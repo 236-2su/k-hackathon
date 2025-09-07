@@ -6,9 +6,18 @@ pipeline {
     DOCKER_REGISTRY = 'hack'
     SLACK_CHANNEL = '#deployment'
     
-    // Credentials에서 민감한 정보 가져오기
-    JWT_SECRET = credentials('jwt-secret')
-    DB_PASS = credentials('db-password')
+    // 임시 환경변수 (production에서는 credentials 사용 필요)
+    JWT_SECRET = 'temp-jwt-secret-for-testing'
+    DB_PASS = 'temp-db-password-for-testing'
+    DB_HOST = 'localhost'
+    DB_PORT = '5432'
+    DB_NAME = 'hackathon'
+    DB_USER = 'postgres'
+    CORS_ALLOWED_ORIGINS = 'http://localhost:3000'
+    
+    // Credentials에서 민감한 정보 가져오기 (주석처리)
+    // JWT_SECRET = credentials('jwt-secret')
+    // DB_PASS = credentials('db-password')
   }
   
   options {
@@ -221,7 +230,7 @@ EOF
           echo "🧹 Cleaning up build artifacts..."
           sh '''
             # Clean up old Docker images (keep last 5 versions)
-            docker images ${DOCKER_REGISTRY}-* --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +6 | awk '{print $1}' | xargs -r docker rmi || true
+            docker images "hack-*" --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +6 | awk '{print $1}' | xargs -r docker rmi || true
             
             # Clean up build workspace
             docker system prune -f || true

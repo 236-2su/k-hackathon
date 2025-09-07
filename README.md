@@ -1,279 +1,291 @@
-# 🚀 K-Hackathon Full Stack Application
+# 🚀 K-Hackathon 배포 가이드
 
-> 완전한 CI/CD 파이프라인과 Blue/Green 배포를 갖춘 현대적인 웹 애플리케이션
+> Jenkins CI/CD + Blue/Green 무중단 배포 시스템 완전 가이드
 
-## 📋 프로젝트 개요
+## 📋 현재 상태
 
-**Tech Stack:**
-- **Frontend**: React 18 + Vite + Tailwind CSS
-- **Backend**: Spring Boot 3.3 (Java 17) + JPA + MySQL
-- **Database**: AWS RDS MySQL 8.0
-- **Infrastructure**: AWS EC2 + Docker + nginx
-- **CI/CD**: Jenkins + Blue/Green Deployment
+**프로덕션 환경:** http://3.26.8.188 (정상 운영 중)
 
-**Live URL:** http://3.26.8.188
+**현재 배포된 서비스:**
+- ✅ Frontend: React + Vite + Tailwind CSS  
+- ✅ Backend: Spring Boot + MySQL
+- ✅ Infrastructure: Docker + nginx + Blue/Green 배포
+- ✅ CI/CD: Jenkins 파이프라인 구축 완료
 
-## 🏗️ 아키텍처
+## 🏗️ 시스템 아키텍처
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│     Jenkins     │    │   AWS EC2       │    │   AWS RDS       │
-│   CI/CD Server  │───▶│  Docker Host    │───▶│   MySQL DB      │
+│     Jenkins     │───▶│   AWS EC2       │───▶│   AWS RDS       │
+│   (CI/CD 서버)   │    │ (Docker Host)   │    │   (MySQL DB)    │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
                               │
                               ▼
                     ┌─────────────────┐
-                    │      nginx      │ ◄── Reverse Proxy
-                    │   Load Balancer │
+                    │      nginx      │ ◄── 리버스 프록시
+                    │  (포트 80/443)   │
                     └─────────────────┘
                               │
                  ┌────────────┴────────────┐
                  ▼                         ▼
         ┌─────────────────┐      ┌─────────────────┐
-        │    Frontend     │      │ Backend (Blue/  │
-        │ React + Vite    │      │ Green Deploy)   │
+        │   Frontend      │      │ Backend (Blue/  │
+        │ (React 앱)      │      │ Green 배포)     │
         └─────────────────┘      └─────────────────┘
 ```
 
-## 📁 프로젝트 구조
+## 🚀 배포 방법
 
-```
-├── frontend/                 # React 프론트엔드
-│   ├── src/
-│   ├── package.json
-│   └── vite.config.js
-├── backend/                  # Spring Boot 백엔드
-│   ├── src/main/java/
-│   ├── src/main/resources/
-│   └── build.gradle
-├── deploy/                   # 배포 관련 파일
-│   ├── docker/              # Dockerfile 모음
-│   │   ├── frontend.Dockerfile
-│   │   ├── backend.Dockerfile
-│   │   └── nginx.Dockerfile
-│   ├── nginx/               # nginx 설정
-│   │   └── default.conf
-│   ├── env/                 # 환경변수
-│   │   └── .env.prod
-│   ├── scripts/             # 배포 스크립트
-│   │   └── blue_green_switch.sh
-│   ├── Jenkinsfile          # Jenkins 파이프라인
-│   └── docker-compose.prod.yml
-└── README.md
-```
+### 1️⃣ 자동 배포 (Jenkins CI/CD)
 
-## 🚀 로컬 개발 환경
+**추천 방법 - 가장 간단함**
 
-### Prerequisites
-- Node.js 20+
-- Java 17+
-- Docker & Docker Compose
-- MySQL (선택사항)
+1. 코드를 GitHub에 푸시:
+   ```bash
+   git add .
+   git commit -m "your changes"
+   git push origin master
+   ```
 
-### Frontend 개발
+2. Jenkins에서 자동으로 배포 실행됨:
+   - Frontend 빌드
+   - Backend 빌드 및 테스트
+   - Docker 이미지 생성
+   - Blue/Green 무중단 배포
+
+### 2️⃣ 수동 배포 (서버에서 직접)
+
+**Jenkins 없이 배포하는 방법**
+
 ```bash
-cd frontend
-npm install
-npm run dev
-# http://localhost:5173
-```
+# 1. EC2 서버 접속
+ssh -i hack-keypair.pem ubuntu@3.26.8.188
 
-### Backend 개발
-```bash
-cd backend
-./gradlew bootRun
-# http://localhost:8080
-```
-
-### 전체 로컬 실행
-```bash
-docker compose -f deploy/docker-compose.prod.yml up -d
-# http://localhost
-```
-
-## 🏭 프로덕션 배포
-
-### 환경 설정
-1. `deploy/env/.env.prod` 파일 생성:
-```env
-# === DB ===
-DB_HOST=your-rds-endpoint.amazonaws.com
-DB_PORT=3306
-DB_NAME=hackdb
-DB_USER=hackuser
-DB_PASS=your-password
-
-# === App ===
-JWT_SECRET=your-jwt-secret
-CORS_ALLOWED_ORIGINS=http://your-ec2-ip
-```
-
-### Jenkins CI/CD 파이프라인
-
-#### 파이프라인 단계:
-1. **Frontend Build** - React 앱 빌드 및 최적화
-2. **Backend Build** - Spring Boot JAR 빌드 및 테스트
-3. **Docker Build** - 모든 서비스의 Docker 이미지 생성
-4. **Blue/Green Deploy** - 무중단 배포 실행
-
-#### Jenkins 설정 방법:
-```bash
-# Jenkins 서버에서
-1. New Item → Pipeline 선택
-2. Pipeline script from SCM 선택
-3. Git Repository URL 입력
-4. Script Path: deploy/Jenkinsfile
-5. Build Now 실행
-```
-
-### 수동 배포
-```bash
-# EC2 서버에서
+# 2. 최신 코드 가져오기
 cd ~/k-hackathon
-git pull origin main
+git pull origin master
 
-# 환경변수 업데이트
-cp deploy/env/.env.prod.example deploy/env/.env.prod
-# .env.prod 파일 편집
-
-# Blue/Green 배포 실행
+# 3. Blue/Green 배포 실행
 bash deploy/scripts/blue_green_switch.sh latest
 ```
 
-## 🔄 Blue/Green 배포
+## 🔄 Blue/Green 배포 시스템
 
-### 작동 방식
-1. **현재 색상 확인**: `deploy/active_color` 파일에서 현재 활성 환경 확인
-2. **새 환경 준비**: 비활성 색상의 백엔드 컨테이너 시작
-3. **Health Check**: 새 환경이 정상 작동하는지 확인 (최대 60초)
-4. **트래픽 전환**: nginx를 재시작하여 트래픽을 새 환경으로 전환
-5. **구 환경 정리**: 이전 활성 환경의 컨테이너 중지
+### 작동 원리
+1. **Blue** 환경에서 서비스 중 → **Green** 환경에 새 버전 배포
+2. Health Check 통과 시 트래픽을 Green으로 전환
+3. Blue 환경 중지 → 다음 배포 시에는 Blue가 새 환경이 됨
+
+### 현재 활성 환경 확인
+```bash
+# EC2 서버에서
+cat ~/deployment/active_color
+# 결과: blue 또는 green
+```
 
 ### 수동 스위치
 ```bash
-# Blue → Green 또는 Green → Blue
-bash deploy/scripts/blue_green_switch.sh [GIT_SHA]
-
-# 현재 활성 환경 확인
-cat deploy/active_color
+# Blue ↔ Green 전환
+cd ~/k-hackathon
+bash deploy/scripts/blue_green_switch.sh [버전태그]
 ```
 
-## 🐳 Docker Services
+## 🐳 Docker 컨테이너 관리
 
-### 서비스 구성
-- **nginx**: 리버스 프록시 (Port 80, 443)
-- **frontend**: React 정적 파일 서빙
-- **backend_blue**: Spring Boot 앱 (Blue 환경)
-- **backend_green**: Spring Boot 앱 (Green 환경)
-
-### 컨테이너 관리
+### 현재 실행 중인 컨테이너 확인
 ```bash
-# 모든 서비스 시작
-docker compose -f deploy/docker-compose.prod.yml up -d
-
-# 특정 서비스만 재시작
-docker compose -f deploy/docker-compose.prod.yml restart nginx
-
-# 로그 확인
-docker logs hack-backend-blue
-docker logs hack-nginx
-
-# 컨테이너 상태 확인
 docker ps
 ```
 
-## 🔧 운영 및 모니터링
+### 컨테이너 로그 확인
+```bash
+# nginx 로그
+docker logs hack-nginx
+
+# 백엔드 로그 (Blue 환경)
+docker logs hack-backend-blue
+
+# 백엔드 로그 (Green 환경)  
+docker logs hack-backend-green
+
+# 프론트엔드 로그
+docker logs hack-frontend
+```
+
+### 서비스 재시작
+```bash
+cd ~/k-hackathon
+
+# nginx만 재시작
+docker compose -f deploy/docker-compose.prod.yml restart nginx
+
+# 전체 스택 재시작
+docker compose -f deploy/docker-compose.prod.yml down
+docker compose -f deploy/docker-compose.prod.yml up -d
+```
+
+## 🔧 문제 해결
+
+### ❌ 웹사이트에 접속이 안 될 때
+
+1. **컨테이너 상태 확인:**
+   ```bash
+   docker ps -a
+   ```
+
+2. **nginx 로그 확인:**
+   ```bash
+   docker logs hack-nginx --tail=50
+   ```
+
+3. **nginx 재시작:**
+   ```bash
+   cd ~/k-hackathon
+   docker compose -f deploy/docker-compose.prod.yml restart nginx
+   ```
+
+### ❌ Backend API 오류 (502 Bad Gateway)
+
+1. **백엔드 컨테이너 상태 확인:**
+   ```bash
+   docker ps | grep backend
+   ```
+
+2. **백엔드 로그 확인:**
+   ```bash
+   # 현재 활성 환경 확인 후 해당 로그 확인
+   cat ~/deployment/active_color
+   docker logs hack-backend-blue --tail=50  # 또는 green
+   ```
+
+3. **데이터베이스 연결 확인:**
+   ```bash
+   # 환경변수 파일 확인
+   cat ~/k-hackathon/deploy/env/.env.prod
+   ```
+
+### ❌ Jenkins 빌드 실패
+
+1. **Jenkins 웹 인터페이스에서 Console Output 확인**
+
+2. **일반적인 해결 방법:**
+   ```bash
+   # Jenkins 서버에서 Docker 권한 확인
+   sudo usermod -aG docker jenkins
+   sudo systemctl restart jenkins
+   ```
+
+### ❌ 전체 시스템 재시작이 필요한 경우
+
+```bash
+# EC2 서버에서
+cd ~/k-hackathon
+
+# 모든 컨테이너 중지 및 제거
+docker compose -f deploy/docker-compose.prod.yml down
+
+# 이미지 다시 빌드하며 시작
+docker compose -f deploy/docker-compose.prod.yml up -d --build
+
+# Blue/Green 배포 초기화
+echo "blue" > ~/deployment/active_color
+```
+
+## 📊 상태 확인 명령어
 
 ### Health Check
 ```bash
-# 프론트엔드 상태
+# 프론트엔드 접속 테스트
 curl -I http://3.26.8.188/
 
-# 백엔드 상태
+# 백엔드 API 테스트
+curl http://3.26.8.188/api/health
+# 응답: UP
+
+# 백엔드 상세 헬스체크
 curl http://3.26.8.188/api/actuator/health
-
-# nginx 상태
-docker logs hack-nginx --tail=20
 ```
 
-### 네트워크 확인
+### 시스템 리소스 확인
 ```bash
-# 컨테이너 네트워크 정보
-docker network inspect deploy_hacknet
+# 디스크 사용량
+df -h
 
-# 컨테이너 IP 확인
-docker inspect hack-backend-blue | grep IPAddress
+# 메모리 사용량
+free -h
+
+# Docker 이미지 및 컨테이너 용량
+docker system df
 ```
 
-### 트러블슈팅
+## 📁 중요 파일 및 디렉토리
+
+```
+~/k-hackathon/                    # 메인 프로젝트
+├── deploy/
+│   ├── docker-compose.prod.yml   # Docker Compose 설정
+│   ├── scripts/blue_green_switch.sh  # Blue/Green 배포 스크립트
+│   ├── env/.env.prod             # 환경변수 (DB 설정 등)
+│   └── Jenkinsfile               # Jenkins 파이프라인
+
+~/deployment/                     # Jenkins 배포 작업 디렉토리
+├── active_color                  # 현재 활성 환경 (blue/green)
+├── docker-compose.prod.yml       # 배포용 설정 (복사본)
+└── *.tar                        # Docker 이미지 파일들
+```
+
+## 🔐 환경변수 설정
+
+**중요 설정 파일:** `~/k-hackathon/deploy/env/.env.prod`
+
+```env
+# 데이터베이스 설정
+DB_HOST=your-rds-endpoint.amazonaws.com
+DB_PORT=3306
+DB_NAME=hackathon
+DB_USER=root
+DB_PASS=your-password
+
+# 애플리케이션 설정
+JWT_SECRET=your-jwt-secret-key
+CORS_ALLOWED_ORIGINS=http://3.26.8.188
+```
+
+## 🆘 긴급 상황 대응
+
+### 🚨 사이트 다운 시 즉시 복구
 ```bash
-# 502 Bad Gateway 해결
-1. 컨테이너 IP 변경 확인
-2. nginx 설정 파일 검증
-3. 백엔드 컨테이너 health 상태 확인
+# 1. EC2 접속
+ssh -i hack-keypair.pem ubuntu@3.26.8.188
 
-# DB 연결 문제 해결
-1. .env.prod 파일의 DB 설정 확인
-2. RDS 보안그룹 확인
-3. 백엔드 로그에서 연결 에러 확인
+# 2. 빠른 재시작
+cd ~/k-hackathon
+docker compose -f deploy/docker-compose.prod.yml up -d --force-recreate
+
+# 3. 5분 후에도 안 되면 전체 재시작
+sudo reboot
 ```
 
-## 📊 성능 최적화
+### 🚨 롤백 (이전 버전으로 되돌리기)
+```bash
+# 현재 환경의 반대로 전환 (이전 버전이 남아있음)
+cd ~/k-hackathon
+bash deploy/scripts/blue_green_switch.sh previous
+```
 
-### Frontend
-- Vite를 사용한 빠른 HMR 개발
-- Tailwind CSS Purge로 CSS 최적화
-- React 18 Concurrent Features 활용
+## 📞 연락처
 
-### Backend
-- Spring Boot 3.3 최신 성능 개선사항
-- HikariCP 커넥션 풀 최적화
-- JPA 쿼리 최적화
-
-### Infrastructure
-- nginx gzip 압축 활성화
-- Docker multi-stage 빌드로 이미지 크기 최적화
-- Blue/Green 배포로 무중단 서비스
-
-## 🔐 보안
-
-- HTTPS 준비 (Let's Encrypt 설정 포함)
-- CORS 설정으로 크로스 오리진 요청 제어
-- JWT 기반 인증
-- nginx 보안 헤더 설정
-- 환경변수로 민감정보 관리
-
-## 🤝 기여하기
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-MIT License - 자세한 내용은 `LICENSE` 파일을 참고하세요.
-
-## 🆘 문제 해결
-
-**일반적인 문제:**
-
-1. **502 Bad Gateway**
-   - nginx 컨테이너 재빌드: `docker compose -f deploy/docker-compose.prod.yml up --build -d nginx`
-
-2. **DB 연결 실패**
-   - `.env.prod` 파일의 DB 설정 확인
-   - RDS 보안그룹에서 EC2 IP 허용 여부 확인
-
-3. **Jenkins 빌드 실패**
-   - Node.js, Java, Docker가 Jenkins 서버에 설치되어 있는지 확인
-   - Jenkins 사용자에게 Docker 권한 부여: `sudo usermod -aG docker jenkins`
-
-**도움이 필요한 경우:**
-- Issue를 생성하거나
-- 개발팀에 직접 문의
+**문제 발생 시 연락:**
+- 개발팀 Slack 채널
+- 또는 GitHub Issues에 문제 상황 등록
 
 ---
 
-⭐ **이 프로젝트가 도움이 되었다면 Star를 눌러주세요!**
+## 💡 팁
+
+1. **정기 백업:** 매일 RDS 스냅샷 자동 생성 설정됨
+2. **로그 관리:** Docker 로그는 자동으로 로테이션됨
+3. **모니터링:** CloudWatch로 시스템 메트릭 확인 가능
+4. **보안:** 정기적으로 Docker 이미지 업데이트 권장
+
+⭐ **이 가이드로 문제가 해결되지 않으면 개발팀에 연락주세요!**

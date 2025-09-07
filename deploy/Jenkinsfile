@@ -1,28 +1,251 @@
 pipeline {
   agent any
+  
   environment {
     GIT_SHA = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+    DOCKER_REGISTRY = 'hack'
+    SLACK_CHANNEL = '#deployment'
+    
+    // Credentials에서 민감한 정보 가져오기
+    JWT_SECRET = credentials('jwt-secret')
+    DB_PASS = credentials('db-password')
   }
+  
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    timeout(time: 30, unit: 'MINUTES')
+    timestamps()
+  }
+  
   stages {
-    stage('Frontend Build') {
-      steps { dir('frontend'){ sh 'npm i && npm run build' } }
-    }
-    stage('Backend Build') {
-      steps { dir('backend'){ sh './gradlew clean test bootJar' } }
-    }
-    stage('Docker Build') {
+    stage('Preparation') {
       steps {
+        echo "🚀 Starting deployment for commit: ${GIT_SHA}"
+        echo "📋 Branch: ${env.BRANCH_NAME}"
+        sh 'docker --version'
+        sh 'node --version'
+        sh 'java -version'
+        
+        // 환경변수 파일 생성
         sh '''
-          docker build -t hack-frontend:${GIT_SHA} -f deploy/docker/frontend.Dockerfile .
-          docker build -t hack-backend:${GIT_SHA}  -f deploy/docker/backend.Dockerfile .
-          docker build -t hack-nginx:${GIT_SHA}    -f deploy/docker/nginx.Dockerfile .
+          echo "🔧 Creating .env.prod file..."
+          cat > deploy/env/.env.prod << EOF
+# === DB ===
+DB_HOST=${DB_HOST}
+DB_PORT=${DB_PORT}
+DB_NAME=${DB_NAME}
+DB_USER=${DB_USER}
+DB_PASS=${DB_PASS}
+
+# === App ===
+JWT_SECRET=${JWT_SECRET}
+CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+EOF
+          echo "✅ Environment file created"
         '''
       }
     }
-    stage('Deploy Blue/Green') {
+    
+    stage('Frontend Build') {
       steps {
-        sh 'bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}'
+        echo "🎨 Building React Frontend..."
+        dir('frontend') {
+          sh '''
+            npm ci
+            npm run lint || echo "⚠️  Linting warnings found"
+            npm run build
+            echo "✅ Frontend build completed"
+          '''
+        }
       }
+      post {
+        failure {
+          echo "❌ Frontend build failed"
+        }
+      }
+    }
+    
+    stage('Backend Build & Test') {
+      steps {
+        echo "⚙️  Building Spring Boot Backend..."
+        dir('backend') {
+          sh '''
+            ./gradlew clean
+            ./gradlew test --info
+            ./gradlew bootJar
+            echo "✅ Backend build and tests completed"
+          '''
+        }
+      }
+      post {
+        always {
+          publishTestResults testResultsPattern: 'backend/build/test-results/**/*.xml'
+          archiveArtifacts artifacts: 'backend/build/libs/*.jar', fingerprint: true
+        }
+        failure {
+          echo "❌ Backend build or tests failed"
+        }
+      }
+    }
+    
+    stage('Docker Build') {
+      parallel {
+        stage('Frontend Image') {
+          steps {
+            echo "🐳 Building Frontend Docker image..."
+            sh '''
+              docker build -t ${DOCKER_REGISTRY}-frontend:${GIT_SHA} \
+                         -t ${DOCKER_REGISTRY}-frontend:latest \
+                         -f deploy/docker/frontend.Dockerfile .
+            '''
+          }
+        }
+        stage('Backend Image') {
+          steps {
+            echo "🐳 Building Backend Docker image..."
+            sh '''
+              docker build -t ${DOCKER_REGISTRY}-backend:${GIT_SHA} \
+                         -t ${DOCKER_REGISTRY}-backend:latest \
+                         -f deploy/docker/backend.Dockerfile .
+            '''
+          }
+        }
+        stage('Nginx Image') {
+          steps {
+            echo "🐳 Building Nginx Docker image..."
+            sh '''
+              docker build -t ${DOCKER_REGISTRY}-nginx:${GIT_SHA} \
+                         -t ${DOCKER_REGISTRY}-nginx:latest \
+                         -f deploy/docker/nginx.Dockerfile .
+            '''
+          }
+        }
+      }
+      post {
+        success {
+          echo "✅ All Docker images built successfully"
+        }
+        failure {
+          echo "❌ Docker build failed"
+        }
+      }
+    }
+    
+    stage('Security Scan') {
+      steps {
+        echo "🔐 Running security scans..."
+        sh '''
+          # Container vulnerability scan (optional)
+          # docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+          #   aquasec/trivy image ${DOCKER_REGISTRY}-backend:${GIT_SHA} || echo "Security scan completed with warnings"
+          echo "🔍 Security scan placeholder - implement Trivy or similar tool"
+        '''
+      }
+    }
+    
+    stage('Deploy to Staging') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'staging'
+        }
+      }
+      steps {
+        echo "🚀 Deploying to staging environment..."
+        sh '''
+          docker compose -f deploy/docker-compose.staging.yml down || true
+          GIT_SHA=${GIT_SHA} docker compose -f deploy/docker-compose.staging.yml up -d
+          echo "✅ Staging deployment completed"
+        '''
+      }
+    }
+    
+    stage('Deploy to Production') {
+      when {
+        anyOf {
+          branch 'main'
+          branch 'master'
+        }
+      }
+      steps {
+        echo "🏭 Deploying to production with Blue/Green strategy..."
+        script {
+          def deployResult = sh(
+            script: "bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}",
+            returnStatus: true
+          )
+          
+          if (deployResult != 0) {
+            error "❌ Blue/Green deployment failed"
+          }
+          
+          echo "✅ Production deployment completed successfully"
+        }
+      }
+    }
+    
+    stage('Health Check') {
+      when {
+        anyOf {
+          branch 'main'
+          branch 'master'
+        }
+      }
+      steps {
+        echo "🏥 Running post-deployment health checks..."
+        sh '''
+          # Wait for application to start
+          sleep 30
+          
+          # Frontend health check
+          curl -f http://localhost/ || exit 1
+          
+          # Backend health check  
+          curl -f http://localhost/api/actuator/health || exit 1
+          
+          echo "✅ All health checks passed"
+        '''
+      }
+      post {
+        failure {
+          echo "❌ Health checks failed - consider rollback"
+        }
+      }
+    }
+  }
+  
+  post {
+    always {
+      echo "🧹 Cleaning up build artifacts..."
+      sh '''
+        # Clean up old Docker images (keep last 5 versions)
+        docker images ${DOCKER_REGISTRY}-* --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +6 | awk '{print $1}' | xargs -r docker rmi || true
+        
+        # Clean up build workspace
+        docker system prune -f || true
+      '''
+    }
+    
+    success {
+      echo "🎉 Pipeline completed successfully!"
+      // slackSend(
+      //   channel: env.SLACK_CHANNEL,
+      //   color: 'good',
+      //   message: "✅ Deployment successful for ${env.JOB_NAME} - ${GIT_SHA}"
+      // )
+    }
+    
+    failure {
+      echo "💥 Pipeline failed!"
+      // slackSend(
+      //   channel: env.SLACK_CHANNEL,
+      //   color: 'danger',
+      //   message: "❌ Deployment failed for ${env.JOB_NAME} - ${GIT_SHA}\nCheck: ${env.BUILD_URL}"
+      // )
+    }
+    
+    unstable {
+      echo "⚠️  Pipeline completed with warnings"
     }
   }
 }

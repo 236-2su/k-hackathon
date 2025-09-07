@@ -228,7 +228,6 @@ EOF
                 # Blue/Green 배포 실행
                 echo "🚀 Starting Blue/Green deployment..."
                 export GIT_SHA=${GIT_SHA}
-                cd ~/k-hackathon
                 bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}
               '
             """,

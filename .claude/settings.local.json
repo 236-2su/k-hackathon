@@ -4,7 +4,15 @@
       "Bash(bash:*)",
       "Bash(git add:*)",
       "Bash(git push:*)",
-      "Bash(openssl rand:*)"
+      "Bash(openssl rand:*)",
+      "Bash(netstat:*)",
+      "Bash(wmic process where:*)",
+      "Bash(cat:*)",
+      "Bash(npm run dev:*)",
+      "Bash(./gradlew:*)",
+      "Bash(npm install)",
+      "Bash(gradle:*)",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []

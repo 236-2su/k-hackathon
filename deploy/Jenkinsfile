@@ -62,7 +62,7 @@ EOF
         echo "🎨 Building React Frontend..."
         dir('frontend') {
           sh '''
-            npm ci
+            npm ci --include=dev
             npm run lint || echo "⚠️  Linting warnings found"
             npm run build
             echo "✅ Frontend build completed"

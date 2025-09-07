@@ -15,6 +15,11 @@ pipeline {
     DB_USER = 'postgres'
     CORS_ALLOWED_ORIGINS = 'http://localhost:3000'
     
+    // EC2 배포 설정
+    EC2_HOST = '43.203.xxx.xxx'  // EC2 퍼블릭 IP 주소로 변경 필요
+    EC2_USER = 'ec2-user'        // 또는 ubuntu
+    PEM_KEY = 'hack-keypair.pem'
+    
     // Credentials에서 민감한 정보 가져오기 (주석처리)
     // JWT_SECRET = credentials('jwt-secret')
     // DB_PASS = credentials('db-password')
@@ -177,18 +182,59 @@ EOF
         }
       }
       steps {
-        echo "🏭 Deploying to production with Blue/Green strategy..."
+        echo "🏭 Deploying to EC2 production server..."
         script {
+          // .pem 키 권한 설정
+          sh "chmod 600 ${PEM_KEY}"
+          
+          // Docker 이미지를 tar 파일로 저장
+          sh '''
+            echo "📦 Saving Docker images to tar files..."
+            docker save hack-frontend:${GIT_SHA} -o frontend-${GIT_SHA}.tar
+            docker save hack-backend:${GIT_SHA} -o backend-${GIT_SHA}.tar
+            docker save hack-nginx:${GIT_SHA} -o nginx-${GIT_SHA}.tar
+          '''
+          
+          // EC2 서버에 파일 전송
+          sh '''
+            echo "📤 Transferring files to EC2..."
+            
+            # 배포 디렉토리 생성
+            ssh -i ${PEM_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "mkdir -p ~/deployment"
+            
+            # Docker 이미지 파일 전송
+            scp -i ${PEM_KEY} -o StrictHostKeyChecking=no *.tar ${EC2_USER}@${EC2_HOST}:~/deployment/
+            
+            # 배포 스크립트와 설정 파일 전송
+            scp -i ${PEM_KEY} -o StrictHostKeyChecking=no -r deploy/ ${EC2_USER}@${EC2_HOST}:~/deployment/
+          '''
+          
+          // EC2에서 배포 실행
           def deployResult = sh(
-            script: "bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}",
+            script: """
+              ssh -i ${PEM_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
+                cd ~/deployment
+                
+                # Docker 이미지 로드
+                echo "📥 Loading Docker images..."
+                docker load -i frontend-${GIT_SHA}.tar
+                docker load -i backend-${GIT_SHA}.tar  
+                docker load -i nginx-${GIT_SHA}.tar
+                
+                # Blue/Green 배포 실행
+                echo "🚀 Starting Blue/Green deployment..."
+                export GIT_SHA=${GIT_SHA}
+                bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}
+              '
+            """,
             returnStatus: true
           )
           
           if (deployResult != 0) {
-            error "❌ Blue/Green deployment failed"
+            error "❌ EC2 deployment failed"
           }
           
-          echo "✅ Production deployment completed successfully"
+          echo "✅ EC2 production deployment completed successfully"
         }
       }
     }
@@ -201,18 +247,18 @@ EOF
         }
       }
       steps {
-        echo "🏥 Running post-deployment health checks..."
+        echo "🏥 Running post-deployment health checks on EC2..."
         sh '''
           # Wait for application to start
           sleep 30
           
-          # Frontend health check
-          curl -f http://localhost/ || exit 1
+          # Frontend health check on EC2
+          curl -f http://${EC2_HOST}/ || exit 1
           
-          # Backend health check  
-          curl -f http://localhost/api/actuator/health || exit 1
+          # Backend health check on EC2
+          curl -f http://${EC2_HOST}/api/actuator/health || exit 1
           
-          echo "✅ All health checks passed"
+          echo "✅ All health checks passed on EC2"
         '''
       }
       post {

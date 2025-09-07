@@ -90,7 +90,7 @@ EOF
       }
       post {
         always {
-          publishTestResults testResultsPattern: 'backend/build/test-results/**/*.xml'
+          junit 'backend/build/test-results/**/*.xml'
           archiveArtifacts artifacts: 'backend/build/libs/*.jar', fingerprint: true
         }
         failure {

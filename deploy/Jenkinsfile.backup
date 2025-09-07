@@ -1,0 +1,315 @@
+pipeline {
+  agent any
+  
+  environment {
+    GIT_SHA = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+    DOCKER_REGISTRY = 'hack'
+    SLACK_CHANNEL = '#deployment'
+    
+    // Jenkins Credentials 사용
+    JWT_SECRET = credentials('jwt-secret')
+    DB_PASS = credentials('db-password')
+    DB_HOST = "${params.DB_HOST ?: '3.26.8.188'}"
+    DB_PORT = "${params.DB_PORT ?: '3306'}"
+    DB_NAME = "${params.DB_NAME ?: 'hackathon'}"
+    DB_USER = "${params.DB_USER ?: 'root'}"
+    CORS_ALLOWED_ORIGINS = "${params.CORS_ALLOWED_ORIGINS ?: 'http://3.26.8.188'}"
+    
+    // EC2 배포 설정
+    EC2_HOST = "${params.EC2_HOST ?: '3.26.8.188'}"
+    EC2_USER = "${params.EC2_USER ?: 'ubuntu'}"
+    
+  }
+  
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+    timeout(time: 30, unit: 'MINUTES')
+    timestamps()
+  }
+  
+  stages {
+    stage('Preparation') {
+      steps {
+        echo "🚀 Starting deployment for commit: ${GIT_SHA}"
+        echo "📋 Branch: ${env.BRANCH_NAME}"
+        sh 'docker --version'
+        sh 'node --version'
+        sh 'java -version'
+        
+        // 환경변수 파일 생성
+        sh '''
+          echo "🔧 Creating .env.prod file..."
+          mkdir -p deploy/env
+          cat > deploy/env/.env.prod << EOF
+# === DB ===
+DB_HOST=${DB_HOST}
+DB_PORT=${DB_PORT}
+DB_NAME=${DB_NAME}
+DB_USER=${DB_USER}
+DB_PASS=${DB_PASS}
+
+# === App ===
+JWT_SECRET=${JWT_SECRET}
+CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
+EOF
+          echo "✅ Environment file created"
+        '''
+      }
+    }
+    
+    stage('Frontend Build') {
+      steps {
+        echo "🎨 Building React Frontend..."
+        dir('frontend') {
+          sh '''
+            npm ci --include=dev
+            npm run lint || echo "⚠️  Linting warnings found"
+            npm run build
+            echo "✅ Frontend build completed"
+          '''
+        }
+      }
+      post {
+        failure {
+          echo "❌ Frontend build failed"
+        }
+      }
+    }
+    
+    stage('Backend Build & Test') {
+      steps {
+        echo "⚙️  Building Spring Boot Backend..."
+        dir('backend') {
+          sh '''
+            chmod +x ./gradlew
+            ./gradlew clean
+            ./gradlew test --info
+            ./gradlew bootJar
+            echo "✅ Backend build and tests completed"
+          '''
+        }
+      }
+      post {
+        always {
+          script {
+            if (fileExists('backend/build/test-results/test/TEST-*.xml')) {
+              junit 'backend/build/test-results/**/*.xml'
+            } else {
+              echo "⚠️ No test results found - tests may not have run"
+            }
+          }
+          archiveArtifacts artifacts: 'backend/build/libs/*.jar', fingerprint: true, allowEmptyArchive: true
+        }
+        failure {
+          echo "❌ Backend build or tests failed"
+        }
+      }
+    }
+    
+    stage('Docker Build') {
+      parallel {
+        stage('Frontend Image') {
+          steps {
+            echo "🐳 Building Frontend Docker image..."
+            sh '''
+              docker build -t ${DOCKER_REGISTRY}-frontend:${GIT_SHA} \
+                         -t ${DOCKER_REGISTRY}-frontend:latest \
+                         -f deploy/docker/frontend.Dockerfile .
+            '''
+          }
+        }
+        stage('Backend Image') {
+          steps {
+            echo "🐳 Building Backend Docker image..."
+            sh '''
+              docker build -t ${DOCKER_REGISTRY}-backend:${GIT_SHA} \
+                         -t ${DOCKER_REGISTRY}-backend:latest \
+                         -f deploy/docker/backend.Dockerfile .
+            '''
+          }
+        }
+        stage('Nginx Image') {
+          steps {
+            echo "🐳 Building Nginx Docker image..."
+            sh '''
+              docker build -t ${DOCKER_REGISTRY}-nginx:${GIT_SHA} \
+                         -t ${DOCKER_REGISTRY}-nginx:latest \
+                         -f deploy/docker/nginx.Dockerfile .
+            '''
+          }
+        }
+      }
+      post {
+        success {
+          echo "✅ All Docker images built successfully"
+        }
+        failure {
+          echo "❌ Docker build failed"
+        }
+      }
+    }
+    
+    stage('Security Scan') {
+      steps {
+        echo "🔐 Running security scans..."
+        sh '''
+          # Container vulnerability scan (optional)
+          # docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
+          #   aquasec/trivy image ${DOCKER_REGISTRY}-backend:${GIT_SHA} || echo "Security scan completed with warnings"
+          echo "🔍 Security scan placeholder - implement Trivy or similar tool"
+        '''
+      }
+    }
+    
+    stage('Deploy to Staging') {
+      when {
+        anyOf {
+          branch 'develop'
+          branch 'staging'
+        }
+      }
+      steps {
+        echo "🚀 Deploying to staging environment..."
+        sh '''
+          docker compose -f deploy/docker-compose.staging.yml down || true
+          GIT_SHA=${GIT_SHA} docker compose -f deploy/docker-compose.staging.yml up -d
+          echo "✅ Staging deployment completed"
+        '''
+      }
+    }
+    
+    stage('Deploy to Production') {
+      when {
+        anyOf {
+          branch 'main'
+          branch 'master'
+        }
+      }
+      steps {
+        echo "🏭 Deploying to EC2 production server..."
+        script {
+          // SSH 키를 Jenkins credentials에서 사용
+          sshagent(['ec2-ssh-key']) {
+          
+          // Docker 이미지를 tar 파일로 저장
+          sh '''
+            echo "📦 Saving Docker images to tar files..."
+            docker save hack-frontend:${GIT_SHA} -o frontend-${GIT_SHA}.tar
+            docker save hack-backend:${GIT_SHA} -o backend-${GIT_SHA}.tar
+            docker save hack-nginx:${GIT_SHA} -o nginx-${GIT_SHA}.tar
+          '''
+          
+          // EC2 서버에 파일 전송
+          sh '''
+            echo "📤 Transferring files to EC2..."
+            
+            # 배포 디렉토리 생성
+            ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "mkdir -p ~/deployment"
+            
+            # Docker 이미지 파일 전송
+            scp -o StrictHostKeyChecking=no *.tar ${EC2_USER}@${EC2_HOST}:~/deployment/
+            
+            # 배포 스크립트와 설정 파일 전송
+            scp -o StrictHostKeyChecking=no -r deploy/ ${EC2_USER}@${EC2_HOST}:~/deployment/
+          '''
+          
+          // EC2에서 배포 실행
+          def deployResult = sh(
+            script: """
+              ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
+                cd ~/deployment
+                
+                # Docker 이미지 로드
+                echo "📥 Loading Docker images..."
+                docker load -i frontend-${GIT_SHA}.tar
+                docker load -i backend-${GIT_SHA}.tar  
+                docker load -i nginx-${GIT_SHA}.tar
+                
+                # Blue/Green 배포 실행
+                echo "🚀 Starting Blue/Green deployment..."
+                export GIT_SHA=${GIT_SHA}
+                bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}
+              '
+            """,
+            returnStatus: true
+          )
+          
+          if (deployResult != 0) {
+            error "❌ EC2 deployment failed"
+          }
+          
+          echo "✅ EC2 production deployment completed successfully"
+          }
+        }
+      }
+    }
+    
+    stage('Health Check') {
+      when {
+        anyOf {
+          branch 'main'
+          branch 'master'
+        }
+      }
+      steps {
+        echo "🏥 Running post-deployment health checks on EC2..."
+        sh '''
+          # Wait for application to start
+          sleep 30
+          
+          # Frontend health check on EC2
+          curl -f http://${EC2_HOST}/ || exit 1
+          
+          # Backend health check on EC2
+          curl -f http://${EC2_HOST}/api/actuator/health || exit 1
+          
+          echo "✅ All health checks passed on EC2"
+        '''
+      }
+      post {
+        failure {
+          echo "❌ Health checks failed - consider rollback"
+        }
+      }
+    }
+  }
+  
+  post {
+    always {
+      script {
+        node {
+          echo "🧹 Cleaning up build artifacts..."
+          sh '''
+            # Clean up old Docker images (keep last 5 versions)
+            docker images "hack-*" --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +6 | awk '{print $1}' | xargs -r docker rmi || true
+            
+            # Clean up build workspace
+            docker system prune -f || true
+          '''
+        }
+      }
+    }
+    
+    success {
+      echo "🎉 Pipeline completed successfully!"
+      // slackSend(
+      //   channel: env.SLACK_CHANNEL,
+      //   color: 'good',
+      //   message: "✅ Deployment successful for ${env.JOB_NAME} - ${GIT_SHA}"
+      // )
+    }
+    
+    failure {
+      echo "💥 Pipeline failed!"
+      // slackSend(
+      //   channel: env.SLACK_CHANNEL,
+      //   color: 'danger',
+      //   message: "❌ Deployment failed for ${env.JOB_NAME} - ${GIT_SHA}\nCheck: ${env.BUILD_URL}"
+      // )
+    }
+    
+    unstable {
+      echo "⚠️  Pipeline completed with warnings"
+    }
+  }
+}

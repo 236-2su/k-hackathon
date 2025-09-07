@@ -81,6 +81,7 @@ EOF
         echo "⚙️  Building Spring Boot Backend..."
         dir('backend') {
           sh '''
+            chmod +x ./gradlew
             ./gradlew clean
             ./gradlew test --info
             ./gradlew bootJar
@@ -90,8 +91,14 @@ EOF
       }
       post {
         always {
-          junit 'backend/build/test-results/**/*.xml'
-          archiveArtifacts artifacts: 'backend/build/libs/*.jar', fingerprint: true
+          script {
+            if (fileExists('backend/build/test-results/test/TEST-*.xml')) {
+              junit 'backend/build/test-results/**/*.xml'
+            } else {
+              echo "⚠️ No test results found - tests may not have run"
+            }
+          }
+          archiveArtifacts artifacts: 'backend/build/libs/*.jar', fingerprint: true, allowEmptyArchive: true
         }
         failure {
           echo "❌ Backend build or tests failed"

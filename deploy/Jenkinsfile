@@ -216,14 +216,18 @@ EOF
   
   post {
     always {
-      echo "🧹 Cleaning up build artifacts..."
-      sh '''
-        # Clean up old Docker images (keep last 5 versions)
-        docker images ${DOCKER_REGISTRY}-* --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +6 | awk '{print $1}' | xargs -r docker rmi || true
-        
-        # Clean up build workspace
-        docker system prune -f || true
-      '''
+      script {
+        node {
+          echo "🧹 Cleaning up build artifacts..."
+          sh '''
+            # Clean up old Docker images (keep last 5 versions)
+            docker images ${DOCKER_REGISTRY}-* --format "table {{.Repository}}:{{.Tag}}\t{{.CreatedAt}}" | tail -n +2 | sort -k2 -r | tail -n +6 | awk '{print $1}' | xargs -r docker rmi || true
+            
+            # Clean up build workspace
+            docker system prune -f || true
+          '''
+        }
+      }
     }
     
     success {

@@ -11,7 +11,7 @@ NC='\033[0m' # No Color
 # Script parameters
 GIT_SHA=${1:-"latest"}
 COMPOSE_FILE="deploy/docker-compose.prod.yml"
-ACTIVE_FILE="deploy/active_color"
+ACTIVE_FILE="~/deployment/active_color"
 HEALTH_CHECK_URL="http://localhost:8080/actuator/health"
 HEALTH_TIMEOUT=30
 ROLLBACK_TIMEOUT=60

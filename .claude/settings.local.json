@@ -20,7 +20,8 @@
       "Bash(curl:*)",
       "Bash(chmod:*)",
       "Bash(ping:*)",
-      "Bash(aws:*)"
+      "Bash(aws:*)",
+      "WebFetch(domain:13.239.19.131)"
     ],
     "deny": [],
     "ask": []

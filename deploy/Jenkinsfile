@@ -10,9 +10,9 @@ pipeline {
     JWT_SECRET = credentials('jwt-secret')
     DB_PASS = credentials('db-password')
     DB_HOST = 'localhost'
-    DB_PORT = '5432'
+    DB_PORT = '3306'
     DB_NAME = 'hackathon'
-    DB_USER = 'postgres'
+    DB_USER = 'root'
     CORS_ALLOWED_ORIGINS = 'http://localhost:3000'
     
     // EC2 배포 설정 (환경변수 또는 기본값)

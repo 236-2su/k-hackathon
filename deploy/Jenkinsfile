@@ -3,21 +3,27 @@ pipeline {
   
   environment {
     GIT_SHA = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-    DOCKER_REGISTRY = 'hack'
-    SLACK_CHANNEL = '#deployment'
     
-    // Jenkins Credentials 사용
+    // 환경변수 파일에서 설정 로드 (IP 변경 시 자동 반영)
+    SERVER_IP = sh(script: "grep '^HACKATHON_SERVER_IP=' /etc/environment.hackathon 2>/dev/null | cut -d'=' -f2 || echo '54.206.22.151'", returnStdout: true).trim()
+    DOCKER_REGISTRY = sh(script: "grep '^HACKATHON_DOCKER_REGISTRY=' /etc/environment.hackathon 2>/dev/null | cut -d'=' -f2 || echo 'hack'", returnStdout: true).trim()
+    
+    // Jenkins Credentials 사용 (보안 정보)
     JWT_SECRET = credentials('jwt-secret')
     DB_PASS = credentials('db-password')
-    DB_HOST = "${params.DB_HOST ?: '54.206.22.151'}"
+    
+    // 환경변수에서 동적으로 로드되는 설정들
+    DB_HOST = "${params.DB_HOST ?: env.SERVER_IP}"
     DB_PORT = "${params.DB_PORT ?: '3306'}"
     DB_NAME = "${params.DB_NAME ?: 'hackathon'}"
     DB_USER = "${params.DB_USER ?: 'root'}"
-    CORS_ALLOWED_ORIGINS = "${params.CORS_ALLOWED_ORIGINS ?: 'http://54.206.22.151'}"
+    CORS_ALLOWED_ORIGINS = "${params.CORS_ALLOWED_ORIGINS ?: 'http://' + env.SERVER_IP}"
     
-    // EC2 배포 설정
-    EC2_HOST = "${params.EC2_HOST ?: '54.206.22.151'}"
+    // EC2 배포 설정 (동적)
+    EC2_HOST = "${params.EC2_HOST ?: env.SERVER_IP}"
     EC2_USER = "${params.EC2_USER ?: 'ubuntu'}"
+    
+    SLACK_CHANNEL = '#deployment'
     
   }
   

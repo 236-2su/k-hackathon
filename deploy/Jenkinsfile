@@ -6,9 +6,9 @@ pipeline {
     DOCKER_REGISTRY = 'hack'
     SLACK_CHANNEL = '#deployment'
     
-    // 임시 환경변수 (production에서는 credentials 사용 필요)
-    JWT_SECRET = 'temp-jwt-secret-for-testing'
-    DB_PASS = 'temp-db-password-for-testing'
+    // Jenkins Credentials 사용
+    JWT_SECRET = credentials('jwt-secret')
+    DB_PASS = credentials('db-password')
     DB_HOST = 'localhost'
     DB_PORT = '5432'
     DB_NAME = 'hackathon'
@@ -20,9 +20,6 @@ pipeline {
     EC2_USER = env.EC2_USER ?: 'ec2-user'
     PEM_KEY = env.PEM_KEY ?: 'hack-keypair.pem'
     
-    // Credentials에서 민감한 정보 가져오기 (주석처리)
-    // JWT_SECRET = credentials('jwt-secret')
-    // DB_PASS = credentials('db-password')
   }
   
   options {

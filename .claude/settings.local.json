@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(bash:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(openssl rand:*)"
     ],
     "deny": [],
     "ask": []

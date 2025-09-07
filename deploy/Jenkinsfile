@@ -9,16 +9,15 @@ pipeline {
     // Jenkins Credentials 사용
     JWT_SECRET = credentials('jwt-secret')
     DB_PASS = credentials('db-password')
-    DB_HOST = 'localhost'
-    DB_PORT = '3306'
-    DB_NAME = 'hackathon'
-    DB_USER = 'root'
-    CORS_ALLOWED_ORIGINS = 'http://localhost:3000'
+    DB_HOST = "${params.DB_HOST ?: '3.26.8.188'}"
+    DB_PORT = "${params.DB_PORT ?: '3306'}"
+    DB_NAME = "${params.DB_NAME ?: 'hackathon'}"
+    DB_USER = "${params.DB_USER ?: 'root'}"
+    CORS_ALLOWED_ORIGINS = "${params.CORS_ALLOWED_ORIGINS ?: 'http://3.26.8.188'}"
     
-    // EC2 배포 설정 (환경변수 또는 기본값)
-    EC2_HOST = env.EC2_HOST ?: '3.26.8.188'
-    EC2_USER = env.EC2_USER ?: 'ec2-user'
-    PEM_KEY = env.PEM_KEY ?: 'hack-keypair.pem'
+    // EC2 배포 설정
+    EC2_HOST = "${params.EC2_HOST ?: '3.26.8.188'}"
+    EC2_USER = "${params.EC2_USER ?: 'ec2-user'}"
     
   }
   
@@ -181,8 +180,8 @@ EOF
       steps {
         echo "🏭 Deploying to EC2 production server..."
         script {
-          // .pem 키 권한 설정
-          sh "chmod 600 ${PEM_KEY}"
+          // SSH 키를 Jenkins credentials에서 사용
+          sshagent(['ec2-ssh-key']) {
           
           // Docker 이미지를 tar 파일로 저장
           sh '''
@@ -197,19 +196,19 @@ EOF
             echo "📤 Transferring files to EC2..."
             
             # 배포 디렉토리 생성
-            ssh -i ${PEM_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "mkdir -p ~/deployment"
+            ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} "mkdir -p ~/deployment"
             
             # Docker 이미지 파일 전송
-            scp -i ${PEM_KEY} -o StrictHostKeyChecking=no *.tar ${EC2_USER}@${EC2_HOST}:~/deployment/
+            scp -o StrictHostKeyChecking=no *.tar ${EC2_USER}@${EC2_HOST}:~/deployment/
             
             # 배포 스크립트와 설정 파일 전송
-            scp -i ${PEM_KEY} -o StrictHostKeyChecking=no -r deploy/ ${EC2_USER}@${EC2_HOST}:~/deployment/
+            scp -o StrictHostKeyChecking=no -r deploy/ ${EC2_USER}@${EC2_HOST}:~/deployment/
           '''
           
           // EC2에서 배포 실행
           def deployResult = sh(
             script: """
-              ssh -i ${PEM_KEY} -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
+              ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
                 cd ~/deployment
                 
                 # Docker 이미지 로드
@@ -232,6 +231,7 @@ EOF
           }
           
           echo "✅ EC2 production deployment completed successfully"
+          }
         }
       }
     }

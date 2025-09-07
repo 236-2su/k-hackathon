@@ -15,3 +15,5 @@ out/
 # Env
 *.env
 deploy/env/.env.*
+# SSH keys
+*.pem

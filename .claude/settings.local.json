@@ -12,7 +12,12 @@
       "Bash(./gradlew:*)",
       "Bash(npm install)",
       "Bash(gradle:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(git commit:*)",
+      "Read(//c/Users/lsw01/Pictures/Screenshots/**)",
+      "Bash(git check-ignore:*)",
+      "Bash(ssh:*)",
+      "Bash(curl:*)"
     ],
     "deny": [],
     "ask": []

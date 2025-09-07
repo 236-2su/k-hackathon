@@ -39,6 +39,7 @@ pipeline {
         // 환경변수 파일 생성
         sh '''
           echo "🔧 Creating .env.prod file..."
+          mkdir -p deploy/env
           cat > deploy/env/.env.prod << EOF
 # === DB ===
 DB_HOST=${DB_HOST}

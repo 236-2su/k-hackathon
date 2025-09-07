@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import StarField from './components/StarField'
+import MeteorShower from './components/MeteorShower'
 
 interface User {
   id: number;
@@ -34,15 +36,18 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 relative">
+      {/* Beautiful Star Animations */}
+      <StarField />
+      <MeteorShower />
       {/* Hero Section */}
       <div className="relative overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative px-6 py-24 sm:py-32 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              🚀 <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
-                Hack MVP Platform
+            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl animate-pulse">
+              🚀 <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient bg-300% bg-gradient-to-r">
+                ✨ Hack MVP Platform ✨
               </span>
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
@@ -73,24 +78,24 @@ export default function App() {
           </div>
           
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-8">
-            <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-pink-500">
+            <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300 animate-float hover:scale-105">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 animate-sparkle">
                 <span className="text-3xl">⚡</span>
               </div>
               <h3 className="text-xl font-semibold text-white mb-4">Git Push 배포</h3>
               <p className="text-gray-300 text-center">Git commit & push만으로 Jenkins가 자동 빌드하고 배포합니다</p>
             </div>
 
-            <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500">
+            <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300 animate-float hover:scale-105" style={{animationDelay: '0.5s'}}>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 animate-sparkle" style={{animationDelay: '0.5s'}}>
                 <span className="text-3xl">🔧</span>
               </div>
               <h3 className="text-xl font-semibold text-white mb-4">완전 자동화</h3>
               <p className="text-gray-300 text-center">Docker 컨테이너화와 CI/CD 파이프라인이 모두 구성됨</p>
             </div>
 
-            <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-500">
+            <div className="flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300 animate-float hover:scale-105" style={{animationDelay: '1s'}}>
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-lg bg-gradient-to-r from-green-500 to-emerald-500 animate-sparkle" style={{animationDelay: '1s'}}>
                 <span className="text-3xl">👥</span>
               </div>
               <h3 className="text-xl font-semibold text-white mb-4">실시간 API</h3>

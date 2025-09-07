@@ -22,7 +22,8 @@
       "Bash(ping:*)",
       "Bash(aws:*)",
       "WebFetch(domain:13.239.19.131)",
-      "Bash(scp:*)"
+      "Bash(scp:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

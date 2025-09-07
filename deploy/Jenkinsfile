@@ -9,14 +9,14 @@ pipeline {
     // Jenkins Credentials 사용
     JWT_SECRET = credentials('jwt-secret')
     DB_PASS = credentials('db-password')
-    DB_HOST = "${params.DB_HOST ?: '13.239.19.131'}"
+    DB_HOST = "${params.DB_HOST ?: '54.206.22.151'}"
     DB_PORT = "${params.DB_PORT ?: '3306'}"
     DB_NAME = "${params.DB_NAME ?: 'hackathon'}"
     DB_USER = "${params.DB_USER ?: 'root'}"
-    CORS_ALLOWED_ORIGINS = "${params.CORS_ALLOWED_ORIGINS ?: 'http://13.239.19.131'}"
+    CORS_ALLOWED_ORIGINS = "${params.CORS_ALLOWED_ORIGINS ?: 'http://54.206.22.151'}"
     
     // EC2 배포 설정
-    EC2_HOST = "${params.EC2_HOST ?: '13.239.19.131'}"
+    EC2_HOST = "${params.EC2_HOST ?: '54.206.22.151'}"
     EC2_USER = "${params.EC2_USER ?: 'ubuntu'}"
     
   }

@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+  environment {
+    GIT_SHA = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+  }
+  stages {
+    stage('Frontend Build') {
+      steps { dir('frontend'){ sh 'npm i && npm run build' } }
+    }
+    stage('Backend Build') {
+      steps { dir('backend'){ sh './gradlew clean test bootJar' } }
+    }
+    stage('Docker Build') {
+      steps {
+        sh '''
+          docker build -t hack-frontend:${GIT_SHA} -f deploy/docker/frontend.Dockerfile .
+          docker build -t hack-backend:${GIT_SHA}  -f deploy/docker/backend.Dockerfile .
+          docker build -t hack-nginx:${GIT_SHA}    -f deploy/docker/nginx.Dockerfile .
+        '''
+      }
+    }
+    stage('Deploy Blue/Green') {
+      steps {
+        sh 'bash deploy/scripts/blue_green_switch.sh ${GIT_SHA}'
+      }
+    }
+  }
+}

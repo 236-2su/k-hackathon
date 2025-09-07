@@ -1,1 +1,17 @@
-.claude
+.claude# Node
+node_modules/
+dist/
+# Java/Gradle
+.gradle/
+build/
+out/
+# IDE
+.idea/
+.vscode/
+# OS
+.DS_Store
+# Docker
+*.log
+# Env
+*.env
+deploy/env/.env.*

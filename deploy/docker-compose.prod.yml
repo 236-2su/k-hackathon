@@ -1,0 +1,54 @@
+version: "3.9"
+services:
+  nginx:
+    build:
+      context: ..
+      dockerfile: deploy/docker/nginx.Dockerfile
+    container_name: hack-nginx
+    ports: ["80:80", "443:443"]
+    depends_on:
+      - frontend
+      - backend_blue
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    networks: [hacknet]
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: deploy/docker/frontend.Dockerfile
+    container_name: hack-frontend
+    environment:
+      - PORT=8081
+    expose: ["8081"]
+    command: [ "nginx", "-g", "daemon off;" ]
+    networks: [hacknet]
+
+  backend_blue:
+    build:
+      context: ..
+    #  dockerfile: deploy/docker/backend.Dockerfile   # uncomment to build from Dockerfile
+    image: hack-backend:${GIT_SHA:-latest}
+    container_name: hack-backend-blue
+    env_file: [deploy/env/.env.prod]
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=prod
+    expose: ["8080"]
+    networks: [hacknet]
+
+  backend_green:
+    image: hack-backend:${GIT_SHA:-latest}
+    container_name: hack-backend-green
+    env_file: [deploy/env/.env.prod]
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_PROFILES_ACTIVE=prod
+    expose: ["8080"]
+    deploy:
+      replicas: 0
+    networks: [hacknet]
+
+networks:
+  hacknet:
+    driver: bridge

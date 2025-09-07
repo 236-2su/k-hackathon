@@ -18,10 +18,7 @@ services:
       context: ..
       dockerfile: deploy/docker/frontend.Dockerfile
     container_name: hack-frontend
-    environment:
-      - PORT=8081
-    expose: ["8081"]
-    command: [ "nginx", "-g", "daemon off;" ]
+    expose: ["80"]
     networks: [hacknet]
 
   backend_blue:

@@ -1,7 +1,7 @@
-FROM gradle:8-jdk17 AS build
+FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /app
 COPY backend/ /app
-RUN gradle bootJar -x test
+RUN chmod +x ./gradlew && ./gradlew bootJar -x test
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app

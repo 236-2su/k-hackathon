@@ -184,7 +184,7 @@ export default function App() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-400 text-lg mb-2">
-              🚀 자동 배포 테스트 - Jenkins 8080 포트!
+              🎯 자동 배포 테스트 완료! - 새 서버 54.206.22.151 🎉
             </p>
             <p className="text-sm text-gray-500">
               Jenkins + Docker + React + Spring Boot로 구축된 완전 자동화 개발 환경

@@ -1,0 +1,153 @@
+﻿{
+  "questions": [
+    {
+      "id": "age-range",
+      "title": "연령대를 알려주세요",
+      "description": "나이에 따라 추천해줄 수 있는 상품이 달라져요.",
+      "multiSelect": false,
+      "options": [
+        { "id": "13-15", "label": "13-15세" },
+        { "id": "16-18", "label": "16-18세" },
+        { "id": "19-plus", "label": "19세 이상" },
+        { "id": "other", "label": "기타" }
+      ]
+    },
+    {
+      "id": "allowance",
+      "title": "한 달 용돈이나 수입은 어느 정도인가요?",
+      "description": "대략적인 범위를 선택해주세요.",
+      "multiSelect": false,
+      "options": [
+        { "id": "lt-5", "label": "5만 원 이하" },
+        { "id": "5-10", "label": "5~10만 원" },
+        { "id": "10-20", "label": "10~20만 원" },
+        { "id": "gt-20", "label": "20만 원 이상" }
+      ]
+    },
+    {
+      "id": "spending-category",
+      "title": "가장 자주 쓰는 소비 분야는 무엇인가요?",
+      "description": "해당되는 항목을 모두 골라주세요.",
+      "multiSelect": true,
+      "options": [
+        { "id": "food", "label": "식비" },
+        { "id": "culture", "label": "문화·여가" },
+        { "id": "transport", "label": "교통" },
+        { "id": "shopping", "label": "쇼핑" },
+        { "id": "saving", "label": "저축·투자" },
+        { "id": "other", "label": "기타" }
+      ]
+    },
+    {
+      "id": "goal",
+      "title": "지금 가장 이루고 싶은 금융 목표는 무엇인가요?",
+      "description": null,
+      "multiSelect": false,
+      "options": [
+        { "id": "short-saving", "label": "단기 저축" },
+        { "id": "long-saving", "label": "장기 저축" },
+        { "id": "hobby", "label": "여행·취미 준비" },
+        { "id": "emergency", "label": "비상금 마련" },
+        { "id": "study", "label": "금융 공부" }
+      ]
+    },
+    {
+      "id": "risk",
+      "title": "어떤 성향의 금융상품을 선호하나요?",
+      "description": null,
+      "multiSelect": false,
+      "options": [
+        { "id": "safe", "label": "안정적인 상품" },
+        { "id": "balanced", "label": "중간 정도" },
+        { "id": "aggressive", "label": "조금 위험해도 수익 우선" }
+      ]
+    },
+    {
+      "id": "card-usage",
+      "title": "카드를 사용하고 있거나 관심이 있나요?",
+      "description": null,
+      "multiSelect": false,
+      "options": [
+        { "id": "using", "label": "이미 사용 중" },
+        { "id": "interested", "label": "만들어보고 싶어요" },
+        { "id": "not-yet", "label": "아직 관심 없어요" }
+      ]
+    },
+    {
+      "id": "interests",
+      "title": "관심 있는 금융 서비스가 있다면 골라주세요 (최대 2개)",
+      "description": null,
+      "multiSelect": true,
+      "options": [
+        { "id": "savings", "label": "적금" },
+        { "id": "deposit", "label": "예금" },
+        { "id": "card", "label": "체크카드" },
+        { "id": "teen-card", "label": "청소년 전용 카드" },
+        { "id": "education", "label": "금융 교육 콘텐츠" }
+      ]
+    },
+    {
+      "id": "consulting",
+      "title": "추가로 상담받고 싶은 주제가 있나요?",
+      "description": null,
+      "multiSelect": false,
+      "options": [
+        { "id": "compare", "label": "예·적금 비교" },
+        { "id": "benefits", "label": "카드 혜택" },
+        { "id": "spending", "label": "소비 습관 관리" },
+        { "id": "other", "label": "기타" },
+        { "id": "none", "label": "없어요" }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": "SAV001",
+      "type": "SAVINGS",
+      "name": "미래드림 청소년 적금",
+      "headline": "한 달 1만 원부터 꾸준히 모으는 습관 만들기",
+      "benefits": [
+        "최대 연 4.2% 우대 금리",
+        "출석 체크 미션 성공 시 추가 이자",
+        "학습 리포트로 저축 팁 제공"
+      ],
+      "caution": "중도 해지 시 우대 이자가 사라질 수 있어요."
+    },
+    {
+      "id": "DEP001",
+      "type": "DEPOSIT",
+      "name": "스마트 스타트 예금",
+      "headline": "목돈을 잠시 맡길 때 안전하게 보관",
+      "benefits": [
+        "6개월~1년 자유롭게 기간 선택",
+        "모바일 신규 시 0.2%p 추가 금리",
+        "잔액 조회 알림 무료 제공"
+      ],
+      "caution": "중도 해지하면 기본 금리만 적용돼요."
+    },
+    {
+      "id": "CARD001",
+      "type": "CARD",
+      "name": "틴 스텝 체크카드",
+      "headline": "일상 소비에 딱 맞는 생활 할인",
+      "benefits": [
+        "편의점/카페 5% 캐시백",
+        "교통·통신 자동이체 시 2천 원 캐시백",
+        "모바일 앱에서 소비 리포트 제공"
+      ],
+      "caution": "계좌 잔액 내에서만 결제되니 잔액을 꼭 확인하세요."
+    },
+    {
+      "id": "CARD002",
+      "type": "CARD",
+      "name": "플랜업 교통 체크카드",
+      "headline": "교통비와 공부 카페를 자주 쓴다면",
+      "benefits": [
+        "대중교통 7% 청구 할인",
+        "스터디카페 10% 할인",
+        "분기별 이용 금액에 따라 굿즈 제공"
+      ],
+      "caution": "월 할인 한도가 있으니 이용 금액을 확인하세요."
+    }
+  ]
+}

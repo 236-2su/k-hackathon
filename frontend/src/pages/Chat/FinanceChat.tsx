@@ -15,6 +15,22 @@ interface FinanceChatResponse {
   financeRelated: boolean;
 }
 
+function generateId(): string {
+  if (typeof globalThis !== "undefined" && globalThis.crypto) {
+    if (typeof globalThis.crypto.randomUUID === "function") {
+      return globalThis.crypto.randomUUID();
+    }
+    if (typeof globalThis.crypto.getRandomValues === "function") {
+      const buffer = new Uint32Array(4);
+      globalThis.crypto.getRandomValues(buffer);
+      return Array.from(buffer)
+        .map((value) => value.toString(16).padStart(8, "0"))
+        .join("-");
+    }
+  }
+  return Math.random().toString(36).slice(2) + Date.now().toString(36);
+}
+
 export default function FinanceChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -23,11 +39,14 @@ export default function FinanceChat() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const sessionId = useMemo(() => {
+    if (typeof window === "undefined") {
+      return generateId();
+    }
     const stored = window.localStorage.getItem("financeChatSessionId");
     if (stored) {
       return stored;
     }
-    const generated = crypto.randomUUID();
+    const generated = generateId();
     window.localStorage.setItem("financeChatSessionId", generated);
     return generated;
   }, []);
@@ -46,7 +65,7 @@ export default function FinanceChat() {
 
     const question = input.trim();
     const userMessage: ChatMessage = {
-      id: crypto.randomUUID(),
+      id: generateId(),
       role: "user",
       content: question,
     };
@@ -71,7 +90,7 @@ export default function FinanceChat() {
 
       const data = (await response.json()) as FinanceChatResponse;
       const assistantMessage: ChatMessage = {
-        id: crypto.randomUUID(),
+        id: generateId(),
         role: "assistant",
         content: data.reply,
       };

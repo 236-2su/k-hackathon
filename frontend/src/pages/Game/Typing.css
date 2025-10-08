@@ -1,0 +1,179 @@
+.typing-game-container {
+    padding: 1rem;
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 2rem;
+    background-color: #f4f7f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.timer {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.sentence-display {
+    width: 100%;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    background-color: #ffffff;
+    border: 1px solid #dcdfe2;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 입력 폼 스타일 */
+.typing-form {
+    display: flex;
+    width: 100%;
+    gap: 0.5rem; /* 입력창과 버튼 사이 간격 */
+}
+
+.typing-input {
+    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
+    padding: 0.8rem 1rem;
+    font-size: 1.1rem;
+    border: 2px solid #3498db;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.typing-input:focus {
+    outline: none;
+    border-color: #2980b9;
+}
+
+.typing-input:disabled {
+    background-color: #ecf0f1;
+    cursor: not-allowed;
+}
+
+/* 확인 버튼 스타일 */
+.submit-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover:not(:disabled) {
+    background-color: #2980b9;
+}
+
+.submit-button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.game-info p {
+    margin: 0;
+    color: #34495e;
+}
+
+.start-button {
+    margin-top: 2rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #27ae60;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.start-button:hover {
+    background-color: #229954;
+}
+
+.feedback {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.feedback.correct {
+    color: #27ae60;
+    background-color: #e6ffe6;
+}
+
+.feedback.incorrect {
+    color: #e74c3c;
+    background-color: #ffe6e6;
+}
+
+.game-result-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    padding: 2rem;
+    background-color: #f4f7f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.game-result-area h2 {
+    font-size: 2rem;
+    color: #34495e;
+    margin-bottom: 1rem;
+}
+
+.game-result-area p {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.confirm-button {
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirm-button:hover {
+    background-color: #2980b9;
+}

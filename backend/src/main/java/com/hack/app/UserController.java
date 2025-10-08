@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,4 +42,12 @@ public class UserController {
         return ResponseEntity.created(URI.create("/api/users/" + created.id()))
             .body(created);
     }
+
+    @PutMapping("/{id}/gold")
+    public ResponseEntity<UserResponse> updateUserGold(@PathVariable Long id, @RequestBody GoldUpdateRequest request) {
+        UserResponse updated = userService.updateUserGold(id, request.goldAmount());
+        return ResponseEntity.ok(updated);
+    }
 }
+
+record GoldUpdateRequest(int goldAmount) {}

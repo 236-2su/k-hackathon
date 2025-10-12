@@ -4,10 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProblemResponse {
-    private String question;
-    private int timeLimit;
+    private MenuBoard menuBoard;
+    private List<OrderItem> orders;
+    private int answer;
 }

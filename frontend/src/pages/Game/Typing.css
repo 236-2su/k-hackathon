@@ -1,179 +1,221 @@
+/* ===== 기본 레이아웃 ===== */
 .typing-game-container {
-    padding: 1rem;
-    font-family: 'Arial', sans-serif;
-    max-width: 800px;
-    margin: 0 auto;
+  padding: 1.5rem;
+  font-family: 'Arial', sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .game-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    padding: 2rem;
-    background-color: #f4f7f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 2rem;
+  background-color: #f7f9fb;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
+  gap: 1rem;
 }
 
 .timer {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #e74c3c;
-    margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e74c3c;
 }
 
-.sentence-display {
-    width: 100%;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    background-color: #ffffff;
-    border: 1px solid #dcdfe2;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    text-align: center;
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* ===== 시작 화면 (게임 시작 버튼만 표시) ===== */
+.start-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 3rem 1rem;
 }
 
-/* 입력 폼 스타일 */
-.typing-form {
-    display: flex;
-    width: 100%;
-    gap: 0.5rem; /* 입력창과 버튼 사이 간격 */
+.start-hero .start-title {
+  font-size: 2rem;
+  font-weight: 800;
 }
 
-.typing-input {
-    flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
-    padding: 0.8rem 1rem;
-    font-size: 1.1rem;
-    border: 2px solid #3498db;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
+.start-hero .start-desc {
+  color: #6b7280;
+  font-size: 1.25rem;
+  text-align: center;
 }
 
-.typing-input:focus {
-    outline: none;
-    border-color: #2980b9;
+.start-hero .start-button-lg {
+  margin-top: 1rem;
+  padding: 1rem 2.2rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  background-color: #5a7af9;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .05s ease;
 }
 
-.typing-input:disabled {
-    background-color: #ecf0f1;
-    cursor: not-allowed;
+.start-hero .start-button-lg:hover {
+  background-color: #4767ee;
 }
 
-/* 확인 버튼 스타일 */
-.submit-button {
-    padding: 0.8rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #3498db;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.start-hero .start-button-lg:active {
+  transform: translateY(1px);
 }
 
-.submit-button:hover:not(:disabled) {
-    background-color: #2980b9;
+/* ===== 문장 표시 (이전/현재/다음 3줄 고정) ===== */
+.sentence-context {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 12px;
+  min-height: 240px; /* 3줄 고정 높이 */
 }
 
-.submit-button:disabled {
-    background-color: #bdc3c7;
-    cursor: not-allowed;
+.sentence-line {
+  text-align: center;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.6;
+  background: #fff;
+  border: 1px solid #e3e7ec;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
 
-.game-info {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    margin-top: 1.5rem;
-    font-size: 1.2rem;
-    font-weight: 500;
+.sentence-line.current {
+  background-color: #2f80ed;
+  color: #fff;
+  font-weight: 700;
+  transform: scale(1.03);
 }
 
-.game-info p {
-    margin: 0;
-    color: #34495e;
+.sentence-line.prev,
+.sentence-line.next {
+  color: #8a96a4;
+  background: #f9fafb;
+  font-weight: 500;
+  transform: scale(0.98);
 }
 
-.start-button {
-    margin-top: 2rem;
-    padding: 0.8rem 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #27ae60;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+/* ===== 입력창 카드 ===== */
+.input-card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #dfe6ee;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.start-button:hover {
-    background-color: #229954;
+/* ===== 피드백 배지 (정답/오답) ===== */
+.feedback-wrap {
+  width: 100%;
+  text-align: center;
+  margin: 0.25rem 0 0.5rem 0;
 }
 
 .feedback {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px; /* pill 모양 */
 }
 
 .feedback.correct {
-    color: #27ae60;
-    background-color: #e6ffe6;
+  color: #166534;
+  background: #dcfce7;
+  border: 1px solid #86efac;
 }
 
 .feedback.incorrect {
-    color: #e74c3c;
-    background-color: #ffe6e6;
+  color: #991b1b;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
 }
 
-.game-result-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    padding: 2rem;
-    background-color: #f4f7f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
+/* ===== 입력 폼 ===== */
+.typing-form {
+  display: flex;
+  width: 100%;
+  gap: 0.75rem;
 }
 
-.game-result-area h2 {
-    font-size: 2rem;
-    color: #34495e;
-    margin-bottom: 1rem;
+.typing-input {
+  flex-grow: 1;
+  padding: 1rem 1.2rem;
+  font-size: clamp(18px, 2vw, 22px);
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.game-result-area p {
-    font-size: 1.5rem;
-    color: #555;
-    margin-bottom: 0.5rem;
+.typing-input:focus {
+  outline: none;
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 4px rgba(47, 128, 237, 0.15);
 }
 
-.confirm-button {
-    margin-top: 1.5rem;
-    padding: 0.8rem 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #3498db;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.typing-input:disabled {
+  background-color: #ecf0f1;
+  cursor: not-allowed;
 }
 
-.confirm-button:hover {
-    background-color: #2980b9;
+/* ===== 확인 버튼 ===== */
+.submit-button {
+  padding: 0 1.4rem;
+  min-width: 110px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background-color: #2f80ed;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #256ad0;
+}
+
+.submit-button:disabled {
+  background-color: #b7c7df;
+  cursor: not-allowed;
+}
+
+/* ===== 게임 정보 ===== */
+.game-info {
+  margin-top: 0.75rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #34495e;
+}
+
+/* ===== 결과 화면 버튼 ===== */
+.start-button-lg {
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  background-color: #2f80ed;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.05s ease;
+}
+
+.start-button-lg:hover {
+  background-color: #256ad0;
+}
+
+.start-button-lg:active {
+  transform: translateY(1px);
 }

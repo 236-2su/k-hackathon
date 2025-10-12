@@ -1,9 +1,5 @@
 server:
   port: ${SERVER_PORT:${BACKEND_PORT:8080}}
-  servlet:
-    encoding:
-      charset: UTF-8
-      force: true
 
 spring:
   profiles:
@@ -28,14 +24,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-    defer-datasource-initialization: true
   h2:
     console:
       enabled: true
       path: /h2-console
-  sql:
-    init:
-      encoding: UTF-8
 
 openai:
   api-key: ${OPENAI_API_KEY:}

@@ -252,7 +252,7 @@ export default function SurveyResultPage() {
   }
 
   return (
-    <div ref={topRef} className="px-4 sm:px-6 md:px-8 md:pt-20 flex flex-col gap-6">
+    <div ref={topRef} className="flex flex-col gap-6">
       <div className="flex items-center gap-3">
         <Link to="/" className="text-sm text-slate-500 hover:text-slate-700">
           홈으로 가기

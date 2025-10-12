@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hack.app.chat.survey.dto.ProductRecommendation;
 import com.hack.app.chat.survey.dto.RecommendationResponse;
-import com.hack.app.chat.survey.model.FinancialProduct;
 import com.hack.app.chat.survey.model.ProductType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +14,19 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class RecommendationParser {
 
     private static final Logger log = LoggerFactory.getLogger(RecommendationParser.class);
+
+    private static final String DEFAULT_NAME = "UNKNOWN_PRODUCT";
+    private static final String DEFAULT_HEADLINE = "DETAILS_UNAVAILABLE";
+    private static final String DEFAULT_BENEFIT = "DETAILS_UNAVAILABLE";
+    private static final String DEFAULT_CAUTION = "INFO_VALIDATION_REQUIRED";
 
     private final ObjectMapper objectMapper;
 
@@ -32,32 +34,50 @@ public class RecommendationParser {
         this.objectMapper = objectMapper;
     }
 
-    public RecommendationResponse parse(String json, List<FinancialProduct> catalog) {
-        Map<String, FinancialProduct> productById = catalog.stream()
-            .collect(Collectors.toMap(FinancialProduct::id, product -> product));
-
+    public RecommendationResponse parse(String json) {
+        String sanitized = sanitize(json);
         try {
-            JsonNode root = objectMapper.readTree(json);
+            JsonNode root = objectMapper.readTree(sanitized);
             String summary = textValue(root, "summary");
             if (summary == null || summary.isBlank()) {
-                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "?붿빟 臾몄옣???꾨씫?섏뿀?듬땲??");
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Summary field is missing.");
             }
 
             List<String> insights = parseInsights(root.path("insights"));
-            List<ProductRecommendation> savings = parseProducts(root.path("savings"), productById, Set.of(ProductType.SAVINGS, ProductType.DEPOSIT));
-            List<ProductRecommendation> cards = parseProducts(root.path("cards"), productById, Set.of(ProductType.CARD));
+            List<ProductRecommendation> savings = parseProducts(root.path("savings"), ProductType.SAVINGS);
+            List<ProductRecommendation> cards = parseProducts(root.path("cards"), ProductType.CARD);
 
             if (savings.isEmpty() && cards.isEmpty()) {
-                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "異붿쿇 ?곹뭹??鍮꾩뼱 ?덉뒿?덈떎.");
+                throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Gemini returned no actionable recommendations.");
             }
 
             return new RecommendationResponse(summary.trim(), insights, savings, cards);
         } catch (ResponseStatusException ex) {
             throw ex;
         } catch (JsonProcessingException ex) {
-            log.warn("Failed to parse OpenAI response: {}", ex.getMessage());
-            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "OpenAI ?묐떟???댁꽍?섏? 紐삵뻽?듬땲??");
+            log.warn("Failed to parse Gemini response: {}", ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, "Unable to parse Gemini response payload.");
         }
+    }
+
+    private String sanitize(String raw) {
+        if (raw == null) {
+            return "";
+        }
+        String trimmed = raw.trim();
+        if (trimmed.startsWith("```")) {
+            int firstLineBreak = trimmed.indexOf('\n');
+            if (firstLineBreak >= 0) {
+                trimmed = trimmed.substring(firstLineBreak + 1);
+            } else {
+                trimmed = trimmed.substring(3);
+            }
+            trimmed = trimmed.trim();
+            if (trimmed.endsWith("```")) {
+                trimmed = trimmed.substring(0, trimmed.length() - 3).trim();
+            }
+        }
+        return trimmed;
     }
 
     private List<String> parseInsights(JsonNode node) {
@@ -78,61 +98,54 @@ public class RecommendationParser {
         return results;
     }
 
-    private List<ProductRecommendation> parseProducts(JsonNode node,
-                                                      Map<String, FinancialProduct> productById,
-                                                      Set<ProductType> allowedTypes) {
+    private List<ProductRecommendation> parseProducts(JsonNode node, ProductType defaultType) {
         List<ProductRecommendation> results = new ArrayList<>();
-        Set<String> seen = new HashSet<>();
-
         if (!node.isArray()) {
             return results;
         }
 
-        Iterator<JsonNode> iterator = node.elements();
-        while (iterator.hasNext()) {
-            JsonNode item = iterator.next();
-            String productId = textValue(item, "productId");
-            if (productId == null || !seen.add(productId)) {
+        Set<String> usedIds = new HashSet<>();
+        int index = 0;
+        for (JsonNode item : node) {
+            ProductRecommendation recommendation = toRecommendation(item, defaultType, index++);
+            if (!usedIds.add(recommendation.productId())) {
                 continue;
             }
-
-            FinancialProduct product = productById.get(productId);
-            if (product == null || !allowedTypes.contains(product.type())) {
-                continue;
-            }
-
-            results.add(merge(product, item));
-            if (results.size() == 2) {
-                break;
-            }
+            results.add(recommendation);
         }
         return results;
     }
 
-    private ProductRecommendation merge(FinancialProduct product, JsonNode node) {
+    private ProductRecommendation toRecommendation(JsonNode node, ProductType defaultType, int index) {
+        String rawId = textValue(node, "productId");
+        String name = textValue(node, "name", DEFAULT_NAME);
+        String productId = ensureProductId(rawId, name, index);
+
+        ProductType type = parseProductType(textValue(node, "type"), defaultType);
+
         List<String> benefits = collectTextArray(node.path("benefits"));
         if (benefits.isEmpty()) {
-            benefits = new ArrayList<>(product.benefits());
+            benefits.add(DEFAULT_BENEFIT);
         }
 
         List<String> highlight = collectTextArray(node.path("highlightCategories"));
-        if (highlight.isEmpty() && product.highlightCategories() != null) {
-            highlight = new ArrayList<>(product.highlightCategories());
-        }
+
+        Integer minAmount = parseInteger(node.path("minMonthlyAmount"));
+        Integer maxAmount = parseInteger(node.path("maxMonthlyAmount"));
 
         return new ProductRecommendation(
-            product.id(),
-            product.type(),
-            product.name(),
-            textValue(node, "headline", product.headline()),
+            productId,
+            type,
+            name,
+            textValue(node, "headline", DEFAULT_HEADLINE),
             benefits,
-            textValue(node, "caution", product.caution()),
+            textValue(node, "caution", DEFAULT_CAUTION),
             textValue(node, "nextAction", null),
-            intValue(node, "minMonthlyAmount", product.minMonthlyAmount()),
-            intValue(node, "maxMonthlyAmount", product.maxMonthlyAmount()),
-            booleanValue(node, "guardianRequired", product.guardianRequired()),
+            minAmount,
+            maxAmount,
+            node.path("guardianRequired").asBoolean(false),
             highlight,
-            booleanValue(node, "digitalFriendly", product.digitalFriendly())
+            node.path("digitalFriendly").asBoolean(false)
         );
     }
 
@@ -151,6 +164,45 @@ public class RecommendationParser {
         return list;
     }
 
+    private ProductType parseProductType(String value, ProductType defaultType) {
+        if (value == null || value.isBlank()) {
+            return defaultType;
+        }
+        try {
+            return ProductType.valueOf(value.trim().toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException ex) {
+            return defaultType;
+        }
+    }
+
+    private Integer parseInteger(JsonNode node) {
+        if (node.isNumber()) {
+            return node.intValue();
+        }
+        if (node.isTextual()) {
+            String digits = node.asText().replaceAll("[^0-9]", "");
+            if (!digits.isEmpty()) {
+                try {
+                    return Integer.parseInt(digits);
+                } catch (NumberFormatException ignored) {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    private String ensureProductId(String rawId, String name, int index) {
+        if (rawId != null && !rawId.isBlank()) {
+            return rawId.trim();
+        }
+        String base = name == null ? "REC" : name.replaceAll("[^A-Za-z0-9]", "").toUpperCase(Locale.ROOT);
+        if (base.isEmpty()) {
+            base = "REC";
+        }
+        return base + "_" + index;
+    }
+
     private String textValue(JsonNode node, String field) {
         return textValue(node, field, null);
     }
@@ -162,24 +214,5 @@ public class RecommendationParser {
         }
         String text = value.asText();
         return text == null || text.isBlank() ? defaultValue : text;
-    }
-
-    private Integer intValue(JsonNode node, String field, Integer defaultValue) {
-        JsonNode value = node.path(field);
-        if (value.isInt()) {
-            return value.asInt();
-        }
-        if (value.isNumber()) {
-            return value.intValue();
-        }
-        return defaultValue;
-    }
-
-    private boolean booleanValue(JsonNode node, String field, boolean defaultValue) {
-        JsonNode value = node.path(field);
-        if (value.isBoolean()) {
-            return value.asBoolean();
-        }
-        return defaultValue;
     }
 }

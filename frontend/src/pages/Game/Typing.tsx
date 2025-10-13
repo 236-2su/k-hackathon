@@ -24,6 +24,7 @@ export default function Typing() {
 
   const inputRef = useRef<HTMLInputElement>(null);
   const userId = 1;
+  void userId;
 
   const fetchSentence = async (excludeIds: number[] = []) => {
     const query = new URLSearchParams();

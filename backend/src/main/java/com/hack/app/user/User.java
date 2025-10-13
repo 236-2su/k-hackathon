@@ -7,9 +7,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.OffsetDateTime;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -22,42 +28,20 @@ public class User {
     @Column(nullable = false, length = 255, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private int gold = 0; // 기본값 0
+
+    @Column(nullable = false, length = 50)
+    private String job = "초보"; // 기본값 "초보"
+
+    @Column(nullable = false, length = 255)
+    private String mission = "없음"; // 기본값 "없음"
+
     @Column(nullable = false, name = "created_at")
     private OffsetDateTime createdAt = OffsetDateTime.now();
-
-    protected User() {
-    }
 
     public User(String name, String email) {
         this.name = name;
         this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public OffsetDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

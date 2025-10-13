@@ -37,4 +37,13 @@ public class UserService {
         User saved = userRepository.save(new User(request.name(), request.email()));
         return UserResponse.from(saved);
     }
+
+    @Transactional
+    public UserResponse updateUserGold(Long userId, int goldAmount) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new UserNotFoundException(userId));
+        user.setGold(user.getGold() + goldAmount);
+        User updatedUser = userRepository.save(user);
+        return UserResponse.from(updatedUser);
+    }
 }

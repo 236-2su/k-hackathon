@@ -48,21 +48,30 @@ interface RecommendationResponse {
   cards: ProductRecommendation[];
 }
 
-const INTRO_CARDS: { message: string; activeDot: number; showCta?: boolean }[] = [
-  { message: "매번 용돈이 금방 사라져버려...", activeDot: 0 },
-  { message: "하루에 천 원씩 모으면 한 달에 3만 원이네!", activeDot: 1 },
-  { message: "드디어 내가 사고 싶던 걸 내 돈으로 샀어!", activeDot: 2, showCta: true },
+const INTRO_CARDS: { message: string }[] = [
+  { message: "매번 용돈이 금방 사라져버려..." },
+  { message: "하루에 천 원씩 모으면 한 달에 3만 원이네!" },
+  { message: "드디어 내가 사고 싶던 걸 내 돈으로 샀어!" },
 ];
 
-function IntroDots({ activeIndex, total }: { activeIndex: number; total: number }) {
+function IntroDots({
+  activeIndex,
+  total,
+  onSelect,
+}: {
+  activeIndex: number;
+  total: number;
+  onSelect?: (index: number) => void;
+}) {
   return (
     <div className="flex items-center justify-center gap-1.5">
       {Array.from({ length: total }).map((_, index) => (
-        <span
+        <button
           key={index}
-          className={`h-2 w-2 rounded-full transition ${
-            index === activeIndex ? "bg-blue-500" : "bg-slate-300"
-          }`}
+          type="button"
+          onClick={() => onSelect?.(index)}
+          className={`h-2.5 w-2.5 rounded-full transition ${index === activeIndex ? "bg-blue-500" : "bg-slate-300"}`}
+          aria-label={`소개 카드 ${index + 1} 보기`}
         />
       ))}
     </div>
@@ -70,6 +79,24 @@ function IntroDots({ activeIndex, total }: { activeIndex: number; total: number 
 }
 
 function IntroSection({ onStart }: { onStart: () => void }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const isFirst = activeIndex === 0;
+  const isLast = activeIndex === INTRO_CARDS.length - 1;
+
+  const handlePrev = () => {
+    if (!isFirst) {
+      setActiveIndex(prev => prev - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (isLast) {
+      onStart();
+      return;
+    }
+    setActiveIndex(prev => Math.min(prev + 1, INTRO_CARDS.length - 1));
+  };
+
   return (
     <div className="flex flex-col gap-10">
       <div className="flex items-center gap-3">
@@ -82,29 +109,40 @@ function IntroSection({ onStart }: { onStart: () => void }) {
       <p className="text-sm text-slate-600">
         용돈 관리 고민부터 목표 달성까지, 간단한 설문으로 나에게 맞는 금융 상품을 추천받아 보세요.
       </p>
-      <div className="grid gap-4 md:grid-cols-3">
-        {INTRO_CARDS.map((card, index) => (
+      <div className="relative mx-auto w-full max-w-2xl">
+        <div className="overflow-hidden rounded-3xl">
           <div
-            key={index}
-            className="rounded-3xl border border-slate-100 bg-white p-8 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            className="flex transition-transform duration-500"
+            style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
-            <div className="flex h-full flex-col items-center justify-between gap-8">
-              <p className="mt-auto text-base font-semibold text-slate-700">{card.message}</p>
-              <div className="flex flex-col items-center gap-4">
-                <IntroDots activeIndex={card.activeDot} total={INTRO_CARDS.length} />
-                {card.showCta && (
-                  <button
-                    type="button"
-                    onClick={onStart}
-                    className="rounded-lg bg-blue-500 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-600"
-                  >
-                    설문조사하고 상품 추천받기
-                  </button>
-                )}
+            {INTRO_CARDS.map((card, index) => (
+              <div key={index} className="w-full shrink-0 px-1">
+                <div className="flex h-full min-h-[220px] flex-col items-center justify-center gap-6 rounded-3xl border border-slate-100 bg-white p-8 text-center shadow-sm">
+                  <p className="text-base font-semibold text-slate-700">{card.message}</p>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <button
+            type="button"
+            onClick={handlePrev}
+            disabled={isFirst}
+            className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-500 transition hover:border-slate-300 disabled:opacity-40"
+          >
+            이전
+          </button>
+          <IntroDots activeIndex={activeIndex} total={INTRO_CARDS.length} onSelect={setActiveIndex} />
+          <button
+            type="button"
+            onClick={handleNext}
+            className="rounded-full bg-blue-500 px-5 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-600"
+          >
+            {isLast ? "설문조사하고 상품 추천받기" : "다음"}
+          </button>
+        </div>
       </div>
     </div>
   );

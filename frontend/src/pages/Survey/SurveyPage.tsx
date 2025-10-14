@@ -48,10 +48,22 @@ interface RecommendationResponse {
   cards: ProductRecommendation[];
 }
 
-const INTRO_CARDS: { message: string }[] = [
-  { message: "매번 용돈이 금방 사라져버려..." },
-  { message: "하루에 천 원씩 모으면 한 달에 3만 원이네!" },
-  { message: "드디어 내가 사고 싶던 걸 내 돈으로 샀어!" },
+const INTRO_CARDS: { message: string; image: string; alt: string }[] = [
+  {
+    message: "매번 용돈이 금방 사라져버려...",
+    image: "/1.png",
+    alt: "용돈을 빠르게 사용해버린 학생",
+  },
+  {
+    message: "하루에 천 원씩 모으면 한 달에 3만 원이네!",
+    image: "/2.png",
+    alt: "하루에 천 원씩 저금하는 학생",
+  },
+  {
+    message: "드디어 내가 사고 싶던 걸 내 돈으로 샀어!",
+    image: "/3.png",
+    alt: "원하던 물건을 구입한 학생",
+  },
 ];
 
 function IntroDots({
@@ -116,10 +128,16 @@ function IntroSection({ onStart }: { onStart: () => void }) {
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
             {INTRO_CARDS.map((card, index) => (
-              <div key={index} className="w-full shrink-0 px-1">
-                <div className="flex h-full min-h-[220px] flex-col items-center justify-center gap-6 rounded-3xl border border-slate-100 bg-white p-8 text-center shadow-sm">
-                  <p className="text-base font-semibold text-slate-700">{card.message}</p>
+              <div key={index} className="w-full shrink-0 px-1 py-1">
+                <div className="flex h-[320px] w-full items-center justify-center rounded-3xl border border-slate-100 bg-white shadow-sm">
+                  <img
+                    src={card.image}
+                    alt={card.alt}
+                    className="h-full w-auto max-w-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
+                <p className="mt-4 text-center text-base font-semibold text-slate-700">{card.message}</p>
               </div>
             ))}
           </div>

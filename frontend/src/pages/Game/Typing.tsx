@@ -105,7 +105,7 @@ export default function Typing() {
   return (
     <div className="typing-game-container">
       <div className="relative text-center">
-        <h1 className="text-xl font-bold">타이핑 게임</h1>
+        <h1 className="title text-[28px]">타이핑 게임</h1>
         <Link to="/" className="absolute top-0 left-0" aria-label="뒤로가기">
           <ChevronLeft />
         </Link>

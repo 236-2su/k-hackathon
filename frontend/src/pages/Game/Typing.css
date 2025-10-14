@@ -1,9 +1,6 @@
 /* ===== 기본 레이아웃 ===== */
 .typing-game-container {
-  padding: 1.5rem;
-  font-family: 'Arial', sans-serif;
-  max-width: 900px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .game-area {

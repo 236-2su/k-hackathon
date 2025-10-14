@@ -159,9 +159,9 @@ export default function Calculating() {
   const currentProblem = problems[currentProblemIndex];
 
   return (
-    <div className="p-4">
+    <div className="p-4 w-full">
       <div className="relative text-center">
-        <h1 className="text-xl font-bold">계산 게임</h1>
+        <h1 className="title text-[28px]">계산 게임</h1>
         <Link to="/" className="absolute top-0 left-0"><ChevronLeft /></Link>
       </div>
       <p className="text-center py-4 text-[#666]">당신은 자영업자! 손님들의 계산을 정확하게 도와주세요~!</p>

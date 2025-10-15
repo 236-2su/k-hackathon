@@ -110,7 +110,7 @@ function IntroSection({ onStart }: { onStart: () => void }) {
   };
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 w-full">
       <div className="flex items-center gap-3">
         <Link to="/" className="text-sm text-slate-500 hover:text-slate-700">
           홈
@@ -389,7 +389,7 @@ export default function SurveyPage() {
   const maxSelections = currentQuestion.maxSelections ?? undefined;
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 w-full">
       <div className="flex items-center gap-3">
         <Link to="/" className="text-sm text-slate-500 hover:text-slate-700">
           홈

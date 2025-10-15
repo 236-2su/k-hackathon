@@ -25,7 +25,8 @@ body {
 #root {
   width: 1080px;height: 80vh;
   display: flex;justify-content: center;align-items: center;
-  margin: 10vh auto;padding: 100px 48px;
+  overflow: auto;
+  margin: 10vh auto;padding: 40px 48px;
   border-radius: 12px;
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
   background-color: #ffffff;

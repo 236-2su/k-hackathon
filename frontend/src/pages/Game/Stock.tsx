@@ -272,13 +272,6 @@ export default function Stock() {
           </dl>
         </div>
       </section>
-      <StockAnalytics
-        snapshots={gameState.snapshots}
-        holdings={gameState.holdingsByTicker}
-        prices={gameState.priceByTicker}
-        stocks={stocksByTicker}
-        formatCurrency={formatCurrency}
-      />
 
       {!isGameOver && currentRound && (
         <section className="mt-8">
@@ -496,6 +489,13 @@ export default function Stock() {
           ))}
         </div>
       </section>
+      <StockAnalytics
+        snapshots={gameState.snapshots}
+        holdings={gameState.holdingsByTicker}
+        prices={gameState.priceByTicker}
+        stocks={stocksByTicker}
+        formatCurrency={formatCurrency}
+      />
       <StockTutorialModal open={showTutorial} onClose={handleCloseTutorial} />
     </div>
   );

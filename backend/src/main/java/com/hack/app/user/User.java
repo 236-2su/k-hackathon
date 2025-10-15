@@ -25,23 +25,16 @@ public class User {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(nullable = false, length = 255, unique = true)
-    private String email;
-
-    @Column(nullable = false)
-    private int gold = 0; // 기본값 0
-
     @Column(nullable = false, length = 50)
-    private String job = "초보"; // 기본값 "초보"
-
-    @Column(nullable = false, length = 255)
-    private String mission = "없음"; // 기본값 "없음"
+    private String job = "무직"; // 기본값 "무직"
 
     @Column(nullable = false, name = "created_at")
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
-    public User(String name, String email) {
-        this.name = name;
-        this.email = email;
+    @Column(nullable = false)
+    private Long gold = 100L; // 기본값 100
+
+    public User(String userId) {
+        this.name = userId;
     }
 }

@@ -76,6 +76,7 @@ export default function Calculating() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-User-Id': '1', // TODO: 실제 userId로 교체 필요
         },
         body: JSON.stringify(answers),
       });
@@ -246,8 +247,8 @@ export default function Calculating() {
             <h2 className="text-3xl font-bold mb-4">게임 종료!</h2>
             <p className="text-xl mb-2">맞힌 개수: {gameResult.correctCount} / {problems.length}</p>
             <p className="text-xl mb-4">획득한 돈: {gameResult.score}원</p>
-            <button onClick={fetchProblems} className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg font-semibold">
-              다시 시작
+            <button onClick={submitAnswers} className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg font-semibold">
+              확인
             </button>
           </div>
         )}

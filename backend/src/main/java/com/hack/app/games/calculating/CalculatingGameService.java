@@ -1,5 +1,6 @@
 package com.hack.app.games.calculating;
 
+import com.hack.app.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,8 +18,10 @@ public class CalculatingGameService {
 
     private final List<MenuBoard> menuBoards;
     private final List<Problem> currentProblems = new ArrayList<>();
+    private final UserService userService;
 
-    public CalculatingGameService() {
+    public CalculatingGameService(UserService userService) {
+        this.userService = userService;
         this.menuBoards = new ArrayList<>();
         // 메뉴판 1: 카페 메뉴
         menuBoards.add(new MenuBoard("카페 메뉴", List.of(
@@ -79,7 +82,7 @@ public class CalculatingGameService {
                 .collect(Collectors.toList());
     }
 
-    public GameResult submitAnswers(List<UserAnswer> userAnswers) {
+    public GameResult submitAnswers(Long userId, List<UserAnswer> userAnswers) {
         int correctCount = 0;
         long score = 0;
 
@@ -92,6 +95,7 @@ public class CalculatingGameService {
                 score += 100; // Example scoring
             }
         }
+        userService.updateUserGold(userId, score);
         return new GameResult(correctCount, score);
     }
 

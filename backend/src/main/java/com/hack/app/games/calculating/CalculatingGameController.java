@@ -20,7 +20,7 @@ public class CalculatingGameController {
     }
 
     @PostMapping("/submit")
-    public GameResult submitAnswers(@RequestBody List<UserAnswer> userAnswers) {
-        return calculatingGameService.submitAnswers(userAnswers);
+    public GameResult submitAnswers(@RequestHeader("X-User-Id") Long userId, @RequestBody List<UserAnswer> userAnswers) {
+        return calculatingGameService.submitAnswers(userId, userAnswers);
     }
 }

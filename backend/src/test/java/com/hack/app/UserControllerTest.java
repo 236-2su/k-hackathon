@@ -42,14 +42,14 @@ class UserControllerTest {
     void listUsers() throws Exception {
         OffsetDateTime createdAt = OffsetDateTime.parse("2025-10-01T00:00:00Z");
         when(userService.getUsers()).thenReturn(List.of(
-            new UserResponse(1L, "홍길동", "hong@example.com", createdAt)
+            new UserResponse(1L, "홍길동", "무직", 100L, createdAt)
         ));
 
         mockMvc.perform(get("/api/users"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].id").value(1))
             .andExpect(jsonPath("$[0].name").value("홍길동"))
-            .andExpect(jsonPath("$[0].email").value("hong@example.com"));
+            .andExpect(jsonPath("$[0].job").value("무직"));
     }
 
     @Test
@@ -57,20 +57,20 @@ class UserControllerTest {
     void createUser() throws Exception {
         OffsetDateTime createdAt = OffsetDateTime.parse("2025-10-01T00:00:00Z");
         when(userService.createUser(any(UserRequest.class))).thenReturn(
-            new UserResponse(10L, "테스터", "tester@example.com", createdAt)
+            new UserResponse(10L, "테스터", "무직", 100L, createdAt)
         );
 
         mockMvc.perform(post("/api/users")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(new UserRequest("테스터", "tester@example.com"))))
+                .content(objectMapper.writeValueAsString(new UserRequest("테스터", "무직"))))
             .andExpect(status().isCreated())
             .andExpect(jsonPath("$.id").value(10))
             .andExpect(jsonPath("$.name").value("테스터"))
-            .andExpect(jsonPath("$.email").value("tester@example.com"));
+            .andExpect(jsonPath("$.job").value("무직"));
 
         ArgumentCaptor<UserRequest> captor = ArgumentCaptor.forClass(UserRequest.class);
         verify(userService).createUser(captor.capture());
-        assertThat(captor.getValue().name()).isEqualTo("테스터");
-        assertThat(captor.getValue().email()).isEqualTo("tester@example.com");
+        assertThat(captor.getValue().userId()).isEqualTo("테스터");
+        assertThat(captor.getValue().job()).isEqualTo("무직");
     }
 }

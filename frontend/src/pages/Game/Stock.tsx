@@ -88,6 +88,19 @@ export default function Stock() {
     }
   }, []);
 
+  const transactionFee = gameState.metadata.transactionFee;
+  const holding = gameState.holdingsByTicker[firstTicker];
+  const currentPrice = gameState.priceByTicker[firstTicker] ?? 0;
+  const holdingQuantity = holding?.quantity ?? 0;
+  const cash = gameState.cash;
+  const totalAsset = (holdingQuantity * currentPrice) + cash;
+
+  const maxBuyQuantity = computeMaxBuyQuantity(
+    cash,
+    currentPrice,
+    transactionFee,
+  );
+
   const handleSelectType = (type: TradeType) => {
     setOrderDraft((prev) => ({
       ...prev,
@@ -120,6 +133,27 @@ export default function Stock() {
       orderDraft.quantity > 0 &&
       currentEntry
     ) {
+      if (
+        orderDraft.type === "buy" &&
+        orderDraft.quantity > maxBuyQuantity
+      ) {
+        setErrorMessage(
+          `현금 기준으로 최대 ${maxBuyQuantity.toLocaleString()}주까지만 매수할 수 있어요.`,
+        );
+        setTradeMessage(null);
+        return;
+      }
+      if (
+        orderDraft.type === "sell" &&
+        orderDraft.quantity > holdingQuantity
+      ) {
+        setErrorMessage(
+          `보유 수량 ${holdingQuantity.toLocaleString()}주까지만 매도할 수 있어요.`,
+        );
+        setTradeMessage(null);
+        return;
+      }
+
       intents.push({
         ticker: currentEntry.ticker,
         type: orderDraft.type,
@@ -180,12 +214,7 @@ export default function Stock() {
     }
   };
 
-  const holding = gameState.holdingsByTicker[firstTicker];
-  const currentPrice = gameState.priceByTicker[firstTicker] ?? 0;
-  const holdingQuantity = holding?.quantity ?? 0;
   const holdingValue = holdingQuantity * currentPrice;
-  const cash = gameState.cash;
-  const totalAsset = holdingValue + cash;
 
   const assetColorClass =
     currentReturnPct > 0
@@ -337,6 +366,13 @@ export default function Stock() {
                     className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
                   />
                 </label>
+                <p className="mt-2 text-xs text-slate-500">
+                  {orderDraft.type === "buy"
+                    ? `현금 기준 최대 매수 가능 수량: ${maxBuyQuantity.toLocaleString()}주`
+                    : orderDraft.type === "sell"
+                      ? `보유 수량: ${holdingQuantity.toLocaleString()}주`
+                      : "매수 또는 매도를 먼저 선택해 주세요."}
+                </p>
                 <div className="mt-3 flex justify-end">
                   <button
                     type="button"
@@ -508,4 +544,22 @@ function formatDate(value: string | undefined): string {
   } catch {
     return value;
   }
+}
+
+function computeMaxBuyQuantity(
+  cash: number,
+  price: number,
+  feeRate: number,
+): number {
+  if (!Number.isFinite(cash) || !Number.isFinite(price)) {
+    return 0;
+  }
+  if (price <= 0 || cash <= 0) {
+    return 0;
+  }
+  const effectivePrice = price * (1 + Math.max(0, feeRate));
+  if (effectivePrice <= 0) {
+    return 0;
+  }
+  return Math.max(0, Math.floor(cash / effectivePrice));
 }

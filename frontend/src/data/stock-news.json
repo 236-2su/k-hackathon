@@ -2,664 +2,1416 @@
   "metadata": {
     "currency": "KRW",
     "initialCapital": 10000000,
-    "transactionFee": 0.0035,
-    "goalReturnPct": 0.10,
-    "fxRates": {
-      "TSLA": 1350
-    }
+    "transactionFee": 0.001,
+    "goalReturnPct": 0.1,
+    "fxRates": {}
   },
   "stocks": [
     {
-      "ticker": "005930.KS",
-      "symbol": "Samsung",
-      "displayName": "삼성전자",
-      "basePrice": 70000,
+      "ticker": "FSG",
+      "symbol": "FIRSTSTEP",
+      "displayName": "\uccab\uac78\uc74c \uadf8\ub8f9",
+      "basePrice": 50000,
       "newsPool": [
         {
-          "id": "samsung-2024-hbm3e",
+          "id": "firststep-001",
+          "date": "2024-01-05",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uccad\uc18c\ub144 \uc804\uc6a9 \uc694\uae08\uc81c \ub3c4\uc785",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uccad\uc18c\ub144\uc774 \uc4f0\uae30 \uc26c\uc6b4 \uc694\uae08\uc81c\ub97c \ubc1c\ud45c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.043
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-002",
+          "date": "2024-01-06",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uae30\uc220 \uacbd\uc9c4\ub300\ud68c \uc218\uc0c1",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uc0c8 \uc13c\uc11c \uae30\uc220\ub85c \uccad\uc18c\ub144 \uacbd\uc9c4\ub300\ud68c\uc5d0\uc11c \uc0c1\uc744 \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.025,
+            "maxPct": 0.053
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-003",
+          "date": "2024-01-07",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uce5c\ud658\uacbd \ub178\ud2b8\ubd81 \uacf5\uac1c",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uce5c\ud658\uacbd \uc7ac\ub8cc\ub97c \uc4f4 \ub178\ud2b8\ubd81\uc744 \uc120\ubcf4\uc600\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.06
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-004",
+          "date": "2024-01-08",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uacf5\ubd80 \ub3d5\ub294 \uc571 \uc5c5\ub370\uc774\ud2b8",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uacf5\ubd80 \uacc4\ud68d\uc744 \ub3c4\uc640\uc8fc\ub294 \uc571\uc744 \ud06c\uac8c \uc5c5\ub370\uc774\ud2b8\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.033,
+            "maxPct": 0.06
+          },
+          "insight": "\ud559\uc0dd \uace0\uac1d\uc774 \ub298\uc5b4 \uc218\uc775\uc5d0 \ubcf4\ud0ec",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-005",
+          "date": "2024-01-09",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \uae30\uc220 \ud2b9\ud5c8 \ub4f1\ub85d",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uc790\uccb4 \uac1c\ubc1c \uae30\uc220\uc774 \ud2b9\ud5c8\ub97c \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.031,
+            "maxPct": 0.054
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-006",
+          "date": "2024-01-10",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uae30\uc220 \uacbd\uc9c4\ub300\ud68c \uc218\uc0c1",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc0c8 \uc13c\uc11c \uae30\uc220\ub85c \uccad\uc18c\ub144 \uacbd\uc9c4\ub300\ud68c\uc5d0\uc11c \uc0c1\uc744 \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.025,
+            "maxPct": 0.044
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-007",
+          "date": "2024-01-11",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \ud559\uad50 \ub9de\ucda4 \ud0dc\ube14\ub9bf \ucd9c\uc2dc",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \ud559\uad50 \uc218\uc5c5\uc5d0 \ub9de\ucd98 \uac00\ubcbc\uc6b4 \ud0dc\ube14\ub9bf\uc744 \ub0b4\ub193\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.031,
+            "maxPct": 0.054
+          },
+          "insight": "\ud559\uc0dd \uace0\uac1d\uc774 \ub298\uc5b4 \uc218\uc775\uc5d0 \ubcf4\ud0ec",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-008",
           "date": "2024-01-12",
-          "headline": "삼성, HBM3E 공급 계약 확대",
-          "summary": "AI 서버 수요 급증으로 고대역폭 메모리 발주량이 크게 늘며 수익성이 개선될 전망입니다.",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uce5c\ud658\uacbd \ub178\ud2b8\ubd81 \uacf5\uac1c",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uce5c\ud658\uacbd \uc7ac\ub8cc\ub97c \uc4f4 \ub178\ud2b8\ubd81\uc744 \uc120\ubcf4\uc600\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.03, "maxPct": 0.07 },
-          "insight": "AI 투자 확대에 따라 메모리 ASP 상승 가능",
-          "source": "전자신문"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.052
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \ub9e4\ucd9c\uc5d0 \ub3c4\uc6c0",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
         },
         {
-          "id": "samsung-2023-gn4-delay",
-          "date": "2023-09-05",
-          "headline": "모바일 이미지 센서 차세대 양산 일정 지연",
-          "summary": "주요 고객사의 출시 지연으로 이미지 센서 라인의稼動이 낮아질 것이란 우려가 제기됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.04, "maxPct": -0.015 },
-          "insight": "모바일 수요 둔화에 대한 리스크 재부각",
-          "source": "머니투데이"
-        },
-        {
-          "id": "samsung-2024-foundry-apple",
-          "date": "2024-03-18",
-          "headline": "삼성 파운드리, 글로벌 고객사 신규 수주 확보",
-          "summary": "3nm GAA 공정에서 대형 고객사의 프로토타입 주문을 받아 파운드리 경쟁력이 개선되고 있습니다.",
+          "id": "firststep-009",
+          "date": "2024-01-13",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \uccad\uc18c\ub144 \uc804\uc6a9 \uc694\uae08\uc81c \ub3c4\uc785",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uccad\uc18c\ub144\uc774 \uc4f0\uae30 \uc26c\uc6b4 \uc694\uae08\uc81c\ub97c \ubc1c\ud45c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.025, "maxPct": 0.06 },
-          "insight": "고부가가치 공정 비중 확대 -> 마진 개선",
-          "source": "연합뉴스"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.021,
+            "maxPct": 0.048
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
         },
         {
-          "id": "samsung-2023-union-strike",
-          "date": "2023-07-10",
-          "headline": "노조, 임금 협상 결렬 후 파업 카드 꺼내",
-          "summary": "인력 이탈과 생산 차질 가능성이 제기되면서 단기 실적 변동성에 대한 우려가 커지고 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.035, "maxPct": -0.012 },
-          "insight": "생산 라인 차질은 메모리 출하량 감소로 연결될 수 있음",
-          "source": "한국경제"
-        },
-        {
-          "id": "samsung-2024-earnings-beat",
-          "date": "2024-04-30",
-          "headline": "1분기 영업이익, 시장 예상치 상회",
-          "summary": "메모리 가격 반등과 비용 절감 효과로 컨센서스 대비 실적 서프라이즈가 발표됐습니다.",
+          "id": "firststep-010",
+          "date": "2024-01-14",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uae30\uc220 \uacbd\uc9c4\ub300\ud68c \uc218\uc0c1",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc0c8 \uc13c\uc11c \uae30\uc220\ub85c \uccad\uc18c\ub144 \uacbd\uc9c4\ub300\ud68c\uc5d0\uc11c \uc0c1\uc744 \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.04, "maxPct": 0.08 },
-          "insight": "실적 개선이 확인되며 투자 심리 개선",
-          "source": "삼성전자 IR"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.053
+          },
+          "insight": "\uae30\uc220\ub825 \uc778\uc815\uc774 \uc2e0\uaddc \uacc4\uc57d\uc73c\ub85c \uc774\uc5b4\uc9c8 \uac00\ub2a5\uc131",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
         },
         {
-          "id": "samsung-2022-chip-glut",
-          "date": "2022-10-11",
-          "headline": "메모리 재고 급증, 감산 검토 소식",
-          "summary": "글로벌 PC·스마트폰 수요 둔화로 메모리 가격 하락 압력이 지속되고 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.05, "maxPct": -0.02 },
-          "insight": "단기 실적 부진 우려 재확산",
-          "source": "Reuters"
-        },
-        {
-          "id": "samsung-2024-ev-battery",
-          "date": "2024-05-22",
-          "headline": "삼성SDI, 북미 전기차 업체와 장기 공급 계약",
-          "summary": "그룹 차원의 전기차 생태계 확장이 기대되며 관련 부품사 밸류체인에 긍정적인 영향이 예상됩니다.",
+          "id": "firststep-011",
+          "date": "2024-01-15",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \uce5c\ud658\uacbd \uacf5\uc7a5 \uac00\ub3d9",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uce5c\ud658\uacbd \uc5d0\ub108\uc9c0\ub85c \uacf5\uc7a5\uc744 \ub3cc\ub9ac\uae30 \uc2dc\uc791\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.02, "maxPct": 0.05 },
-          "insight": "배터리 수익 기여 확대 기대",
-          "source": "조선비즈"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.022,
+            "maxPct": 0.052
+          },
+          "insight": "\uc5d0\ub108\uc9c0 \uc808\uac10\uc774 \ube44\uc6a9\uc744 \uc904\uc5ec \uc218\uc775 \uac1c\uc120",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
         },
         {
-          "id": "samsung-2023-legal-fine",
-          "date": "2023-11-02",
-          "headline": "반도체 담합 조사에 따른 과징금 부과",
-          "summary": "국내 공정위가 대규모 과징금을 부과하며 비용 증가와 이미지 타격이 예상됩니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.03, "maxPct": -0.01 },
-          "insight": "일회성 비용으로 영업이익 감소",
-          "source": "공정거래위원회"
-        },
-        {
-          "id": "samsung-2024-ai-center",
-          "date": "2024-02-08",
-          "headline": "삼성리서치, 글로벌 AI 센터 확충 계획 발표",
-          "summary": "자체 AI 가속기 개발 및 소프트웨어 투자로 신사업 성장 기대감이 높아졌습니다.",
+          "id": "firststep-012",
+          "date": "2024-01-16",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \uad6d\ub0b4 \ubc15\ub78c\ud68c \ud638\uc751",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uccad\uc18c\ub144 \uacfc\ud559 \ubc15\ub78c\ud68c\uc5d0\uc11c \uccb4\ud5d8 \ubd80\uc2a4\ub97c \uc5f4\uc5b4 \ud070 \ud638\uc751\uc744 \uc5bb\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.018, "maxPct": 0.045 },
-          "insight": "AI 생태계 투자가 장기 밸류에이션 프리미엄 요인",
-          "source": "삼성리서치 블로그"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.044
+          },
+          "insight": "\uad00\uc2ec\uc774 \uc2e4\uc81c \ud310\ub9e4\ub85c \uc774\uc5b4\uc9c8 \uac83\uc73c\ub85c \uae30\ub300",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
         },
         {
-          "id": "samsung-2023-android-issue",
-          "date": "2023-03-27",
-          "headline": "갤럭시 S 시리즈 발열 이슈 재점화",
-          "summary": "초기 구매자들의 발열 불만이 온라인 커뮤니티에 확산되며 리콜 가능성이 거론되고 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.025, "maxPct": -0.009 },
-          "insight": "브랜드 이미지 및 판매량에 부정적",
-          "source": "XDA Developers"
-        },
-        {
-          "id": "samsung-2024-stock-buyback",
-          "date": "2024-06-18",
-          "headline": "대규모 자사주 매입 프로그램 발표",
-          "summary": "주주 환원 강화 정책이 발표되며 장기 투자 매력이 부각되고 있습니다.",
+          "id": "firststep-013",
+          "date": "2024-01-17",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uae30\uc220 \ud2b9\ud5c8 \ub4f1\ub85d",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc790\uccb4 \uac1c\ubc1c \uae30\uc220\uc774 \ud2b9\ud5c8\ub97c \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "fixed", "pct": 0.05 },
-          "insight": "주당가치 상승 기대, 하방 경직성 강화",
-          "source": "공시"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.026,
+            "maxPct": 0.042
+          },
+          "insight": "\uae0d\uc815\uc801\uc778 \uc785\uc18c\ubb38\uc774 \ud310\ub9e4\uc5d0 \ud798",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
         },
         {
-          "id": "samsung-2022-supply-chain",
-          "date": "2022-09-14",
-          "headline": "글로벌 공급망 차질로 출하 일정 지연",
-          "summary": "부품 수급 문제로 TV와 가전 출하가 늦어질 수 있다는 경고가 나왔습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.028, "maxPct": -0.012 },
-          "insight": "완제품 부문 실적 압박",
-          "source": "Bloomberg"
-        },
-        {
-          "id": "samsung-2024-eco-friendly",
-          "date": "2024-04-05",
-          "headline": "친환경 공정 개선으로 ESG 등급 상향",
-          "summary": "재생에너지 사용 확대가 인정되며 ESG 투자 수요가 유입될 것으로 기대됩니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.012, "maxPct": 0.035 },
-          "insight": "ESG 자금 유입 가능성",
-          "source": "MSCI"
-        },
-        {
-          "id": "samsung-2023-apple-loss",
-          "date": "2023-05-19",
-          "headline": "스마트폰 패널 물량 경쟁 심화",
-          "summary": "경쟁사가 주요 고객사의 패널 물량 일부를 가져갔다는 소식이 전해졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.022, "maxPct": -0.008 },
-          "insight": "디스플레이 사업 부진 우려",
-          "source": "Display Supply Chain"
-        },
-        {
-          "id": "samsung-2024-server-demand",
-          "date": "2024-07-01",
-          "headline": "북미 데이터센터 고객, 서버 DRAM 장기 계약 체결",
-          "summary": "클라우드 고객의 장기 공급 계약이 체결되며 실적 가시성이 확보됐습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.027, "maxPct": 0.055 },
-          "insight": "안정적 수주로 현금흐름 개선",
-          "source": "The Information"
-        },
-        {
-          "id": "samsung-2023-tax-issue",
-          "date": "2023-12-15",
-          "headline": "국내 세무조사로 추가 법인세 부담 가능성",
-          "summary": "세무조사 결과에 따라 추가 비용이 발생할 수 있다는 우려가 커졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.018, "maxPct": -0.006 },
-          "insight": "예상치 못한 비용은 단기 투자심리 악화",
-          "source": "KBS"
-        },
-        {
-          "id": "samsung-2024-quantum-dot",
-          "date": "2024-03-09",
-          "headline": "QD-OLED TV 신제품 호평",
-          "summary": "프리미엄 TV 리뷰에서 높은 점수를 받으며 판매 기대감이 올라갔습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.015, "maxPct": 0.04 },
-          "insight": "프리미엄 제품군 점유율 상승 기대",
-          "source": "TechRadar"
-        },
-        {
-          "id": "samsung-2022-android-ban",
-          "date": "2022-11-03",
-          "headline": "인도 정부, 특정 중국 앱 퇴출…삼성 중저가폰 수혜 기대",
-          "summary": "중저가 시장에서 삼성의 점유율 확대 가능성이 거론되고 있습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.01, "maxPct": 0.03 },
-          "insight": "경쟁사 제약은 삼성에게 기회",
-          "source": "India Times"
-        },
-        {
-          "id": "samsung-2024-memory-price-warning",
-          "date": "2024-08-20",
-          "headline": "D램 가격 상승세 둔화 전망",
-          "summary": "분기 말 재고 조정으로 메모리 가격 상승 속도가 둔화될 것이라는 리포트가 나왔습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.02, "maxPct": -0.005 },
-          "insight": "낙관론에 제동, 단기 조정 가능성",
-          "source": "TrendForce"
-        },
-        {
-          "id": "samsung-2023-smartthings",
-          "date": "2023-08-01",
-          "headline": "스마트싱스 생태계, 글로벌 사용자 수 2배 성장",
-          "summary": "스마트홈 플랫폼 성장으로 구독형 서비스 매출 확대 기대감이 높아졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.012, "maxPct": 0.032 },
-          "insight": "플랫폼 매출은 안정적 현금흐름 기반",
-          "source": "삼성전자 블로그"
-        },
-        {
-          "id": "samsung-2023-chip-cyberattack",
-          "date": "2023-02-14",
-          "headline": "반도체 연구 서버 해킹 시도",
-          "summary": "일부 데이터 유출 가능성이 제기되며 기술 경쟁력에 대한 우려가 커졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.027, "maxPct": -0.01 },
-          "insight": "보안 이슈는 고객 신뢰 저하로 연결될 수 있음",
-          "source": "ZDNet Korea"
-        },
-        {
-          "id": "samsung-2024-sound-sensor",
-          "date": "2024-05-10",
-          "headline": "차세대 사운드 센서, 글로벌 가전사 채택 소식",
-          "summary": "B2B 부품 비즈니스 확대가 기대되며 신규 매출원이 생길 전망입니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.016, "maxPct": 0.038 },
-          "insight": "제품 다각화는 실적 안정성 강화",
-          "source": "Nikkei Asia"
-        }
-      ]
-    },
-    {
-      "ticker": "035720.KS",
-      "symbol": "Kakao",
-      "displayName": "카카오",
-      "basePrice": 55000,
-      "newsPool": [
-        {
-          "id": "kakao-2023-data-center-fire",
-          "date": "2023-10-17",
-          "headline": "카카오 데이터센터 화재 재발 우려",
-          "summary": "중단 사고 재발 가능성에 대한 우려가 커지며 서비스 신뢰도 하락이 거론되고 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.045, "maxPct": -0.02 },
-          "insight": "서비스 장애 리스크는 사용자 이탈로 연결",
-          "source": "YTN"
-        },
-        {
-          "id": "kakao-2024-bank-profit",
-          "date": "2024-02-07",
-          "headline": "카카오뱅크, 역대 최대 실적 달성",
-          "summary": "계열사 실적 호조가 그룹 실적에 긍정적으로 반영될 것이란 기대가 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.03, "maxPct": 0.065 },
-          "insight": "핀테크 수익 기여 증대",
-          "source": "서울경제"
-        },
-        {
-          "id": "kakao-2023-antitrust",
-          "date": "2023-09-12",
-          "headline": "공정위, 카카오 엔터 지배력 조사 착수",
-          "summary": "콘텐츠 사업의 시장지배력 남용 여부가 조사되면서 벌금 가능성이 제기됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.03, "maxPct": -0.012 },
-          "insight": "규제 리스크 확대는 밸류에이션 압박",
-          "source": "공정거래위원회"
-        },
-        {
-          "id": "kakao-2024-ai-launcher",
-          "date": "2024-03-15",
-          "headline": "카카오, 생성형 AI 'KoGPT 2.0' 출시",
-          "summary": "AI API 수익화 전략이 구체화되면서 신규 매출원 확보 기대가 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.022, "maxPct": 0.055 },
-          "insight": "플랫폼 기술 경쟁력 강화",
-          "source": "카카오 테크"
-        },
-        {
-          "id": "kakao-2023-tax-raid",
-          "date": "2023-04-06",
-          "headline": "국세청, 카카오 본사 세무조사 착수",
-          "summary": "대규모 세무조사로 인해 비용 부담이 커질 수 있다는 우려가 제기됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.028, "maxPct": -0.01 },
-          "insight": "일시적 비용 증가 및 투자심리 악화",
-          "source": "JTBC"
-        },
-        {
-          "id": "kakao-2024-commerce-growth",
-          "date": "2024-05-08",
-          "headline": "선물하기·커머스, 거래액 25% 성장",
-          "summary": "커머스 플랫폼이 호조를 보이며 광고 사업 부진을 일부 상쇄할 것으로 전망됩니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.018, "maxPct": 0.045 },
-          "insight": "커머스 성장으로 수익 다각화",
-          "source": "매일경제"
-        },
-        {
-          "id": "kakao-2023-pay-competition",
-          "date": "2023-06-22",
-          "headline": "간편결제 시장 경쟁 심화",
-          "summary": "경쟁사 파격 프로모션이 이어지며 카카오페이 수익성 둔화 우려가 커졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.025, "maxPct": -0.009 },
-          "insight": "시장 점유율 방어 비용 증가",
-          "source": "The Bell"
-        },
-        {
-          "id": "kakao-2024-publisher-alliance",
-          "date": "2024-01-29",
-          "headline": "카카오페이지, 글로벌 웹툰 합작 발표",
-          "summary": "북미와 일본에서 합작 플랫폼을 열며 콘텐츠 수출 확대 기대가 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.025, "maxPct": 0.06 },
-          "insight": "콘텐츠 IP 가치 상승",
-          "source": "Variety"
-        },
-        {
-          "id": "kakao-2022-politics-risk",
-          "date": "2022-12-01",
-          "headline": "플랫폼 독점 규제 법안 재추진",
-          "summary": "정치권에서 플랫폼 규제 법안이 재논의되며 수익 모델 제한 우려가 제기됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.032, "maxPct": -0.012 },
-          "insight": "규제는 광고/커머스 성장에 제동",
-          "source": "국회"
-        },
-        {
-          "id": "kakao-2024-mobility-profit",
-          "date": "2024-04-11",
-          "headline": "카카오모빌리티, 첫 연간 흑자 예상",
-          "summary": "택시·대리 서비스 수익성이 개선되며 기업가치 재평가 기대가 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.02, "maxPct": 0.048 },
-          "insight": "플랫폼 확장에 따른 수익 다변화",
-          "source": "파이낸셜뉴스"
-        },
-        {
-          "id": "kakao-2023-gov-regulation",
-          "date": "2023-05-30",
-          "headline": "정부, 모빌리티 요금규제 강화 검토",
-          "summary": "요금 상한제가 강화되면 수익성 개선 속도가 늦춰질 수 있다는 우려가 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.02, "maxPct": -0.007 },
-          "insight": "수익 개선 기대치 하향",
-          "source": "국토부"
-        },
-        {
-          "id": "kakao-2024-metaverse",
-          "date": "2024-03-02",
-          "headline": "카카오게임즈, 메타버스 신규 서비스 공개",
-          "summary": "VR 기반 플랫폼 공개로 신규 사용자 유입 기대가 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.015, "maxPct": 0.04 },
-          "insight": "게임·콘텐츠 확장은 ARPU 상승 요인",
-          "source": "카카오게임즈"
-        },
-        {
-          "id": "kakao-2022-labor-dispute",
-          "date": "2022-11-22",
-          "headline": "카카오 노조, 단체 행동 준비",
-          "summary": "노조의 단체행동 예고로 개발 일정 차질 가능성이 제기되고 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.018, "maxPct": -0.006 },
-          "insight": "서비스 출시 지연 우려",
-          "source": "노동과세계"
-        },
-        {
-          "id": "kakao-2024-kia-partnership",
-          "date": "2024-05-25",
-          "headline": "기아와 차량 인포테인먼트 제휴 확대",
-          "summary": "네비게이션·커넥티드 서비스 탑재 확대로 수익화 기회가 늘어날 전망입니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.017, "maxPct": 0.04 },
-          "insight": "모빌리티 플랫폼 파급력 강화",
-          "source": "ZDNet"
-        },
-        {
-          "id": "kakao-2023-ads-decline",
-          "date": "2023-02-10",
-          "headline": "광고 경기 둔화로 1분기 매출 전망 하향",
-          "summary": "경기 침체 영향으로 온라인 광고 단가가 하락하고 있다는 보고서가 나왔습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.024, "maxPct": -0.009 },
-          "insight": "광고 매출 비중이 높아 타격",
-          "source": "NH투자증권"
-        },
-        {
-          "id": "kakao-2024-smarthome",
-          "date": "2024-06-03",
-          "headline": "카카오 i 커넥트, 가전 30종 추가 연동",
-          "summary": "스마트홈 연동 기기가 늘어나며 구독형 서비스 확장 가능성이 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.012, "maxPct": 0.035 },
-          "insight": "구독 수익 증대 기대",
-          "source": "디지털타임스"
-        },
-        {
-          "id": "kakao-2023-cxo-resign",
-          "date": "2023-01-05",
-          "headline": "카카오, 핵심 경영진 교체 발표",
-          "summary": "연속된 잡음으로 최고경영자 교체가 단행되면서 경영 안정성 우려가 커졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.03, "maxPct": -0.012 },
-          "insight": "리더십 공백에 대한 시장 우려",
-          "source": "한겨레"
-        },
-        {
-          "id": "kakao-2024-global-chat",
-          "date": "2024-02-24",
-          "headline": "카카오톡 글로벌 베타 출시",
-          "summary": "동남아에서 베타 서비스를 시작해 해외 사용자 확대 기대감이 형성됐습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.02, "maxPct": 0.05 },
-          "insight": "국제 사용자 확보는 광고 단가 개선",
-          "source": "The Verge"
-        },
-        {
-          "id": "kakao-2024-security-incident",
-          "date": "2024-07-19",
-          "headline": "카카오 계정 도용 피싱 기승",
-          "summary": "보안 취약점으로 인한 계정 도용 사례가 급증하며 이용자 불안이 높아졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.022, "maxPct": -0.008 },
-          "insight": "사용자 신뢰 이슈는 플랫폼 이탈을 초래할 수 있음",
-          "source": "KBS"
-        },
-        {
-          "id": "kakao-2023-webtoon-hit",
-          "date": "2023-08-18",
-          "headline": "카카오엔터, 글로벌 히트 웹툰 드라마화",
-          "summary": "IP 확장으로 콘텐츠 매출과 로열티가 증가할 것으로 예상됩니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.018, "maxPct": 0.042 },
-          "insight": "IP 수익화로 밸류체인 강화",
-          "source": "Deadline"
-        }
-      ]
-    },
-    {
-      "ticker": "TSLA",
-      "symbol": "Tesla",
-      "displayName": "테슬라",
-      "basePrice": 360000,
-      "newsPool": [
-        {
-          "id": "tesla-2024-delivery-beat",
-          "date": "2024-04-02",
-          "headline": "테슬라, 1분기 차량 인도 38만대 기록",
-          "summary": "시장 예상치를 웃도는 인도 실적이 발표되며 수요 우려가 완화됐습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.035, "maxPct": 0.07 },
-          "insight": "수요 견조성 확인으로 주가 모멘텀 강화",
-          "source": "Tesla IR"
-        },
-        {
-          "id": "tesla-2023-price-cut",
-          "date": "2023-01-13",
-          "headline": "미국·유럽 전기차 가격 대폭 인하",
-          "summary": "판매가격 인하로 마진 축소 우려가 커지며 주가가 변동성을 보였습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.045, "maxPct": -0.018 },
-          "insight": "판매 확대 vs. 마진 축소 딜레마",
-          "source": "CNBC"
-        },
-        {
-          "id": "tesla-2024-cybertruck-ramp",
-          "date": "2024-05-06",
-          "headline": "사이버트럭 생산 확대 발표",
-          "summary": "텍사스 기가팩토리에서의 생산이 안정화되며 고마진 차량 비중이 늘어날 전망입니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.028, "maxPct": 0.06 },
-          "insight": "신차 라인업은 ASP 개선 요인",
-          "source": "Electrek"
-        },
-        {
-          "id": "tesla-2023-autopilot-investigation",
-          "date": "2023-12-12",
-          "headline": "미국 교통안전청, 오토파일럿 추가 조사",
-          "summary": "자율주행 결함 조사 확대 소식으로 규제 리스크가 부각됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.035, "maxPct": -0.012 },
-          "insight": "규제 리스크는 밸류에이션 할인 요인",
-          "source": "NHTSA"
-        },
-        {
-          "id": "tesla-2024-energy-storage",
-          "date": "2024-02-20",
-          "headline": "에너지 저장 사업 매출 급증",
-          "summary": "메가팩 수주가 급증하며 비자동차 부문의 성장이 본격화됐습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.03, "maxPct": 0.065 },
-          "insight": "에너지 부문이 실적 다변화 기여",
-          "source": "Bloomberg"
-        },
-        {
-          "id": "tesla-2023-musk-sell",
-          "date": "2023-11-15",
-          "headline": "엘론 머스크, 보유 지분 일부 매도",
-          "summary": "대주주의 지분 매도로 투자자 심리가 일시적으로 악화됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.03, "maxPct": -0.01 },
-          "insight": "지분 매도는 주가 오버행 요인",
-          "source": "SEC Filing"
-        },
-        {
-          "id": "tesla-2024-gigafactory-mexico",
-          "date": "2024-03-10",
-          "headline": "멕시코 기가팩토리 착공 승인",
-          "summary": "저비용 생산거점 확보로 원가 경쟁력 개선이 기대됩니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.022, "maxPct": 0.048 },
-          "insight": "원가 절감은 가격 경쟁력 강화",
-          "source": "Reuters"
-        },
-        {
-          "id": "tesla-2023-demand-slowdown",
-          "date": "2023-05-01",
-          "headline": "중국 전기차 수요 둔화 신호",
-          "summary": "중국 시장 주문이 둔화됐다는 리포트가 나오며 수요 우려가 부각됐습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.027, "maxPct": -0.009 },
-          "insight": "주요 시장 수요 둔화는 실적 압박",
-          "source": "Caixin"
-        },
-        {
-          "id": "tesla-2024-fsd-update",
-          "date": "2024-06-01",
-          "headline": "FSD 베타 12.4, 긍정적 사용자 평가",
-          "summary": "자율주행 소프트웨어 업데이트가 호평을 받으며 구독 매출 증가 기대가 커졌습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.02, "maxPct": 0.05 },
-          "insight": "소프트웨어 매출은 고마진",
-          "source": "Teslarati"
-        },
-        {
-          "id": "tesla-2023-competition-rise",
-          "date": "2023-03-18",
-          "headline": "중국 EV 경쟁 심화, BYD 신모델 출시",
-          "summary": "가격·사양 경쟁이 격화되며 마진 압박이 확대될 것이라는 우려가 나왔습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.03, "maxPct": -0.012 },
-          "insight": "경쟁 심화는 점유율 방어 부담",
-          "source": "Nikkei Asia"
-        },
-        {
-          "id": "tesla-2024-robotaxi-day",
-          "date": "2024-08-08",
-          "headline": "로보택시 데이 예고, 자율주행 로드맵 공개",
-          "summary": "완전 자율주행 상용화 기대감이 높아지며 기술 프리미엄이 재부각됐습니다.",
-          "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.028, "maxPct": 0.06 },
-          "insight": "미래 수익모델 기대치 상향",
-          "source": "Tesla X"
-        },
-        {
-          "id": "tesla-2023-factory-shutdown",
-          "date": "2023-07-22",
-          "headline": "베를린 공장, 부품 공급 차질로 일시 가동 중단",
-          "summary": "유럽 공급망 차질로 생산량 감소 우려가 커졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.026, "maxPct": -0.01 },
-          "insight": "생산 차질은 인도 물량에 직격",
-          "source": "Handelsblatt"
-        },
-        {
-          "id": "tesla-2024-dojo-expansion",
+          "id": "firststep-014",
           "date": "2024-01-18",
-          "headline": "Dojo 슈퍼컴퓨터 투자 확대",
-          "summary": "자율주행 학습 가속화를 위해 대규모 투자 계획을 발표했습니다.",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \ud574\uc678 \uccb4\ud5d8\uad00 \uc624\ud508",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc544\uc2dc\uc544 \uc9c0\uc5ed\uc5d0 \uccb4\ud5d8\uad00\uc744 \uc5f4\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.018, "maxPct": 0.04 },
-          "insight": "기술 투자는 경쟁력 강화 신호",
-          "source": "The Information"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.019,
+            "maxPct": 0.043
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
         },
         {
-          "id": "tesla-2023-layoff-rumor",
-          "date": "2023-02-01",
-          "headline": "일부 부문 구조조정 루머",
-          "summary": "자동차 부문의 인력 감축 가능성이 제기되며 성장 둔화 우려가 생겼습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.02, "maxPct": -0.007 },
-          "insight": "인력 감축은 투자 심리 위축 요인",
-          "source": "Bloomberg"
-        },
-        {
-          "id": "tesla-2024-q2-margin",
-          "date": "2024-07-24",
-          "headline": "2분기 마진 회복 신호",
-          "summary": "원가 절감과 에너지 비즈니스 호조로 영업마진이 개선됐다는 실적 발표가 있었습니다.",
+          "id": "firststep-015",
+          "date": "2024-01-19",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uacf5\ubd80 \ub3d5\ub294 \uc571 \uc5c5\ub370\uc774\ud2b8",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uacf5\ubd80 \uacc4\ud68d\uc744 \ub3c4\uc640\uc8fc\ub294 \uc571\uc744 \ud06c\uac8c \uc5c5\ub370\uc774\ud2b8\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.03, "maxPct": 0.07 },
-          "insight": "마진 개선은 밸류에이션 회복 요인",
-          "source": "Tesla Earnings Call"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.033,
+            "maxPct": 0.055
+          },
+          "insight": "\uc571 \uc0ac\uc6a9\uc790\uac00 \ub298\uba74 \uad6c\ub3c5 \uc218\uc775\uc774 \uc88b\uc544\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
         },
         {
-          "id": "tesla-2023-harassment-suit",
-          "date": "2023-10-04",
-          "headline": "직장 내 차별 소송 확대",
-          "summary": "직장 내 차별 관련 소송이 잇따르며 리스크 관리 비용이 늘어날 우려가 있습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.022, "maxPct": -0.008 },
-          "insight": "법적 이슈는 브랜드 이미지에 타격",
-          "source": "WSJ"
-        },
-        {
-          "id": "tesla-2024-india-entry",
-          "date": "2024-05-12",
-          "headline": "인도 시장 진출 위한 투자 MOU 체결",
-          "summary": "새로운 대규모 시장 진출 기대감이 높아지며 성장성이 부각됐습니다.",
+          "id": "firststep-016",
+          "date": "2024-01-20",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \uc11c\ube44\uc2a4 \uc13c\ud130 \ud655\uc7a5",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uc11c\ube44\uc2a4 \uc13c\ud130\ub97c \ud655\ub300\ud574 \uace0\uac1d \uc9c0\uc6d0\uc774 \ube68\ub77c\uc84c\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.022, "maxPct": 0.05 },
-          "insight": "신흥시장 확대는 판매량 증가 요인",
-          "source": "Economic Times"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.055
+          },
+          "insight": "\uae0d\uc815\uc801\uc778 \uc785\uc18c\ubb38\uc774 \ud310\ub9e4\uc5d0 \ud798",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
         },
         {
-          "id": "tesla-2023-battery-recall",
-          "date": "2023-06-11",
-          "headline": "배터리 결함으로 12만대 리콜",
-          "summary": "배터리 냉각 시스템 문제로 대규모 리콜이 진행되며 비용 부담이 커질 전망입니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.034, "maxPct": -0.012 },
-          "insight": "리콜 비용은 수익성 하락 요인",
-          "source": "Bloomberg"
-        },
-        {
-          "id": "tesla-2024-ai-day-partnership",
-          "date": "2024-09-03",
-          "headline": "AI Day에서 반도체 파트너십 발표",
-          "summary": "고성능 AI 칩 공동 개발 소식으로 자율주행 기술 고도화 기대가 높아졌습니다.",
+          "id": "firststep-017",
+          "date": "2024-01-21",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \uacf5\ubd80 \ub3d5\ub294 \uc571 \uc5c5\ub370\uc774\ud2b8",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uacf5\ubd80 \uacc4\ud68d\uc744 \ub3c4\uc640\uc8fc\ub294 \uc571\uc744 \ud06c\uac8c \uc5c5\ub370\uc774\ud2b8\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.02, "maxPct": 0.045 },
-          "insight": "기술 리더십 강화는 프리미엄 유지에 기여",
-          "source": "NVIDIA Blog"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.019,
+            "maxPct": 0.039
+          },
+          "insight": "\uc571 \uc0ac\uc6a9\uc790\uac00 \ub298\uba74 \uad6c\ub3c5 \uc218\uc775\uc774 \uc88b\uc544\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
         },
         {
-          "id": "tesla-2023-cfo-resign",
-          "date": "2023-08-07",
-          "headline": "CFO 오마그 준혼 사임",
-          "summary": "오랜 기간 재무를 이끌던 CFO의 사임으로 경영 공백 우려가 커졌습니다.",
-          "impactHint": "bearish",
-          "expectedChange": { "type": "range", "minPct": -0.025, "maxPct": -0.009 },
-          "insight": "리더십 변화는 단기 불확실성 확대",
-          "source": "SEC Filing"
+          "id": "firststep-018",
+          "date": "2024-01-22",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uad6d\ub0b4 \ubc15\ub78c\ud68c \ud638\uc751",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uccad\uc18c\ub144 \uacfc\ud559 \ubc15\ub78c\ud68c\uc5d0\uc11c \uccb4\ud5d8 \ubd80\uc2a4\ub97c \uc5f4\uc5b4 \ud070 \ud638\uc751\uc744 \uc5bb\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.028,
+            "maxPct": 0.054
+          },
+          "insight": "\uad00\uc2ec\uc774 \uc2e4\uc81c \ud310\ub9e4\ub85c \uc774\uc5b4\uc9c8 \uac83\uc73c\ub85c \uae30\ub300",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
         },
         {
-          "id": "tesla-2024-energy-tax-credit",
+          "id": "firststep-019",
+          "date": "2024-01-23",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uce5c\ud658\uacbd \ub178\ud2b8\ubd81 \uacf5\uac1c",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uce5c\ud658\uacbd \uc7ac\ub8cc\ub97c \uc4f4 \ub178\ud2b8\ubd81\uc744 \uc120\ubcf4\uc600\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.032,
+            "maxPct": 0.05
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \ub9e4\ucd9c\uc5d0 \ub3c4\uc6c0",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-020",
+          "date": "2024-01-24",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uccad\uc18c\ub144 \uc804\uc6a9 \uc694\uae08\uc81c \ub3c4\uc785",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uccad\uc18c\ub144\uc774 \uc4f0\uae30 \uc26c\uc6b4 \uc694\uae08\uc81c\ub97c \ubc1c\ud45c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.027,
+            "maxPct": 0.044
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \uc2e4\uc801\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-021",
+          "date": "2024-01-25",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \ud559\uad50 \ub9de\ucda4 \ud0dc\ube14\ub9bf \ucd9c\uc2dc",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \ud559\uad50 \uc218\uc5c5\uc5d0 \ub9de\ucd98 \uac00\ubcbc\uc6b4 \ud0dc\ube14\ub9bf\uc744 \ub0b4\ub193\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.02,
+            "maxPct": 0.057
+          },
+          "insight": "\uad50\uc721 \uc2dc\uc7a5 \uacf5\ub7b5\uc774 \ub9e4\ucd9c\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-022",
+          "date": "2024-01-26",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uad6d\ub0b4 \ubc15\ub78c\ud68c \ud638\uc751",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uccad\uc18c\ub144 \uacfc\ud559 \ubc15\ub78c\ud68c\uc5d0\uc11c \uccb4\ud5d8 \ubd80\uc2a4\ub97c \uc5f4\uc5b4 \ud070 \ud638\uc751\uc744 \uc5bb\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.021,
+            "maxPct": 0.044
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-023",
+          "date": "2024-01-27",
+          "headline": "\uccab\uac78\uc74c \ucf00\uc5b4, \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \uccb4\uacb0",
+          "summary": "\uccab\uac78\uc74c \ucf00\uc5b4\uc5d0\uc11c \ubd80\ud488\uc744 \uc548\uc815\uc801\uc73c\ub85c \uacf5\uae09 \ubc1b\uc744 \uc0c8 \ud611\ub825\uc0ac\ub97c \ucc3e\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.033,
+            "maxPct": 0.057
+          },
+          "insight": "\uc6d0\uac00 \uad00\ub9ac\uac00 \uc26c\uc6cc\uc838 \uc218\uc775 \uac1c\uc120 \uae30\ub300",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-024",
+          "date": "2024-01-28",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.025,
+            "maxPct": 0.054
+          },
+          "insight": "\ud559\uc0dd \uace0\uac1d\uc774 \ub298\uc5b4 \uc218\uc775\uc5d0 \ubcf4\ud0ec",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-025",
+          "date": "2024-01-29",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \uae30\uc220 \uacbd\uc9c4\ub300\ud68c \uc218\uc0c1",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uc0c8 \uc13c\uc11c \uae30\uc220\ub85c \uccad\uc18c\ub144 \uacbd\uc9c4\ub300\ud68c\uc5d0\uc11c \uc0c1\uc744 \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.029,
+            "maxPct": 0.055
+          },
+          "insight": "\uae0d\uc815\uc801\uc778 \uc785\uc18c\ubb38\uc774 \ud310\ub9e4\uc5d0 \ud798",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-026",
+          "date": "2024-01-30",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \uccb4\uacb0",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \ubd80\ud488\uc744 \uc548\uc815\uc801\uc73c\ub85c \uacf5\uae09 \ubc1b\uc744 \uc0c8 \ud611\ub825\uc0ac\ub97c \ucc3e\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.026,
+            "maxPct": 0.048
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \uc2e4\uc801\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-027",
+          "date": "2024-01-31",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \uc628\ub77c\uc778\ubab0 \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \uc628\ub77c\uc778\ubab0\uc5d0\uc11c \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300\ub97c \ub3cc\ud30c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.059
+          },
+          "insight": "\uc548\uc815\uc801\uc778 \ud310\ub9e4 \ud750\ub984\uc774 \uc2e4\uc801\uc5d0 \uae0d\uc815\uc801",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-028",
+          "date": "2024-02-01",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uce5c\ud658\uacbd \ub178\ud2b8\ubd81 \uacf5\uac1c",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uce5c\ud658\uacbd \uc7ac\ub8cc\ub97c \uc4f4 \ub178\ud2b8\ubd81\uc744 \uc120\ubcf4\uc600\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.032,
+            "maxPct": 0.056
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \ub9e4\ucd9c\uc5d0 \ub3c4\uc6c0",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-029",
+          "date": "2024-02-02",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \ud574\uc678 \uccb4\ud5d8\uad00 \uc624\ud508",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \uc544\uc2dc\uc544 \uc9c0\uc5ed\uc5d0 \uccb4\ud5d8\uad00\uc744 \uc5f4\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.059
+          },
+          "insight": "\ud559\uc0dd \uace0\uac1d\uc774 \ub298\uc5b4 \uc218\uc775\uc5d0 \ubcf4\ud0ec",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-030",
+          "date": "2024-02-03",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \ud574\uc678 \uccb4\ud5d8\uad00 \uc624\ud508",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uc544\uc2dc\uc544 \uc9c0\uc5ed\uc5d0 \uccb4\ud5d8\uad00\uc744 \uc5f4\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.026,
+            "maxPct": 0.046
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-031",
+          "date": "2024-02-04",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \uc11c\ube44\uc2a4 \uc13c\ud130 \ud655\uc7a5",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \uc11c\ube44\uc2a4 \uc13c\ud130\ub97c \ud655\ub300\ud574 \uace0\uac1d \uc9c0\uc6d0\uc774 \ube68\ub77c\uc84c\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.02,
+            "maxPct": 0.045
+          },
+          "insight": "\ub9cc\uc871\ub3c4 \uc0c1\uc2b9\uc774 \uc7ac\uad6c\ub9e4\ub97c \uc774\ub04c \uc804\ub9dd",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-032",
+          "date": "2024-02-05",
+          "headline": "\uccab\uac78\uc74c \ucf00\uc5b4, \uce5c\ud658\uacbd \uacf5\uc7a5 \uac00\ub3d9",
+          "summary": "\uccab\uac78\uc74c \ucf00\uc5b4\uc5d0\uc11c \uce5c\ud658\uacbd \uc5d0\ub108\uc9c0\ub85c \uacf5\uc7a5\uc744 \ub3cc\ub9ac\uae30 \uc2dc\uc791\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.018,
+            "maxPct": 0.058
+          },
+          "insight": "\uc5d0\ub108\uc9c0 \uc808\uac10\uc774 \ube44\uc6a9\uc744 \uc904\uc5ec \uc218\uc775 \uac1c\uc120",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-033",
+          "date": "2024-02-06",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \uc628\ub77c\uc778\ubab0 \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uc628\ub77c\uc778\ubab0\uc5d0\uc11c \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300\ub97c \ub3cc\ud30c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.033,
+            "maxPct": 0.039
+          },
+          "insight": "\uc548\uc815\uc801\uc778 \ud310\ub9e4 \ud750\ub984\uc774 \uc2e4\uc801\uc5d0 \uae0d\uc815\uc801",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-034",
+          "date": "2024-02-07",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \uccb4\uacb0",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \ubd80\ud488\uc744 \uc548\uc815\uc801\uc73c\ub85c \uacf5\uae09 \ubc1b\uc744 \uc0c8 \ud611\ub825\uc0ac\ub97c \ucc3e\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.042
+          },
+          "insight": "\uc6d0\uac00 \uad00\ub9ac\uac00 \uc26c\uc6cc\uc838 \uc218\uc775 \uac1c\uc120 \uae30\ub300",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-035",
+          "date": "2024-02-08",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \uc628\ub77c\uc778\ubab0 \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \uc628\ub77c\uc778\ubab0\uc5d0\uc11c \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300\ub97c \ub3cc\ud30c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.02,
+            "maxPct": 0.045
+          },
+          "insight": "\uae0d\uc815\uc801\uc778 \uc785\uc18c\ubb38\uc774 \ud310\ub9e4\uc5d0 \ud798",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-036",
+          "date": "2024-02-09",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uc11c\ube44\uc2a4 \uc13c\ud130 \ud655\uc7a5",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc11c\ube44\uc2a4 \uc13c\ud130\ub97c \ud655\ub300\ud574 \uace0\uac1d \uc9c0\uc6d0\uc774 \ube68\ub77c\uc84c\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.021,
+            "maxPct": 0.051
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-037",
+          "date": "2024-02-10",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uae30\uc220 \uacbd\uc9c4\ub300\ud68c \uc218\uc0c1",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc0c8 \uc13c\uc11c \uae30\uc220\ub85c \uccad\uc18c\ub144 \uacbd\uc9c4\ub300\ud68c\uc5d0\uc11c \uc0c1\uc744 \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.026,
+            "maxPct": 0.039
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-038",
+          "date": "2024-02-11",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uc628\ub77c\uc778\ubab0 \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uc628\ub77c\uc778\ubab0\uc5d0\uc11c \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300\ub97c \ub3cc\ud30c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.022,
+            "maxPct": 0.056
+          },
+          "insight": "\uc548\uc815\uc801\uc778 \ud310\ub9e4 \ud750\ub984\uc774 \uc2e4\uc801\uc5d0 \uae0d\uc815\uc801",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-039",
+          "date": "2024-02-12",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \uccb4\uacb0",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \ubd80\ud488\uc744 \uc548\uc815\uc801\uc73c\ub85c \uacf5\uae09 \ubc1b\uc744 \uc0c8 \ud611\ub825\uc0ac\ub97c \ucc3e\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.023,
+            "maxPct": 0.059
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-040",
+          "date": "2024-02-13",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \uacc4\uc57d",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \uc5ec\ub7ec \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \ud504\ub85c\uadf8\ub7a8\uc744 \ub9fa\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.032,
+            "maxPct": 0.041
+          },
+          "insight": "\uafb8\uc900\ud55c \uccb4\ud5d8 \uc218\uc694\uac00 \ub9e4\ucd9c\uc744 \ub4b7\ubc1b\uce68",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-041",
+          "date": "2024-02-14",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \uae30\uc220 \ud2b9\ud5c8 \ub4f1\ub85d",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \uc790\uccb4 \uac1c\ubc1c \uae30\uc220\uc774 \ud2b9\ud5c8\ub97c \ubc1b\uc558\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.027,
+            "maxPct": 0.059
+          },
+          "insight": "\ud2b9\ud5c8 \ud655\ubcf4\uac00 \uacbd\uc7c1\uc0ac \ub300\ube44 \uc6b0\uc704",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-042",
+          "date": "2024-02-15",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.023,
+            "maxPct": 0.052
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-043",
+          "date": "2024-02-16",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uc11c\ube44\uc2a4 \uc13c\ud130 \ud655\uc7a5",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uc11c\ube44\uc2a4 \uc13c\ud130\ub97c \ud655\ub300\ud574 \uace0\uac1d \uc9c0\uc6d0\uc774 \ube68\ub77c\uc84c\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.037
+          },
+          "insight": "\ub9cc\uc871\ub3c4 \uc0c1\uc2b9\uc774 \uc7ac\uad6c\ub9e4\ub97c \uc774\ub04c \uc804\ub9dd",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-044",
+          "date": "2024-02-17",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \uacc4\uc57d",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uc5ec\ub7ec \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \ud504\ub85c\uadf8\ub7a8\uc744 \ub9fa\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.028,
+            "maxPct": 0.041
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \uc2e4\uc801\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-045",
+          "date": "2024-02-18",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \uc548\uc804 \uc778\uc99d \ud68d\ub4dd",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \uc81c\ud488 \uc548\uc804 \uc778\uc99d\uc744 \ucd94\uac00\ub85c \ud68d\ub4dd\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.032,
+            "maxPct": 0.041
+          },
+          "insight": "\uc778\uc99d \ud655\ub300\uac00 \ud559\uad50 \ub0a9\ud488\uc5d0 \ub3c4\uc6c0",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-046",
+          "date": "2024-02-19",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \ud574\uc678 \uccb4\ud5d8\uad00 \uc624\ud508",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uc544\uc2dc\uc544 \uc9c0\uc5ed\uc5d0 \uccb4\ud5d8\uad00\uc744 \uc5f4\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.023,
+            "maxPct": 0.047
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \uc2e4\uc801\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-047",
+          "date": "2024-02-20",
+          "headline": "\uccab\uac78\uc74c \ucf00\uc5b4, \uc11c\ube44\uc2a4 \uc13c\ud130 \ud655\uc7a5",
+          "summary": "\uccab\uac78\uc74c \ucf00\uc5b4\uc5d0\uc11c \uc11c\ube44\uc2a4 \uc13c\ud130\ub97c \ud655\ub300\ud574 \uace0\uac1d \uc9c0\uc6d0\uc774 \ube68\ub77c\uc84c\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.035,
+            "maxPct": 0.056
+          },
+          "insight": "\ub9cc\uc871\ub3c4 \uc0c1\uc2b9\uc774 \uc7ac\uad6c\ub9e4\ub97c \uc774\ub04c \uc804\ub9dd",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-048",
+          "date": "2024-02-21",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.029,
+            "maxPct": 0.039
+          },
+          "insight": "\uc774\ubbf8\uc9c0 \uac1c\uc120\uc774 \ud310\ub9e4\uc5d0 \uae0d\uc815\uc801",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-049",
+          "date": "2024-02-22",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \uacc4\uc57d",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uc5ec\ub7ec \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \ud504\ub85c\uadf8\ub7a8\uc744 \ub9fa\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.053
+          },
+          "insight": "\uafb8\uc900\ud55c \uccb4\ud5d8 \uc218\uc694\uac00 \ub9e4\ucd9c\uc744 \ub4b7\ubc1b\uce68",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-050",
+          "date": "2024-02-23",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.024,
+            "maxPct": 0.05
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-051",
+          "date": "2024-02-24",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uccad\uc18c\ub144 \uc804\uc6a9 \uc694\uae08\uc81c \ub3c4\uc785",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uccad\uc18c\ub144\uc774 \uc4f0\uae30 \uc26c\uc6b4 \uc694\uae08\uc81c\ub97c \ubc1c\ud45c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.054
+          },
+          "insight": "\uc774\uc6a9\uc790 \uc99d\uac00\uac00 \ub9e4\ucd9c \uc0c1\uc2b9\uc73c\ub85c \uc774\uc5b4\uc9c8 \uac00\ub2a5\uc131",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-052",
+          "date": "2024-02-25",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.018,
+            "maxPct": 0.051
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \uc2e4\uc801\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-053",
+          "date": "2024-02-26",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \uad6d\ub0b4 \ubc15\ub78c\ud68c \ud638\uc751",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \uccad\uc18c\ub144 \uacfc\ud559 \ubc15\ub78c\ud68c\uc5d0\uc11c \uccb4\ud5d8 \ubd80\uc2a4\ub97c \uc5f4\uc5b4 \ud070 \ud638\uc751\uc744 \uc5bb\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.021,
+            "maxPct": 0.053
+          },
+          "insight": "\ud611\ub825 \ud655\ub300\uac00 \uc548\uc815\uc801\uc778 \uc131\uc7a5\uc5d0 \ub3c4\uc6c0",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-054",
+          "date": "2024-02-27",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uce5c\ud658\uacbd \uacf5\uc7a5 \uac00\ub3d9",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uce5c\ud658\uacbd \uc5d0\ub108\uc9c0\ub85c \uacf5\uc7a5\uc744 \ub3cc\ub9ac\uae30 \uc2dc\uc791\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.03,
+            "maxPct": 0.047
+          },
+          "insight": "\uc5d0\ub108\uc9c0 \uc808\uac10\uc774 \ube44\uc6a9\uc744 \uc904\uc5ec \uc218\uc775 \uac1c\uc120",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-055",
           "date": "2024-02-28",
-          "headline": "미국 청정에너지 세액공제 확대 수혜",
-          "summary": "메가팩·솔라 제품이 세액공제 대상에 포함되며 수요 확대가 기대됩니다.",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \uacc4\uc57d",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uc5ec\ub7ec \ud559\uad50\uc640 \uccb4\ud5d8 \uad50\uc2e4 \ud504\ub85c\uadf8\ub7a8\uc744 \ub9fa\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
           "impactHint": "bullish",
-          "expectedChange": { "type": "range", "minPct": 0.018, "maxPct": 0.04 },
-          "insight": "정부 지원은 에너지 사업 성장 촉진",
-          "source": "US Treasury"
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.029,
+            "maxPct": 0.048
+          },
+          "insight": "\ud559\uc0dd \uace0\uac1d\uc774 \ub298\uc5b4 \uc218\uc775\uc5d0 \ubcf4\ud0ec",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-056",
+          "date": "2024-02-29",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \uce5c\ud658\uacbd \ub178\ud2b8\ubd81 \uacf5\uac1c",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uce5c\ud658\uacbd \uc7ac\ub8cc\ub97c \uc4f4 \ub178\ud2b8\ubd81\uc744 \uc120\ubcf4\uc600\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.027,
+            "maxPct": 0.059
+          },
+          "insight": "\uae0d\uc815\uc801\uc778 \uc785\uc18c\ubb38\uc774 \ud310\ub9e4\uc5d0 \ud798",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-057",
+          "date": "2024-03-01",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \uad6d\ub0b4 \ubc15\ub78c\ud68c \ud638\uc751",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uccad\uc18c\ub144 \uacfc\ud559 \ubc15\ub78c\ud68c\uc5d0\uc11c \uccb4\ud5d8 \ubd80\uc2a4\ub97c \uc5f4\uc5b4 \ud070 \ud638\uc751\uc744 \uc5bb\uc5c8\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.026,
+            "maxPct": 0.051
+          },
+          "insight": "\uad00\uc2ec\uc774 \uc2e4\uc81c \ud310\ub9e4\ub85c \uc774\uc5b4\uc9c8 \uac83\uc73c\ub85c \uae30\ub300",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-058",
+          "date": "2024-03-02",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.031,
+            "maxPct": 0.054
+          },
+          "insight": "\uc0c8 \uc81c\ud488 \uc778\uae30\uac00 \uc2e4\uc801\uc744 \ubc00\uc5b4\uc904 \uc804\ub9dd",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-059",
+          "date": "2024-03-03",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uc628\ub77c\uc778\ubab0 \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc628\ub77c\uc778\ubab0\uc5d0\uc11c \ub204\uc801 \ud310\ub9e4 1\ub9cc\ub300\ub97c \ub3cc\ud30c\ud588\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.027,
+            "maxPct": 0.054
+          },
+          "insight": "\uafb8\uc900\ud55c \uc8fc\ubb38\uc774 \ub9e4\ucd9c\uc744 \uc62c\ub9b4 \uac00\ub2a5\uc131",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-060",
+          "date": "2024-03-04",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uc9c0\uc5ed \uc0ac\ud68c \ub098\ub214 \ud589\uc0ac",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uc9c0\uc5ed \ud559\uc0dd\uacfc \ud568\uaed8 \ub098\ub214 \ud589\uc0ac\ub97c \uc5f4\uc5b4 \ube0c\ub79c\ub4dc \ud638\uac10\ub3c4\uac00 \uc62c\ub790\uc5b4\uc694. \ud559\uc0dd\uacfc \ud559\ubd80\ubaa8\uac00 \uc88b\uc740 \ubc18\uc751\uc744 \ubcf4\uc774\uace0 \uc788\uc5b4\uc694.",
+          "impactHint": "bullish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": 0.028,
+            "maxPct": 0.052
+          },
+          "insight": "\uae0d\uc815\uc801\uc778 \uc785\uc18c\ubb38\uc774 \ud310\ub9e4\uc5d0 \ud798",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-061",
+          "date": "2024-03-05",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \uace0\uac1d \ubb38\uc758 \uae09\uc99d",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \uace0\uac1d \ubb38\uc758\uac00 \uae09\uc99d\ud574 \ub300\uc751\uc774 \ub290\ub824\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.044,
+            "maxPct": -0.023
+          },
+          "insight": "\uc77c\uc2dc\uc801 \ud63c\uc120\uc774 \ud310\ub9e4 \ud750\ub984\uc744 \ub9c9\uc744 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-062",
+          "date": "2024-03-06",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \ub9ac\ucf5c \uc548\ub0b4",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uc77c\ubd80 \uc81c\ud488\uc5d0 \ubb38\uc81c\uac00 \ubc1c\uacac\ub3fc \ubb34\ub8cc \uc810\uac80\uc744 \uc548\ub0b4\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.049,
+            "maxPct": -0.024
+          },
+          "insight": "\uace0\uac1d \ubd88\ud3b8\uc774 \uc774\ubbf8\uc9c0\uc5d0 \uc601\ud5a5\uc744 \uc904 \uc6b0\ub824",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-063",
+          "date": "2024-03-07",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \uc804\ub825 \uc810\uac80\uc73c\ub85c \uacf5\uc7a5 \uc815\uc9c0",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uc804\ub825 \uc810\uac80\uc73c\ub85c \ud558\ub8e8 \uacf5\uc7a5\uc774 \uba48\ucdc4\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.03,
+            "maxPct": -0.017
+          },
+          "insight": "\uc0dd\uc0b0 \uacf5\ubc31\uc774 \ucd9c\ud558\uc5d0 \uc9c0\uc5f0",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-064",
+          "date": "2024-03-08",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \uc2dc\ud5d8 \uc81c\ud488 \uc131\ub2a5 \uc9c0\uc5f0",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \uc2dc\ud5d8 \uc81c\ud488\uc774 \uc608\uc0c1\ubcf4\ub2e4 \ub2a6\uac8c \uc644\uc131\ub410\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.049,
+            "maxPct": -0.021
+          },
+          "insight": "\ucd9c\uc2dc \uc77c\uc815\uc774 \ubc00\ub9b4 \uc704\ud5d8",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-065",
+          "date": "2024-03-09",
+          "headline": "\uccab\uac78\uc74c \uc804\uc790, \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \uc810\uac80",
+          "summary": "\uccab\uac78\uc74c \uc804\uc790\uc5d0\uc11c \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \ubb38\uc81c\ub85c \ubcf4\uace0\uc11c\uac00 \ub2a6\uc5b4\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.041,
+            "maxPct": -0.018
+          },
+          "insight": "\uc6b4\uc601 \ud6a8\uc728\uc774 \uc77c\uc2dc\uc801\uc73c\ub85c \ub5a8\uc5b4\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-066",
+          "date": "2024-03-10",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \uc810\uac80",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \ubb38\uc81c\ub85c \ubcf4\uace0\uc11c\uac00 \ub2a6\uc5b4\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.042,
+            "maxPct": -0.014
+          },
+          "insight": "\uc77c\uc2dc\uc801 \ud63c\uc120\uc774 \ud310\ub9e4 \ud750\ub984\uc744 \ub9c9\uc744 \uc218 \uc788\uc74c",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-067",
+          "date": "2024-03-11",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \ub9ac\ucf5c \uc548\ub0b4",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc77c\ubd80 \uc81c\ud488\uc5d0 \ubb38\uc81c\uac00 \ubc1c\uacac\ub3fc \ubb34\ub8cc \uc810\uac80\uc744 \uc548\ub0b4\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.029,
+            "maxPct": -0.017
+          },
+          "insight": "\ube44\uc6a9 \uc99d\uac00\uac00 \uc218\uc775\uc744 \uc904\uc77c \uc704\ud5d8",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-068",
+          "date": "2024-03-12",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \uc810\uac80",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \ubb38\uc81c\ub85c \ubcf4\uace0\uc11c\uac00 \ub2a6\uc5b4\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.032,
+            "maxPct": -0.011
+          },
+          "insight": "\uc6b4\uc601 \ud6a8\uc728\uc774 \uc77c\uc2dc\uc801\uc73c\ub85c \ub5a8\uc5b4\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-069",
+          "date": "2024-03-13",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \ub9c8\ucf00\ud305 \uc9c0\ucd9c \ud655\ub300",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uc0c8 \uad11\uace0\ub97c \uc704\ud574 \uc9c0\ucd9c\uc774 \ub298\uc5c8\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.034,
+            "maxPct": -0.017
+          },
+          "insight": "\uc9c0\ucd9c \uc99d\uac00\uac00 \ub2e8\uae30 \uc2e4\uc801\uc744 \ub20c\ub7ec\uc549\ud790 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-070",
+          "date": "2024-03-14",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \uae09\uaca9\ud55c \ud658\uc728 \ubcc0\ub3d9",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \ud658\uc728\uc774 \uac11\uc790\uae30 \ubcc0\ud574 \ube44\uc6a9 \uacc4\uc0b0\uc774 \uc5b4\ub824\uc6cc\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.029,
+            "maxPct": -0.013
+          },
+          "insight": "\uace0\uac1d \ubd88\ud3b8\uc774 \uc774\ubbf8\uc9c0\uc5d0 \uc601\ud5a5\uc744 \uc904 \uc6b0\ub824",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-071",
+          "date": "2024-03-15",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uc9c1\uc6d0 \uad50\uc721 \ube44\uc6a9 \uc99d\uac00",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uc2e0\uaddc \uc2dc\uc2a4\ud15c \ub3c4\uc785\uc73c\ub85c \uad50\uc721 \ube44\uc6a9\uc774 \ub298\uc5c8\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.027,
+            "maxPct": -0.024
+          },
+          "insight": "\uc77c\uc2dc\uc801 \ud63c\uc120\uc774 \ud310\ub9e4 \ud750\ub984\uc744 \ub9c9\uc744 \uc218 \uc788\uc74c",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-072",
+          "date": "2024-03-16",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \ud611\ub825\uc0ac \uacc4\uc57d \uc9c0\uc5f0",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \ud611\uc758\uac00 \uc608\uc0c1\ubcf4\ub2e4 \uae38\uc5b4\uc9c0\uace0 \uc788\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.05,
+            "maxPct": -0.024
+          },
+          "insight": "\ubd80\ud488 \uc218\uae09 \ubd88\uc548\uc774 \uc0dd\uc0b0\uc744 \ub2a6\ucd9c \uc704\ud5d8",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-073",
+          "date": "2024-03-17",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \ud574\uc678 \ubb3c\ub958 \ube44\uc6a9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \ud574\uc678 \uc6b4\uc1a1 \ube44\uc6a9\uc774 \uac11\uc790\uae30 \uc62c\ub790\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.044,
+            "maxPct": -0.017
+          },
+          "insight": "\ubb3c\ub958\ube44 \uc0c1\uc2b9\uc774 \uc774\uc775\uc744 \uc904\uc77c \uc218 \uc788\uc74c",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-074",
+          "date": "2024-03-18",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \ub9c8\ucf00\ud305 \uc9c0\ucd9c \ud655\ub300",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \uc0c8 \uad11\uace0\ub97c \uc704\ud574 \uc9c0\ucd9c\uc774 \ub298\uc5c8\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.048,
+            "maxPct": -0.019
+          },
+          "insight": "\uc9c0\ucd9c \uc99d\uac00\uac00 \ub2e8\uae30 \uc2e4\uc801\uc744 \ub20c\ub7ec\uc549\ud790 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-075",
+          "date": "2024-03-19",
+          "headline": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624, \ubc30\uc1a1 \uc9c0\uc5f0 \uacf5\uc9c0",
+          "summary": "\uccab\uac78\uc74c \uc2a4\ud29c\ub514\uc624\uc5d0\uc11c \ubd80\ud488 \uc785\uace0\uac00 \ub2a6\uc5b4\uc838 \ubc30\uc1a1\uc774 \uc870\uae08 \ub290\ub824\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.03,
+            "maxPct": -0.016
+          },
+          "insight": "\uc77c\uc2dc\uc801 \ud63c\uc120\uc774 \ud310\ub9e4 \ud750\ub984\uc744 \ub9c9\uc744 \uc218 \uc788\uc74c",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-076",
+          "date": "2024-03-20",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \ud574\uc678 \ubb3c\ub958 \ube44\uc6a9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \ud574\uc678 \uc6b4\uc1a1 \ube44\uc6a9\uc774 \uac11\uc790\uae30 \uc62c\ub790\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.03,
+            "maxPct": -0.015
+          },
+          "insight": "\uc6b4\uc601 \uc9c0\uc5f0\uc774 \ub2e8\uae30 \uc2e4\uc801\uc5d0 \ubd80\ub2f4",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-077",
+          "date": "2024-03-21",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \ubc30\uc1a1 \uc9c0\uc5f0 \uacf5\uc9c0",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \ubd80\ud488 \uc785\uace0\uac00 \ub2a6\uc5b4\uc838 \ubc30\uc1a1\uc774 \uc870\uae08 \ub290\ub824\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.038,
+            "maxPct": -0.011
+          },
+          "insight": "\uace0\uac1d \ubd88\ud3b8\uc774 \uc774\ubbf8\uc9c0\uc5d0 \uc601\ud5a5\uc744 \uc904 \uc6b0\ub824",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-078",
+          "date": "2024-03-22",
+          "headline": "\uccab\uac78\uc74c \ub85c\ubd07, \ud611\ub825\uc0ac \uacc4\uc57d \uc9c0\uc5f0",
+          "summary": "\uccab\uac78\uc74c \ub85c\ubd07\uc5d0\uc11c \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \ud611\uc758\uac00 \uc608\uc0c1\ubcf4\ub2e4 \uae38\uc5b4\uc9c0\uace0 \uc788\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.042,
+            "maxPct": -0.016
+          },
+          "insight": "\ucd94\uac00 \ube44\uc6a9\uc774 \uc774\uc775\ub960\uc744 \ub0ae\ucd9c \uc218 \uc788\uc74c",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-079",
+          "date": "2024-03-23",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \ud574\uc678 \ubb3c\ub958 \ube44\uc6a9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \ud574\uc678 \uc6b4\uc1a1 \ube44\uc6a9\uc774 \uac11\uc790\uae30 \uc62c\ub790\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.05,
+            "maxPct": -0.023
+          },
+          "insight": "\uc6b4\uc601 \uc9c0\uc5f0\uc774 \ub2e8\uae30 \uc2e4\uc801\uc5d0 \ubd80\ub2f4",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-080",
+          "date": "2024-03-24",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \ud574\uc678 \ubb3c\ub958 \ube44\uc6a9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \ud574\uc678 \uc6b4\uc1a1 \ube44\uc6a9\uc774 \uac11\uc790\uae30 \uc62c\ub790\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.038,
+            "maxPct": -0.018
+          },
+          "insight": "\ubb3c\ub958\ube44 \uc0c1\uc2b9\uc774 \uc774\uc775\uc744 \uc904\uc77c \uc218 \uc788\uc74c",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-081",
+          "date": "2024-03-25",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uc2dc\ud5d8 \uc81c\ud488 \uc131\ub2a5 \uc9c0\uc5f0",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uc2dc\ud5d8 \uc81c\ud488\uc774 \uc608\uc0c1\ubcf4\ub2e4 \ub2a6\uac8c \uc644\uc131\ub410\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.037,
+            "maxPct": -0.012
+          },
+          "insight": "\ucd9c\uc2dc \uc77c\uc815\uc774 \ubc00\ub9b4 \uc704\ud5d8",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-082",
+          "date": "2024-03-26",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \ub9ac\ucf5c \uc548\ub0b4",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc77c\ubd80 \uc81c\ud488\uc5d0 \ubb38\uc81c\uac00 \ubc1c\uacac\ub3fc \ubb34\ub8cc \uc810\uac80\uc744 \uc548\ub0b4\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.038,
+            "maxPct": -0.014
+          },
+          "insight": "\uc6b4\uc601 \uc9c0\uc5f0\uc774 \ub2e8\uae30 \uc2e4\uc801\uc5d0 \ubd80\ub2f4",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-083",
+          "date": "2024-03-27",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uc7ac\uace0 \uc870\uc815 \uc2dc\ud589",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \ud310\ub9e4 \ub290\ub9b0 \ubaa8\ub378\uc758 \uc7ac\uace0\ub97c \uc870\uc815\ud558\uace0 \uc788\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.04,
+            "maxPct": -0.014
+          },
+          "insight": "\ube44\uc6a9 \uc99d\uac00\uac00 \uc218\uc775\uc744 \uc904\uc77c \uc704\ud5d8",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-084",
+          "date": "2024-03-28",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uc791\uc740 \ud654\uc7ac \uc0ac\uace0",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc791\uc740 \uacf5\uc7a5 \ud654\uc7ac\uac00 \ubc1c\uc0dd\ud574 \uc7a0\uc2dc \uc0dd\uc0b0\uc774 \uba48\ucdc4\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.032,
+            "maxPct": -0.016
+          },
+          "insight": "\uc0dd\uc0b0 \ucc28\uc9c8\uc774 \ub2e8\uae30 \uacf5\uae09\uc5d0 \uc601\ud5a5",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-085",
+          "date": "2024-03-29",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \ub9c8\ucf00\ud305 \uc9c0\ucd9c \ud655\ub300",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uc0c8 \uad11\uace0\ub97c \uc704\ud574 \uc9c0\ucd9c\uc774 \ub298\uc5c8\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.048,
+            "maxPct": -0.017
+          },
+          "insight": "\uc9c0\ucd9c \uc99d\uac00\uac00 \ub2e8\uae30 \uc2e4\uc801\uc744 \ub20c\ub7ec\uc549\ud790 \uc218 \uc788\uc74c",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-086",
+          "date": "2024-03-30",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \ub9ac\ucf5c \uc548\ub0b4",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uc77c\ubd80 \uc81c\ud488\uc5d0 \ubb38\uc81c\uac00 \ubc1c\uacac\ub3fc \ubb34\ub8cc \uc810\uac80\uc744 \uc548\ub0b4\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.03,
+            "maxPct": -0.023
+          },
+          "insight": "\uc77c\uc2dc\uc801 \ud63c\uc120\uc774 \ud310\ub9e4 \ud750\ub984\uc744 \ub9c9\uc744 \uc218 \uc788\uc74c",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-087",
+          "date": "2024-03-31",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \uc7ac\uace0 \uc870\uc815 \uc2dc\ud589",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \ud310\ub9e4 \ub290\ub9b0 \ubaa8\ub378\uc758 \uc7ac\uace0\ub97c \uc870\uc815\ud558\uace0 \uc788\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.032,
+            "maxPct": -0.01
+          },
+          "insight": "\ube44\uc6a9 \uc99d\uac00\uac00 \uc218\uc775\uc744 \uc904\uc77c \uc704\ud5d8",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-088",
+          "date": "2024-04-01",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \ud574\uc678 \ubb3c\ub958 \ube44\uc6a9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \ud574\uc678 \uc6b4\uc1a1 \ube44\uc6a9\uc774 \uac11\uc790\uae30 \uc62c\ub790\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.029,
+            "maxPct": -0.01
+          },
+          "insight": "\uc77c\uc2dc\uc801 \ud63c\uc120\uc774 \ud310\ub9e4 \ud750\ub984\uc744 \ub9c9\uc744 \uc218 \uc788\uc74c",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-089",
+          "date": "2024-04-02",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \uc810\uac80",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \ub0b4\ubd80 \uc2dc\uc2a4\ud15c \ubb38\uc81c\ub85c \ubcf4\uace0\uc11c\uac00 \ub2a6\uc5b4\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.031,
+            "maxPct": -0.019
+          },
+          "insight": "\uc6b4\uc601 \ud6a8\uc728\uc774 \uc77c\uc2dc\uc801\uc73c\ub85c \ub5a8\uc5b4\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-090",
+          "date": "2024-04-03",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \ud574\uc678 \ubb3c\ub958 \ube44\uc6a9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \ud574\uc678 \uc6b4\uc1a1 \ube44\uc6a9\uc774 \uac11\uc790\uae30 \uc62c\ub790\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.036,
+            "maxPct": -0.014
+          },
+          "insight": "\ube44\uc6a9 \uc99d\uac00\uac00 \uc218\uc775\uc744 \uc904\uc77c \uc704\ud5d8",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-091",
+          "date": "2024-04-04",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \ubd80\ud488 \uac00\uaca9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \ud575\uc2ec \ubd80\ud488 \uac00\uaca9\uc774 \uc62c\ub77c \uc6d0\uac00\uac00 \ub298\uc5c8\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.039,
+            "maxPct": -0.017
+          },
+          "insight": "\uace0\uac1d \ubd88\ud3b8\uc774 \uc774\ubbf8\uc9c0\uc5d0 \uc601\ud5a5\uc744 \uc904 \uc6b0\ub824",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-092",
+          "date": "2024-04-05",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \ud611\ub825\uc0ac \uacc4\uc57d \uc9c0\uc5f0",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \ud611\uc758\uac00 \uc608\uc0c1\ubcf4\ub2e4 \uae38\uc5b4\uc9c0\uace0 \uc788\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.031,
+            "maxPct": -0.011
+          },
+          "insight": "\uace0\uac1d \ubd88\ud3b8\uc774 \uc774\ubbf8\uc9c0\uc5d0 \uc601\ud5a5\uc744 \uc904 \uc6b0\ub824",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-093",
+          "date": "2024-04-06",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \ubd80\ud488 \uac00\uaca9 \uc0c1\uc2b9",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \ud575\uc2ec \ubd80\ud488 \uac00\uaca9\uc774 \uc62c\ub77c \uc6d0\uac00\uac00 \ub298\uc5c8\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.046,
+            "maxPct": -0.015
+          },
+          "insight": "\ube44\uc6a9 \uc99d\uac00\uac00 \uc218\uc775\uc744 \uc904\uc77c \uc704\ud5d8",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-094",
+          "date": "2024-04-07",
+          "headline": "\uccab\uac78\uc74c \uad50\uc721, \uace0\uac1d \ubb38\uc758 \uae09\uc99d",
+          "summary": "\uccab\uac78\uc74c \uad50\uc721\uc5d0\uc11c \uace0\uac1d \ubb38\uc758\uac00 \uae09\uc99d\ud574 \ub300\uc751\uc774 \ub290\ub824\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.03,
+            "maxPct": -0.022
+          },
+          "insight": "\uc11c\ube44\uc2a4 \uc9c0\uc5f0\uc774 \uc774\ubbf8\uc9c0 \ud558\ub77d\uc73c\ub85c \uc774\uc5b4\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-095",
+          "date": "2024-04-08",
+          "headline": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0, \uc11c\ube44\uc2a4 \uc13c\ud130 \ud63c\uc7a1",
+          "summary": "\uccab\uac78\uc74c \uc5d0\ub108\uc9c0\uc5d0\uc11c \uc11c\ube44\uc2a4 \uc13c\ud130\uac00 \uc774\uc6a9\uc790 \ubab0\ub9bc\uc73c\ub85c \ud63c\uc7a1\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.046,
+            "maxPct": -0.02
+          },
+          "insight": "\uc6b4\uc601 \uc9c0\uc5f0\uc774 \ub2e8\uae30 \uc2e4\uc801\uc5d0 \ubd80\ub2f4",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
+        },
+        {
+          "id": "firststep-096",
+          "date": "2024-04-09",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \uace0\uac1d \ubb38\uc758 \uae09\uc99d",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \uace0\uac1d \ubb38\uc758\uac00 \uae09\uc99d\ud574 \ub300\uc751\uc774 \ub290\ub824\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.038,
+            "maxPct": -0.021
+          },
+          "insight": "\uc6b4\uc601 \uc9c0\uc5f0\uc774 \ub2e8\uae30 \uc2e4\uc801\uc5d0 \ubd80\ub2f4",
+          "source": "\uc9c0\uc5ed \ub274\uc2a4"
+        },
+        {
+          "id": "firststep-097",
+          "date": "2024-04-10",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c, \uc571 \uc624\ub958 \uc810\uac80",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ubc14\uc77c\uc5d0\uc11c \uc571\uc5d0\uc11c \uc624\ub958\uac00 \ubc1c\uacac\ub3fc \uae34\uae09 \uc810\uac80\uc744 \uc9c4\ud589\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.049,
+            "maxPct": -0.02
+          },
+          "insight": "\uc11c\ube44\uc2a4 \uc911\ub2e8\uc774 \uc774\uc6a9\uc790 \ubd88\ud3b8\uc73c\ub85c \uc774\uc5b4\uc9c8 \uc218 \uc788\uc74c",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-098",
+          "date": "2024-04-11",
+          "headline": "\uccab\uac78\uc74c \uc2dd\ud488, \ub9ac\ucf5c \uc548\ub0b4",
+          "summary": "\uccab\uac78\uc74c \uc2dd\ud488\uc5d0\uc11c \uc77c\ubd80 \uc81c\ud488\uc5d0 \ubb38\uc81c\uac00 \ubc1c\uacac\ub3fc \ubb34\ub8cc \uc810\uac80\uc744 \uc548\ub0b4\ud588\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.034,
+            "maxPct": -0.011
+          },
+          "insight": "\uc810\uac80 \ube44\uc6a9\uc774 \uc218\uc775\uc744 \uc904\uc77c \uc218 \uc788\uc74c",
+          "source": "\uccab\uac78\uc74c \uc18c\uc2dd"
+        },
+        {
+          "id": "firststep-099",
+          "date": "2024-04-12",
+          "headline": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0, \ubc30\uc1a1 \uc9c0\uc5f0 \uacf5\uc9c0",
+          "summary": "\uccab\uac78\uc74c \ubaa8\ube4c\ub9ac\ud2f0\uc5d0\uc11c \ubd80\ud488 \uc785\uace0\uac00 \ub2a6\uc5b4\uc838 \ubc30\uc1a1\uc774 \uc870\uae08 \ub290\ub824\uc84c\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.032,
+            "maxPct": -0.016
+          },
+          "insight": "\uc6b4\uc601 \uc9c0\uc5f0\uc774 \ub2e8\uae30 \uc2e4\uc801\uc5d0 \ubd80\ub2f4",
+          "source": "\ud559\uad50 \uacbd\uc81c\uc2e0\ubb38"
+        },
+        {
+          "id": "firststep-100",
+          "date": "2024-04-13",
+          "headline": "\uccab\uac78\uc74c \ud14c\ud06c, \ud611\ub825\uc0ac \uacc4\uc57d \uc9c0\uc5f0",
+          "summary": "\uccab\uac78\uc74c \ud14c\ud06c\uc5d0\uc11c \uc0c8 \ud611\ub825\uc0ac \uacc4\uc57d \ud611\uc758\uac00 \uc608\uc0c1\ubcf4\ub2e4 \uae38\uc5b4\uc9c0\uace0 \uc788\uc5b4\uc694. \ube60\ub974\uac8c \ud574\uacb0\ud558\ub824\uace0 \uc548\ub0b4\ud588\uc5b4\uc694.",
+          "impactHint": "bearish",
+          "expectedChange": {
+            "type": "range",
+            "minPct": -0.05,
+            "maxPct": -0.014
+          },
+          "insight": "\uace0\uac1d \ubd88\ud3b8\uc774 \uc774\ubbf8\uc9c0\uc5d0 \uc601\ud5a5\uc744 \uc904 \uc6b0\ub824",
+          "source": "\uccad\uc18c\ub144 \ud22c\uc790 \ub9ac\ud3ec\ud2b8"
         }
       ]
     }

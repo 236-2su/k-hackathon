@@ -267,7 +267,7 @@ export default function Stock() {
         </section>
 
         <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-          {!isGameOver && currentEntry ? (
+          {!isGameOver && currentRound && currentEntry ? (
             <>
               <header className="flex items-center justify-between">
                 <div>

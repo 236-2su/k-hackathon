@@ -6,7 +6,7 @@ import './Typing.css';
 type SentenceItem = { id: number; content: string };
 
 export default function Typing() {
-  const GAME_TIME_SECONDS = 180;
+  const GAME_TIME_SECONDS = 60;
 
   // 세 줄 고정 구조
   const [prevSentence, setPrevSentence] = useState<SentenceItem | null>(null);
@@ -166,9 +166,33 @@ export default function Typing() {
       ) : (
         /* ====== 결과 화면 ====== */
         <div className="game-area">
-          <h2>게임 종료!</h2>
+          <h2 className='text-xl'>게임 종료!</h2>
           <p>총 완성 문장 수: {completedCount}</p>
-          <button className="start-button-lg" onClick={startGame}>다시 시작</button>
+          <div className="relative">
+            <img
+              src="/money.png"
+              alt="획득한 머니"
+              className="w-36 h-36 animate-bounce-slow drop-shadow-md"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-2xl font-bold text-yellow-700 bg-white/80 rounded-full px-4 py-2 shadow-md">
+                +{completedCount * 500} 머니
+              </p>
+            </div>
+          </div>
+
+          {/* 버튼 영역 */}
+          <div className="flex gap-3">
+            <button className="start-button-lg bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-semibold py-3 px-6 rounded-xl shadow hover:from-amber-500 hover:to-yellow-600 transition">
+              💰 머니 획득
+            </button>
+            <button
+              className="start-button-lg bg-gray-400! text-white font-semibold py-3 px-6 rounded-xl shadow hover:bg-gray-500 transition"
+              onClick={startGame}
+            >
+              🔁 다시 시작
+            </button>
+          </div>
         </div>
       )}
     </div>

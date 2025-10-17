@@ -7,11 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
-  padding: 2rem;
-  background-color: #f7f9fb;
-  border-radius: 16px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.07);
+  margin-top: 2rem;
   gap: 1rem;
 }
 
@@ -43,19 +39,19 @@
 
 .start-hero .start-button-lg {
   margin-top: 1rem;
-  padding: 1rem 2.2rem;
-  font-size: 1.5rem;
+  padding: 12px 32px;
+  font-size: 16px;
   font-weight: 800;
   color: #fff;
-  background-color: #5a7af9;
+  background-color: rgb(50 98 86);
   border: none;
-  border-radius: 16px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color .2s ease, transform .05s ease;
 }
 
 .start-hero .start-button-lg:hover {
-  background-color: #4767ee;
+  background-color: rgb(50 98 86);
 }
 
 .start-hero .start-button-lg:active {
@@ -74,39 +70,35 @@
 
 .sentence-line {
   text-align: center;
-  border-radius: 12px;
-  padding: 0.9rem 1rem;
+  border-radius: 8px;
+  padding: 20px 8px;
   font-size: clamp(18px, 2vw, 22px);
   line-height: 1.6;
   background: #fff;
   border: 1px solid #e3e7ec;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 .sentence-line.current {
-  background-color: #2f80ed;
+  background-color: rgb(74, 138, 122);
   color: #fff;
   font-weight: 700;
-  transform: scale(1.03);
 }
 
 .sentence-line.prev,
 .sentence-line.next {
   color: #8a96a4;
   background: #f9fafb;
-  font-weight: 500;
-  transform: scale(0.98);
+  font-weight: 300;
+  font-size: 18px;
+  padding: 12px 0;
 }
 
 /* ===== 입력창 카드 ===== */
 .input-card {
   width: 100%;
-  background: #fff;
-  border: 1px solid #dfe6ee;
-  border-radius: 12px;
-  padding: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 /* ===== 피드백 배지 (정답/오답) ===== */
@@ -145,9 +137,9 @@
 
 .typing-input {
   flex-grow: 1;
-  padding: 1rem 1.2rem;
-  font-size: clamp(18px, 2vw, 22px);
-  border: 2px solid #3498db;
+  padding: 12px 18px;
+  font-size: 20px;
+  border: 2px solid rgb(86, 150, 134);
   border-radius: 10px;
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -155,8 +147,7 @@
 
 .typing-input:focus {
   outline: none;
-  border-color: #2f80ed;
-  box-shadow: 0 0 0 4px rgba(47, 128, 237, 0.15);
+  border-color: none;
 }
 
 .typing-input:disabled {
@@ -171,7 +162,7 @@
   font-size: 1.1rem;
   font-weight: 700;
   color: #fff;
-  background-color: #2f80ed;
+  background-color: rgb(50 98 86);
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -179,7 +170,7 @@
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #256ad0;
+  background-color: rgb(49, 105, 91);
 }
 
 .submit-button:disabled {
@@ -198,13 +189,13 @@
 /* ===== 결과 화면 버튼 ===== */
 .start-button-lg {
   margin-top: 1rem;
-  padding: 1rem 2rem;
-  font-size: 1.25rem;
+  padding: 12px 32px;
+  font-size: 16px;
   font-weight: 800;
   color: #fff;
   background-color: #2f80ed;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.05s ease;
 }

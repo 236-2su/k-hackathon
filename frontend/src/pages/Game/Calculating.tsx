@@ -169,7 +169,7 @@ export default function Calculating() {
 
       <div className="flex flex-col items-center justify-center mt-8 relative">
         {!isGameRunning && !isGameEnded && (
-          <button onClick={fetchProblems} className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg font-semibold">
+          <button onClick={fetchProblems} className="bg-[#326256] text-white px-6 py-3 rounded-lg text-lg font-semibold">
             게임 시작
           </button>
         )}
@@ -177,28 +177,29 @@ export default function Calculating() {
         {isGameRunning && currentProblem && (
           <div className="flex flex-col items-center w-full">
             {/* Problem / Time display */}
-            <div className="flex items-baseline mb-4">
+            <div className="flex items-baseline mb-8">
               <div className="text-2xl font-bold mr-2">문제 {currentProblemIndex + 1} / {problems.length}</div>
               <div className="text-xl"> {timeLeft}초</div>
             </div>
 
             {/* Main game area: Character, Speech Bubble, Menu Board */}
-            <div className="flex justify-between items-start w-full mb-8">
-              {/* Character */}
-              <div className="ml-0">
-                <img src="/character.png" alt="Character" className="w-72 h-72 object-contain" />
+            <div className="flex justify-between items-start w-[80%] mb-8">
+              <div className="flex -gap-3 items-start">
+                <div className="">
+                  <img src="/character.png" alt="Character" className="w-72 h-72 object-contain" />
+                </div>
+                {/* Speech bubble (centered within its flexible space) */}
+                <div className="relative bg-blue-100 p-4 rounded-lg shadow-md -ml-10">
+                  <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-blue-100"></div>
+                  <p className="text-lg font-semibold">주문:</p>
+                  <ul>
+                    {currentProblem.orders.map((order, index) => (
+                      <li key={index} className="text-md">{order.menuName} {order.quantity}개 주세요.</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              {/* Speech bubble (centered within its flexible space) */}
-              <div className="relative bg-blue-100 p-4 rounded-lg shadow-md max-w-md mx-auto">
-                <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-8 border-r-blue-100"></div>
-                <p className="text-lg font-semibold">주문:</p>
-                <ul>
-                  {currentProblem.orders.map((order, index) => (
-                    <li key={index} className="text-md">{order.menuName} {order.quantity}개 주세요.</li>
-                  ))}
-                </ul>
-              </div>
 
               {/* 메뉴판 */}
               {menuBoard && (
@@ -217,22 +218,25 @@ export default function Calculating() {
             </div>
 
             {/* Input field below speech bubble (now centered relative to the overall game area) */}
-            <input
-              ref={inputRef}
-              type="number"
-              className="border-2 border-gray-300 p-3 rounded-lg text-center text-2xl w-48 mb-4"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                  handleNextProblem();
-                }
-              }}
-              autoFocus
-            />
-            <button onClick={() => handleNextProblem()} className="mt-6 bg-green-500 text-white px-6 py-3 rounded-lg text-lg font-semibold">
-              정답 제출
-            </button>
+            <div className="flex gap-4">
+              <input
+                ref={inputRef}
+                type="number"
+                className="border-2 border-gray-300 p-3 rounded-lg text-center text-2xl w-48"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleNextProblem();
+                  }
+                }}
+                autoFocus
+              />
+              <button onClick={() => handleNextProblem()} className="bg-[#326256] text-white px-6 rounded-lg text-md font-semibold">
+                정답 제출
+              </button>
+
+            </div>
 
             {feedback && (
               <div className={`mt-4 text-2xl font-bold ${feedback === 'correct' ? 'text-green-600' : 'text-red-600'}`}>

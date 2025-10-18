@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+﻿import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { GameTutorialModal } from "./components/GameTutorialModal";
 import { GameResultModal } from "./components/GameResultModal";
 import { getZepContext, postReward } from "./gameApi";
@@ -50,16 +50,16 @@ const MIN_SUCCESS_COUNT = 6;
 
 const tutorialSteps: TutorialStep[] = [
   {
-    title: "주문?��? 꼼꼼???�인?�세??,
-    description: "?�님??부?�한 메뉴?� ?�량??기억???�고 ?�확???�계�?계산?�니??",
+    title: "계산 규칙 확인",
+    description: "메뉴판과 주문 힌트를 보고 합계를 계산하세요.",
   },
   {
-    title: "모든 문제??10�??�한?�에??,
-    description: "??문제�??� ?�마??10�??�에 ?�을 ?�력?�야 ?�음 주문?�로 ?�어�????�어??",
+    title: "10문제 진행",
+    description: "각 문제의 총합을 입력하면 다음 문제로 넘어갑니다.",
   },
   {
-    title: "?�답 개수???�라 보상??받아??,
-    description: "?�답 6�??�상?�면 ?�공! 주문 ?�량 × 300골드�??�득?�니??",
+    title: "성공 조건",
+    description: "정답 6개 이상이면 성공! 품목 × 300골드가 적립됩니다.",
   },
 ];
 
@@ -106,7 +106,7 @@ export default function Calculating() {
     try {
       const response = await fetch("/api/games/calculating/start");
       if (!response.ok) {
-        throw new Error("문제�?불러?��? 못했?�니??");
+        throw new Error("문제를 불러오지 못했습니다.");
       }
       const data = (await response.json()) as ProblemResponse[];
       setProblems(data);
@@ -127,7 +127,7 @@ export default function Calculating() {
       setResult({
         earnedGold: 0,
         success: false,
-        highlights: ["문제�?불러?��? 못했?�니?? ?�시 ???�시 ?�도??주세??"],
+        highlights: ["문제를 불러오지 못했습니다. 잠시 후 다시 시도해주세요."],
         details: null,
       });
     }
@@ -143,7 +143,7 @@ export default function Calculating() {
         },
         body: JSON.stringify(answers),
       });
-      if (!response.ok) throw new Error("결과�??�출?��? 못했?�니??");
+      if (!response.ok) throw new Error("결과를 제출하지 못했습니다.");
       const data = (await response.json()) as GameResultResponse;
 
       const totalItems = problems
@@ -158,8 +158,8 @@ export default function Calculating() {
         earnedGold,
         success,
         highlights: [
-          `?�답 ?? ${data.correctCount} / ${problems.length}`,
-          `�?주문 ?�량: ${totalItems}�?,
+          `정답 수: ${data.correctCount} / ${problems.length}`,
+          `총 주문 수량: ${totalItems}개`,
         ],
         details: orderSummary,
       });
@@ -172,7 +172,7 @@ export default function Calculating() {
       setResult({
         earnedGold: 0,
         success: false,
-        highlights: ["결과�??�출?��? 못했?�니?? ?�시 ???�시 ?�도??주세??"],
+        highlights: ["결과를 제출하지 못했습니다. 잠시 후 다시 시도해주세요."],
         details: null,
       });
     }
@@ -181,8 +181,10 @@ export default function Calculating() {
   const handleNextProblem = useCallback(() => {
     if (!isGameRunning || problems.length === 0) return;
 
-    const currentProblem =\n    currentProblemIndex >= 0 && currentProblemIndex < problems.length\n      ? problems[currentProblemIndex]\n      : undefined;
-    const userAnswer = parseInt(inputValue, 10);\n    const cur = (currentProblemIndex >=0 && currentProblemIndex < problems.length) ? problems[currentProblemIndex] : undefined;\n    if (!cur) return;\n    const isCorrect = userAnswer === cur.answer;
+    if (currentProblemIndex < 0 || currentProblemIndex >= problems.length) return;
+    const cur = problems[currentProblemIndex];
+    const userAnswer = parseInt(inputValue, 10);
+    const isCorrect = userAnswer === cur.answer;
 
     setAnswers((prev) => [...prev, { answer: Number.isNaN(userAnswer) ? 0 : userAnswer }]);
     setFeedback(isCorrect ? "correct" : "wrong");
@@ -234,8 +236,14 @@ export default function Calculating() {
       setMenuBoard(problems[currentProblemIndex].menuBoard);
     }
   }, [currentProblemIndex, problems]);
+  // 현재 문제(안전 가드 포함)
+  const currentProblem =
+    currentProblemIndex >= 0 && currentProblemIndex < problems.length
+      ? problems[currentProblemIndex]
+      : undefined;
 
-  const currentProblem =\n    currentProblemIndex >= 0 && currentProblemIndex < problems.length\n      ? problems[currentProblemIndex]\n      : undefined;
+
+  
 
   const notifyZep = useCallback((success: boolean, earnedGold: number) => {
     if (typeof window === "undefined") {
@@ -291,7 +299,7 @@ export default function Calculating() {
     <div className="p-4 w-full max-w-5xl mx-auto">
       <div className="relative text-center">
         <h1 className="title text-[28px]">계산 게임</h1>
-        <p className="text-center py-4 text-[#666]">?�영?�자가 ?�어 ?�확?�게 주문??계산??주세??</p>
+        <p className="text-center py-4 text-[#666]">메뉴판을 보고 합계를 계산해 정답을 제출하세요.</p>
       </div>
 
       <div className="flex flex-col items-center justify-center mt-8 relative">
@@ -300,7 +308,7 @@ export default function Calculating() {
             onClick={() => setShowTutorial(true)}
             className="bg-[#326256] text-white px-6 py-3 rounded-lg text-lg font-semibold"
           >
-            ?�토리얼 보기
+            튜토리얼 보기
           </button>
         )}
 
@@ -310,14 +318,14 @@ export default function Calculating() {
               <div className="text-2xl font-bold">
                 문제 {currentProblemIndex + 1} / {problems.length}
               </div>
-              <div className="text-xl text-[#e74c3c]">{timeLeft}�?/div>
+              <div className="text-xl text-[#e74c3c]">{timeLeft}초</div>
             </div>
 
             <div className="flex flex-wrap justify-center gap-6 w-full">
               <div className="flex gap-4 items-start">
                 <img
                   src="/character.png"
-                  alt="?�님"
+                  alt="캐릭터"
                   className="w-56 h-56 object-contain"
                 />
                 <div className="relative bg-blue-100 p-4 rounded-lg shadow-md min-w-[220px]">
@@ -326,7 +334,7 @@ export default function Calculating() {
                   <ul className="mt-2">
                     {currentProblem.orders.map((order, index) => (
                       <li key={index} className="text-md">
-                        {order.menuName} {order.quantity}�?주세??
+                        {order.menuName} {order.quantity}개
                       </li>
                     ))}
                   </ul>
@@ -340,7 +348,7 @@ export default function Calculating() {
                     {menuBoard.menuItems.map((item, index) => (
                       <li key={index} className="flex justify-between text-sm">
                         <span>{item.name}</span>
-                        <span>{item.price.toLocaleString()}??/span>
+                        <span>{item.price.toLocaleString()}원</span>
                       </li>
                     ))}
                   </ul>
@@ -366,7 +374,7 @@ export default function Calculating() {
                 onClick={handleNextProblem}
                 className="bg-[#326256] text-white px-6 rounded-lg text-md font-semibold"
               >
-                ?�답 ?�출
+                정답 제출
               </button>
             </div>
 
@@ -376,7 +384,7 @@ export default function Calculating() {
                   feedback === "correct" ? "text-green-600" : "text-red-600"
                 }`}
               >
-                {feedback === "correct" ? "?�답!" : "?�답!"}
+                {feedback === "correct" ? "정답!" : "오답!"}
               </div>
             )}
           </div>
@@ -385,8 +393,8 @@ export default function Calculating() {
 
       <GameTutorialModal
         open={showTutorial}
-        title="계산 게임 가?�드"
-        subtitle="3?�계 ?�토리얼???�인????게임???�작?�세??"
+        title="계산 게임 가이드"
+        subtitle="3단계 튜토리얼을 확인하고 게임을 시작하세요."
         steps={tutorialSteps}
         onStart={() => {
           void fetchProblems();
@@ -404,8 +412,8 @@ export default function Calculating() {
         error={rewardError}
         onConfirm={handleResultConfirm}
         onRetry={result?.success ? handleRetry : undefined}
-        confirmLabel={result?.success ? "보상 받기" : "?�기"}
-        retryLabel="?�시 계산?�기"
+        confirmLabel={result?.success ? "확인" : "닫기"}
+        retryLabel="다시 하기"
       />
     </div>
   );
@@ -425,14 +433,20 @@ function buildOrderSummary(problems: ProblemResponse[]): ReactNode {
 
   return (
     <div>
-      <p className="font-semibold mb-2">�?주문 ?�약</p>
+      <p className="font-semibold mb-2">총 주문 합계</p>
       <ul className="space-y-1">
         {entries.map(([name, qty]) => (
           <li key={name}>
-            {name} × {qty}�?          </li>
+            {name} × {qty}개
+          </li>
         ))}
       </ul>
     </div>
   );
 }
+
+
+
+
+
 

@@ -6,6 +6,7 @@ import com.hack.app.user.UserRequest;
 import com.hack.app.user.UserResponse;
 import com.hack.app.user.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,11 +34,6 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping("/{id}")
-    public UserResponse getUser(@PathVariable Long id) {
-        return userService.getUser(id);
-    }
-
     @PostMapping
     public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request) {
         UserResponse created = userService.createUser(request);
@@ -45,10 +41,21 @@ public class UserController {
             .body(created);
     }
 
+    @GetMapping("/{id}")
+    public UserResponse getUser(@PathVariable String id) {
+        return userService.getUserFlexible(id);
+    }
+
     @PostMapping("/portal-move")
     public ResponseEntity<PortalMoveResponse> portalMove(@Valid @RequestBody PortalMoveRequest request) {
         PortalMoveResponse response = userService.getJobAndGoldByUserId(request.userId());
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/job")
+    public ResponseEntity<UserResponse> updateUserJobByName(@Valid @RequestBody UserJobRequest request) {
+        UserResponse updated = userService.updateUserJobByName(request.zepUserId(), request.job());
+        return ResponseEntity.ok(updated);
     }
 
     @PutMapping("/{id}/gold")
@@ -67,3 +74,6 @@ public class UserController {
 record GoldUpdateRequest(int goldAmount) {}
 
 record JobUpdateRequest(String job) {}
+
+record UserJobRequest(@NotBlank(message = "사용자 ID를 입력해주세요") String zepUserId,
+                      @NotBlank(message = "직업을 입력해주세요") String job) {}

@@ -21,16 +21,39 @@ public class UserService {
             .toList();
     }
 
-    public UserResponse getUser(Long id) {
-        User user = userRepository.findById(id)
-            .orElseThrow(() -> new UserNotFoundException(String.valueOf(id)));
-        return UserResponse.from(user);
+    public UserResponse getUserFlexible(String identifier) {
+        Long numericId = parseLongOrNull(identifier);
+        if (numericId != null) {
+            return userRepository.findById(numericId)
+                .map(UserResponse::from)
+                .orElseGet(() -> userRepository.findByName(identifier)
+                    .map(UserResponse::from)
+                    .orElseThrow(() -> new UserNotFoundException(identifier)));
+        }
+        return userRepository.findByName(identifier)
+            .map(UserResponse::from)
+            .orElseThrow(() -> new UserNotFoundException(identifier));
     }
 
     @Transactional
     public UserResponse createUser(UserRequest request) {
-        User saved = userRepository.save(new User(request.userId()));
+        User user = new User(request.userId());
+        if (request.job() != null && !request.job().isBlank()) {
+            user.setJob(request.job());
+        }
+        User saved = userRepository.save(user);
         return UserResponse.from(saved);
+    }
+
+    @Transactional
+    public UserResponse upsertZepUser(String zepUserId, String job) {
+        User user = userRepository.findByName(zepUserId)
+            .orElseGet(() -> userRepository.save(new User(zepUserId)));
+        if (job != null && !job.isBlank()) {
+            user.setJob(job);
+        }
+        User updated = userRepository.save(user);
+        return UserResponse.from(updated);
     }
 
     @Transactional
@@ -49,11 +72,28 @@ public class UserService {
     }
 
     @Transactional
+    public UserResponse updateUserJobByName(String userId, String job) {
+        User user = userRepository.findByName(userId)
+            .orElseThrow(() -> new UserNotFoundException(userId));
+        user.setJob(job);
+        User updatedUser = userRepository.save(user);
+        return UserResponse.from(updatedUser);
+    }
+
+    @Transactional
     public UserResponse updateUserGold(Long userId, long goldAmount) {
         User user = userRepository.findById(userId)
             .orElseThrow(() -> new UserNotFoundException(String.valueOf(userId)));
         user.setGold(user.getGold() + goldAmount);
         User updatedUser = userRepository.save(user);
         return UserResponse.from(updatedUser);
+    }
+
+    private Long parseLongOrNull(String value) {
+        try {
+            return Long.valueOf(value);
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 }

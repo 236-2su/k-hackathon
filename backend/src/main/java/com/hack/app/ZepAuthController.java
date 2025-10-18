@@ -22,13 +22,13 @@ public class ZepAuthController {
 
     @PostMapping("/zep-session")
     public ResponseEntity<UserResponse> upsertSession(@Valid @RequestBody ZepSessionRequest request) {
-        UserResponse response = userService.upsertZepUser(request.zepUserId(), request.job());
+        UserResponse response = userService.upsertZepUser(request.zepUserId(), request.nickname(), request.job());
         return ResponseEntity.ok(response);
     }
 }
 
 record ZepSessionRequest(
-    @NotBlank(message = "사용자 ID를 입력해주세요") String zepUserId,
+    @NotBlank(message = "유저 ID를 입력해 주세요") String zepUserId,
     String nickname,
     String job
 ) {}

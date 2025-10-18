@@ -1,9 +1,8 @@
 package com.hack.app.user;
 
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,18 +25,17 @@ public class UserService {
         if (numericId != null) {
             return userRepository.findById(numericId)
                 .map(UserResponse::from)
-                .orElseGet(() -> userRepository.findByName(identifier)
-                    .map(UserResponse::from)
-                    .orElseThrow(() -> new UserNotFoundException(identifier)));
+                .orElseThrow(() -> new UserNotFoundException(String.valueOf(numericId)));
         }
-        return userRepository.findByName(identifier)
+        return userRepository.findByZepUserId(identifier)
+            .or(() -> userRepository.findByNickname(identifier))
             .map(UserResponse::from)
             .orElseThrow(() -> new UserNotFoundException(identifier));
     }
 
     @Transactional
     public UserResponse createUser(UserRequest request) {
-        User user = new User(request.userId());
+        User user = new User(request.userId(), request.userId());
         if (request.job() != null && !request.job().isBlank()) {
             user.setJob(request.job());
         }
@@ -46,9 +44,19 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponse upsertZepUser(String zepUserId, String job) {
-        User user = userRepository.findByName(zepUserId)
-            .orElseGet(() -> userRepository.save(new User(zepUserId)));
+    public UserResponse upsertZepUser(String zepUserId, String nickname, String job) {
+        User user = userRepository.findByZepUserId(zepUserId)
+            .orElseGet(() -> userRepository.findByNickname(zepUserId)
+                .orElseGet(() -> new User(zepUserId, nickname)));
+
+        if (user.getZepUserId() == null || user.getZepUserId().isBlank()) {
+            user.setZepUserId(zepUserId);
+        }
+        if (nickname != null && !nickname.isBlank()) {
+            user.setNickname(nickname);
+        } else if (user.getNickname() == null || user.getNickname().isBlank()) {
+            user.setNickname(zepUserId);
+        }
         if (job != null && !job.isBlank()) {
             user.setJob(job);
         }
@@ -66,15 +74,17 @@ public class UserService {
     }
 
     public PortalMoveResponse getJobAndGoldByUserId(String userId) {
-        User user = userRepository.findByName(userId)
-            .orElseThrow(() -> new UserNotFoundException("User with ID " + userId + " not found"));
+        User user = userRepository.findByZepUserId(userId)
+            .orElseGet(() -> userRepository.findByNickname(userId)
+                .orElseThrow(() -> new UserNotFoundException("User with ID " + userId + " not found")));
         return new PortalMoveResponse(user.getJob(), user.getGold());
     }
 
     @Transactional
     public UserResponse updateUserJobByName(String userId, String job) {
-        User user = userRepository.findByName(userId)
-            .orElseThrow(() -> new UserNotFoundException(userId));
+        User user = userRepository.findByZepUserId(userId)
+            .orElseGet(() -> userRepository.findByNickname(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId)));
         user.setJob(job);
         User updatedUser = userRepository.save(user);
         return UserResponse.from(updatedUser);

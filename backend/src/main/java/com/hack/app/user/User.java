@@ -22,19 +22,23 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 100)
-    private String name;
+    @Column(name = "zep_user_id", nullable = false, length = 100, unique = true)
+    private String zepUserId;
+
+    @Column(name = "name", nullable = false, length = 100)
+    private String nickname;
 
     @Column(nullable = false, length = 50)
-    private String job = "무직"; // 기본값 "무직"
+    private String job = "무직";
 
     @Column(nullable = false, name = "created_at")
     private OffsetDateTime createdAt = OffsetDateTime.now();
 
     @Column(nullable = false)
-    private Long gold = 100L; // 기본값 100
+    private Long gold = 100L;
 
-    public User(String userId) {
-        this.name = userId;
+    public User(String zepUserId, String nickname) {
+        this.zepUserId = zepUserId;
+        this.nickname = (nickname != null && !nickname.isBlank()) ? nickname : zepUserId;
     }
 }

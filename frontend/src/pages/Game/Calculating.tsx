@@ -46,7 +46,7 @@ interface ResultState {
 const GAME_TYPE: GameType = "calculating";
 const QUESTION_TIME_LIMIT = 10;
 const GOLD_PER_ITEM = 300;
-const MIN_SUCCESS_COUNT = 6;
+const MIN_SUCCESS_COUNT = 1;
 
 const tutorialSteps: TutorialStep[] = [
   {
@@ -59,7 +59,7 @@ const tutorialSteps: TutorialStep[] = [
   },
   {
     title: "성공 조건",
-    description: "정답 6개 이상이면 성공! 품목 × 300골드가 적립됩니다.",
+    description: "정답 1개 이상이면 성공! 품목 × 300골드가 적립됩니다.",
   },
 ];
 
@@ -152,16 +152,15 @@ export default function Calculating() {
 
       const success = data.correctCount >= MIN_SUCCESS_COUNT;
       const earnedGold = success ? totalItems * GOLD_PER_ITEM : 0;
-      const orderSummary = buildOrderSummary(problems);
+      // 상세 합계 표시는 생략합니다.
 
       setResult({
         earnedGold,
         success,
         highlights: [
           `정답 수: ${data.correctCount} / ${problems.length}`,
-          `총 주문 수량: ${totalItems}개`,
         ],
-        details: orderSummary,
+        details: null,
       });
 
       setIsGameRunning(false);

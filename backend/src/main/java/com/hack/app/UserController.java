@@ -7,6 +7,7 @@ import com.hack.app.user.UserResponse;
 import com.hack.app.user.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,6 +59,17 @@ public class UserController {
         return ResponseEntity.ok(updated);
     }
 
+    @PostMapping("/rewards")
+    public ResponseEntity<UserResponse> applyReward(@Valid @RequestBody RewardRequest request) {
+        UserResponse updated = userService.applyReward(
+            request.zepUserId(),
+            request.gameType(),
+            request.success(),
+            request.earnedGold()
+        );
+        return ResponseEntity.ok(updated);
+    }
+
     @PutMapping("/{id}/gold")
     public ResponseEntity<UserResponse> updateUserGold(@PathVariable Long id, @RequestBody GoldUpdateRequest request) {
         UserResponse updated = userService.updateUserGold(id, request.goldAmount());
@@ -75,5 +87,14 @@ record GoldUpdateRequest(int goldAmount) {}
 
 record JobUpdateRequest(String job) {}
 
-record UserJobRequest(@NotBlank(message = "사용자 ID를 입력해주세요") String zepUserId,
-                      @NotBlank(message = "직업을 입력해주세요") String job) {}
+record UserJobRequest(
+    @NotBlank(message = "ZEP 사용자 ID를 입력해주세요.") String zepUserId,
+    @NotBlank(message = "직업을 입력해주세요.") String job
+) {}
+
+record RewardRequest(
+    @NotBlank(message = "ZEP 사용자 ID를 입력해주세요.") String zepUserId,
+    @NotBlank(message = "게임 종류를 입력해주세요.") String gameType,
+    boolean success,
+    @PositiveOrZero(message = "획득 골드는 0 이상이어야 합니다.") long earnedGold
+) {}

@@ -1,6 +1,21 @@
 /* ===== 기본 레이아웃 ===== */
 .typing-game-container {
   width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.typing-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.typing-header .subtitle {
+  color: #6b7280;
+  font-size: 15px;
 }
 
 .game-area {

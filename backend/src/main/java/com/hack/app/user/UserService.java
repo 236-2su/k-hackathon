@@ -1,12 +1,19 @@
 package com.hack.app.user;
 
 import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
 public class UserService {
+
+    private static final Map<String, String> REQUIRED_JOB_BY_GAME = Map.of(
+        "stock", "\uD504\uB9AC\uB79C\uC11C",       // 프리랜서
+        "typing", "\uD68C\uC0AC\uC6D0",            // 회사원
+        "calculating", "\uC790\uC601\uC5C5\uC790"  // 자영업자
+    );
 
     private final UserRepository userRepository;
 
@@ -62,6 +69,28 @@ public class UserService {
         }
         User updated = userRepository.save(user);
         return UserResponse.from(updated);
+    }
+
+    @Transactional
+    public UserResponse applyReward(String zepUserId, String gameType, boolean success, long earnedGold) {
+        User user = userRepository.findByZepUserId(zepUserId)
+            .orElseThrow(() -> new UserNotFoundException(zepUserId));
+
+        if (!success || earnedGold <= 0) {
+            return UserResponse.from(user);
+        }
+
+        if (gameType == null || gameType.isBlank()) {
+            throw new IllegalArgumentException("gameType must be provided");
+        }
+        String requiredJob = REQUIRED_JOB_BY_GAME.get(gameType);
+        if (requiredJob != null && user.getJob() != null && !requiredJob.equals(user.getJob())) {
+            throw new IllegalStateException("직업이 일치하지 않습니다.");
+        }
+
+        user.setGold(user.getGold() + earnedGold);
+        User updatedUser = userRepository.save(user);
+        return UserResponse.from(updatedUser);
     }
 
     @Transactional

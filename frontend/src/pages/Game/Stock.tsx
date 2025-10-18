@@ -1,6 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+﻿import { ReactNode, useEffect, useMemo, useState } from "react";
 import {
   createInitialGameState,
   loadStockGameDataset,
@@ -15,14 +13,25 @@ import type {
   TradeType,
 } from "./stockGameTypes";
 import { StockTutorialModal } from "./StockTutorialModal";
+import { GameResultModal } from "./components/GameResultModal";
+import { getZepContext, postReward } from "./gameApi";
+import type { GameType } from "./gameApi";
 
 const DEFAULT_ROUNDS = 10;
-const TUTORIAL_STORAGE_KEY = "stock-game/tutorialSeen";
-
+const GAME_TYPE: GameType = "stock";
+const SUCCESS_REWARD = 4000;
 interface OrderDraft {
   type: TradeType | null;
   quantity: number;
 }
+
+interface ResultState {
+  earnedGold: number;
+  success: boolean;
+  highlights: string[];
+  details: ReactNode;
+}
+type HoldingInfo = StockGameState["holdingsByTicker"][string];
 
 export default function Stock() {
   const { dataset, initialState } = useMemo(() => {
@@ -33,6 +42,7 @@ export default function Stock() {
     return { dataset: loadedDataset, initialState: state };
   }, []);
 
+  const { zepUserId } = useMemo(() => getZepContext(), []);
   const firstTicker = dataset.stocks[0]?.ticker ?? "";
 
   const [gameState, setGameState] = useState<StockGameState>(initialState);
@@ -44,8 +54,11 @@ export default function Stock() {
   const [lastTrades, setLastTrades] = useState<TradeExecution[]>([]);
   const [tradeMessage, setTradeMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [hasSeenTutorial, setHasSeenTutorial] = useState(false);
-  const [showTutorial, setShowTutorial] = useState(false);
+  const [showTutorial, setShowTutorial] = useState(true);
+  const [result, setResult] = useState<ResultState | null>(null);
+  const [rewardSubmitting, setRewardSubmitting] = useState(false);
+  const [rewardSubmitted, setRewardSubmitted] = useState(false);
+  const [rewardError, setRewardError] = useState<string | null>(null);
 
   const stocksByTicker = useMemo(
     () => buildStockMap(dataset.stocks),
@@ -73,21 +86,44 @@ export default function Stock() {
       : false;
 
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (!isGameOver || !latestSnapshot) {
+      return;
+    }
+    if (result) {
+      return;
+    }
+    const earnedGold = victoryAchieved ? SUCCESS_REWARD : 0;
+    setResult({
+      earnedGold,
+      success: victoryAchieved,
+      highlights: [
+        `\uCD5C\uC885 \uC790\uC0B0: ${formatCurrency(latestSnapshot.totalValue)}`,
+        `\uC218\uC775\uB960: ${formatPercent(currentReturnPct)}`,
+      ],
+      details: buildStockResultDetails(gameState, stocksByTicker),
+    });
+  }, [
+    isGameOver,
+    latestSnapshot,
+    victoryAchieved,
+    currentReturnPct,
+    gameState,
+    stocksByTicker,
+    result,
+  ]);
+  const notifyZep = (success: boolean, earnedGold: number) => {
+    if (typeof window === 'undefined') {
       return;
     }
     try {
-      const stored = window.localStorage.getItem(TUTORIAL_STORAGE_KEY);
-      const seen = stored === "seen";
-      setHasSeenTutorial(seen);
-      if (!seen) {
-        setShowTutorial(true);
-      }
-    } catch {
-      setShowTutorial(true);
+      window.parent?.postMessage(
+        { type: 'gameResult', success, gold: earnedGold, gameType: GAME_TYPE },
+        '*',
+      );
+    } catch (err) {
+      console.warn('Failed to post result to ZEP:', err);
     }
-  }, []);
-
+  };
   const transactionFee = gameState.metadata.transactionFee;
   const holding = gameState.holdingsByTicker[firstTicker];
   const currentPrice = gameState.priceByTicker[firstTicker] ?? 0;
@@ -138,7 +174,7 @@ export default function Stock() {
         orderDraft.quantity > maxBuyQuantity
       ) {
         setErrorMessage(
-          `현금 기준으로 최대 ${maxBuyQuantity.toLocaleString()}주까지만 매수할 수 있어요.`,
+          `현재 보유 현금으로는 최대 ${maxBuyQuantity.toLocaleString()}주까지 매수할 수 있어요.`,
         );
         setTradeMessage(null);
         return;
@@ -148,7 +184,7 @@ export default function Stock() {
         orderDraft.quantity > holdingQuantity
       ) {
         setErrorMessage(
-          `보유 수량 ${holdingQuantity.toLocaleString()}주까지만 매도할 수 있어요.`,
+          `보유 수량은 ${holdingQuantity.toLocaleString()}주예요.`,
         );
         setTradeMessage(null);
         return;
@@ -179,7 +215,7 @@ export default function Stock() {
       const stockName =
         stocksByTicker[execution.ticker]?.displayName ?? execution.ticker;
       const action = execution.type === "buy" ? "매수" : "매도";
-      setTradeMessage(`${stockName} ${action} ${execution.quantity}주를 완료했어요.`);
+      setTradeMessage(`${stockName} ${action} ${execution.quantity}주를 체결했습니다.`);
     } else {
       setTradeMessage("이번 라운드는 관망했어요.");
     }
@@ -196,6 +232,10 @@ export default function Stock() {
     setLastTrades([]);
     setTradeMessage(null);
     setErrorMessage(null);
+    setResult(null);
+    setRewardSubmitted(false);
+    setRewardError(null);
+    setShowTutorial(true);
   };
 
   const handleOpenTutorial = () => {
@@ -204,16 +244,38 @@ export default function Stock() {
 
   const handleCloseTutorial = () => {
     setShowTutorial(false);
-    setHasSeenTutorial(true);
-    if (typeof window !== "undefined") {
-      try {
-        window.localStorage.setItem(TUTORIAL_STORAGE_KEY, "seen");
-      } catch {
-        // ignore
-      }
-    }
   };
 
+  const handleResultConfirm = async () => {
+    if (!result) {
+      return;
+    }
+    if (!rewardSubmitted) {
+      setRewardSubmitting(true);
+      setRewardError(null);
+      try {
+        await postReward({
+          zepUserId,
+          gameType: GAME_TYPE,
+          success: result.success,
+          earnedGold: result.earnedGold,
+        });
+        setRewardSubmitted(true);
+        notifyZep(result.success, result.earnedGold);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        setRewardError(message);
+        setRewardSubmitting(false);
+        return;
+      }
+      setRewardSubmitting(false);
+    }
+    setResult(null);
+  };
+
+  const handleRetry = () => {
+    handleRestart();
+  };
   const holdingValue = holdingQuantity * currentPrice;
 
   const assetColorClass =
@@ -224,30 +286,16 @@ export default function Stock() {
         : "border-slate-200 bg-slate-50 text-slate-600";
 
   return (
-    <div className="mx-auto flex max-w-6xl flex-col gap-6 p-4 text-slate-800">
-      <header className="flex flex-col items-center gap-2">
-        <div className="flex w-full items-center justify-between">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-800"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            돌아가기
-          </Link>
-          <button
-            type="button"
-            onClick={handleOpenTutorial}
-            className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600 transition hover:bg-blue-100"
-          >
-            {hasSeenTutorial ? "다시 보기" : "처음 안내"}
-          </button>
-        </div>
-        <h1 className="text-center text-3xl font-bold text-slate-900">
-          첫걸음 그룹 모의 투자
-        </h1>
-        <p className="text-center text-sm text-slate-600">
-          10라운드 동안 뉴스 한 개씩 살펴보고 매수·매도를 선택해 보세요.
-        </p>
+    <div className="mx-auto flex max-w-6xl flex-col gap-6 p-4 text-slate-800">      <header className="flex flex-col items-center gap-3">
+        <h1 className="text-center text-3xl font-bold text-slate-900">첫걸음그룹 모의 투자</h1>
+        <p className="text-center text-sm text-slate-600">10라운드 동안 뉴스와 시장 상황을 살피며 10% 수익률에 도전하세요.</p>
+        <button
+          type="button"
+          onClick={handleOpenTutorial}
+          className="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-xs font-semibold text-blue-600 transition hover:bg-blue-100"
+        >
+          튜토리얼 다시 보기
+        </button>
       </header>
 
       {errorMessage && (
@@ -273,11 +321,11 @@ export default function Stock() {
               )} / ${gameState.rounds.length}`}
             />
             <InfoRow
-              label="현금"
+              label="보유 현금"
               value={formatCurrency(cash)}
             />
             <InfoRow
-              label="보유 주식"
+              label="보유 주식 수"
               value={`${holdingQuantity.toLocaleString()}주`}
             />
             <InfoRow
@@ -285,7 +333,7 @@ export default function Stock() {
               value={formatCurrency(currentPrice)}
             />
             <InfoRow
-              label="주식 평가"
+              label="주식 평가액"
               value={formatCurrency(holdingValue)}
             />
             <InfoRow
@@ -315,7 +363,7 @@ export default function Stock() {
                 </p>
                 <p>{currentEntry.news.summary}</p>
                 <p className="text-xs text-slate-500">
-                  출처 {currentEntry.news.source ?? "알 수 없음"} · {formatDate(currentEntry.news.date)}
+                  출처 {currentEntry.news.source ?? "출처 없음"} · {formatDate(currentEntry.news.date)}
                 </p>
               </div>
 
@@ -357,7 +405,7 @@ export default function Stock() {
                   </button>
                 </div>
                 <label className="mt-4 block text-xs font-semibold text-slate-700">
-                  수량 (정수 입력)
+                  수량 (주 단위)
                   <input
                     type="number"
                     min={0}
@@ -368,10 +416,10 @@ export default function Stock() {
                 </label>
                 <p className="mt-2 text-xs text-slate-500">
                   {orderDraft.type === "buy"
-                    ? `현금 기준 최대 매수 가능 수량: ${maxBuyQuantity.toLocaleString()}주`
+                    ? `최대 매수 가능 수량: ${maxBuyQuantity.toLocaleString()}주`
                     : orderDraft.type === "sell"
                       ? `보유 수량: ${holdingQuantity.toLocaleString()}주`
-                      : "매수 또는 매도를 먼저 선택해 주세요."}
+                      : "매수 또는 매도를 선택해 주세요."}
                 </p>
                 <div className="mt-3 flex justify-end">
                   <button
@@ -379,7 +427,7 @@ export default function Stock() {
                     onClick={handleResetDraft}
                     className="text-xs text-slate-500 underline transition hover:text-slate-700"
                   >
-                    입력 비우기
+                    입력 초기화
                   </button>
                 </div>
               </div>
@@ -390,7 +438,7 @@ export default function Stock() {
                   onClick={handleAdvanceRound}
                   className="w-full rounded-lg bg-blue-500 px-4 py-3 text-sm font-semibold text-white shadow transition hover:bg-blue-600 sm:w-auto sm:px-6"
                 >
-                  다음 라운드 시작
+                  다음 라운드 진행
                 </button>
               </div>
             </>
@@ -407,8 +455,8 @@ export default function Stock() {
               )}
               <p className="text-lg font-semibold text-slate-700">
                 {victoryAchieved
-                  ? "축하해요! 목표였던 10% 수익을 달성했어요."
-                  : "아쉽지만 목표 수익률 10%에 닿지 못했어요. 다시 도전해 볼까요?"}
+                  ? "축하합니다! 목표 수익률 10%를 달성했어요."
+                  : "아쉽지만 목표 수익률 10%를 달성하지 못했어요. 다시 도전해 볼까요?"}
               </p>
               <button
                 type="button"
@@ -437,8 +485,7 @@ export default function Stock() {
                       {stocksByTicker[entry.ticker]?.displayName ?? entry.ticker}
                     </p>
                     <p className="mt-1 text-xs text-slate-500">
-                      {formatCurrency(entry.previousPrice)} →{" "}
-                      {formatCurrency(entry.newPrice)} (
+                      {formatCurrency(entry.previousPrice)} → {formatCurrency(entry.newPrice)} (
                       {formatPercent(entry.pctChange)})
                     </p>
                   </div>
@@ -447,7 +494,7 @@ export default function Stock() {
                   <p className="font-semibold text-slate-800">거래 내역</p>
                   {lastTrades.length === 0 ? (
                     <p className="mt-1 text-xs text-slate-500">
-                      지난 라운드에서는 거래가 없었어요.
+                      지난 라운드에는 거래가 없었어요.
                     </p>
                   ) : (
                     lastTrades.map((trade, index) => (
@@ -461,7 +508,7 @@ export default function Stock() {
               </div>
             ) : (
               <p className="mt-3 text-sm text-slate-600">
-                라운드를 진행하면 가격 변화와 거래 결과가 여기에 정리돼요.
+                라운드를 진행하면 각 종목의 거래 결과가 여기 정리돼요.
               </p>
             )}
           </section>
@@ -477,12 +524,26 @@ export default function Stock() {
               수익률 {formatPercent(currentReturnPct)}
             </p>
             <p className="mt-3 text-xs text-slate-600">
-              목표 수익률: 10% 이상 달성 시 승리!
+              목표 수익률 10% 이상을 달성해 보세요!
             </p>
           </section>
         </aside>
       </div>
 
+      <GameResultModal
+        open={result !== null}
+        gameName="주식 게임"
+        earnedGold={result?.earnedGold ?? 0}
+        success={result?.success ?? false}
+        highlights={result?.highlights ?? []}
+        details={result?.details}
+        submitting={rewardSubmitting}
+        error={rewardError}
+        onConfirm={handleResultConfirm}
+        onRetry={handleRetry}
+        confirmLabel={result?.success ? "보상 받기" : "닫기"}
+        retryLabel="새로운 게임 도전"
+      />
       <StockTutorialModal open={showTutorial} onClose={handleCloseTutorial} />
     </div>
   );
@@ -546,6 +607,34 @@ function formatDate(value: string | undefined): string {
   }
 }
 
+function buildStockResultDetails(
+  gameState: StockGameState,
+  stocksByTicker: Record<string, StockDefinition>,
+): ReactNode {
+  const entries = Object.entries(gameState.holdingsByTicker) as Array<[string, HoldingInfo]>;
+  const nonZero = entries.filter(([, holding]) => holding.quantity > 0);
+  if (nonZero.length === 0) {
+    return <p className="text-sm text-slate-600">보유 중인 주식이 없습니다.</p>;
+  }
+  return (
+    <div>
+      <p className="font-semibold mb-2">보유 종목 요약</p>
+      <ul className="space-y-1">
+        {nonZero.map(([ticker, holding]) => {
+          const stock = stocksByTicker[ticker];
+          const displayName = stock?.displayName ?? ticker;
+          const price = gameState.priceByTicker[ticker] ?? 0;
+          const valuation = holding.quantity * price;
+          return (
+            <li key={ticker}>
+              {displayName} {holding.quantity.toLocaleString()}주 · 평가금액 {formatCurrency(valuation)}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
 function computeMaxBuyQuantity(
   cash: number,
   price: number,
@@ -563,3 +652,13 @@ function computeMaxBuyQuantity(
   }
   return Math.max(0, Math.floor(cash / effectivePrice));
 }
+
+
+
+
+
+
+
+
+
+

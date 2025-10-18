@@ -418,31 +418,8 @@ export default function Calculating() {
   );
 }
 
-function buildOrderSummary(problems: ProblemResponse[]): ReactNode {
-  if (problems.length === 0) {
-    return null;
-  }
-  const totals = new Map<string, number>();
-  problems.forEach((problem) => {
-    problem.orders.forEach((order) => {
-      totals.set(order.menuName, (totals.get(order.menuName) ?? 0) + order.quantity);
-    });
-  });
-  const entries = Array.from(totals.entries()).sort((a, b) => b[1] - a[1]);
 
-  return (
-    <div>
-      <p className="font-semibold mb-2">총 주문 합계</p>
-      <ul className="space-y-1">
-        {entries.map(([name, qty]) => (
-          <li key={name}>
-            {name} × {qty}개
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+
 
 
 

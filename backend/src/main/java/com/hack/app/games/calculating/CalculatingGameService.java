@@ -76,7 +76,7 @@ public class CalculatingGameService {
             .collect(Collectors.toList());
     }
 
-    public GameResult submitAnswers(Long userId, List<UserAnswer> userAnswers) {
+    public GameResult submitAnswers(String zepUserId, List<UserAnswer> userAnswers) {
         int correctCount = 0;
         long score = 0;
 

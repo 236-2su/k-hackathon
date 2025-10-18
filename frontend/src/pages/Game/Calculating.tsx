@@ -146,20 +146,26 @@ export default function Calculating() {
       if (!response.ok) throw new Error("결과를 제출하지 못했습니다.");
       const data = (await response.json()) as GameResultResponse;
 
-      const totalItems = problems
-        .flatMap((problem) => problem.orders)
-        .reduce((acc, order) => acc + order.quantity, 0);
+      // 문제별 정답에 대해 해당 문제의 주문 수량만 합산하여 보상 계산
+      let correctItemCount = 0;
+      const len = Math.min(answers.length, problems.length);
+      for (let i = 0; i < len; i++) {
+        const ua = answers[i]?.answer;
+        const pr = problems[i];
+        if (ua === pr.answer) {
+          const cnt = pr.orders.reduce((acc, o) => acc + o.quantity, 0);
+          correctItemCount += cnt;
+        }
+      }
 
       const success = data.correctCount >= MIN_SUCCESS_COUNT;
-      const earnedGold = success ? totalItems * GOLD_PER_ITEM : 0;
+      const earnedGold = success ? correctItemCount * GOLD_PER_ITEM : 0;
       // 상세 합계 표시는 생략합니다.
 
       setResult({
         earnedGold,
         success,
-        highlights: [
-          `정답 수: ${data.correctCount} / ${problems.length}`,
-        ],
+        highlights: [`정답 수: ${data.correctCount} / ${problems.length}`],
         details: null,
       });
 

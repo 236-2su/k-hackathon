@@ -1,9 +1,10 @@
-import { useState, useEffect, useMemo, useRef, useCallback, ReactNode } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { GameTutorialModal } from "./components/GameTutorialModal";
 import { GameResultModal } from "./components/GameResultModal";
 import { getZepContext, postReward } from "./gameApi";
 import type { GameType } from "./gameApi";
 import type { TutorialStep } from "./components/GameTutorialModal";
+import type { ReactNode } from "react";
 
 interface MenuItem {
   name: string;

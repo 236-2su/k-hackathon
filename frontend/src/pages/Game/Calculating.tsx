@@ -45,7 +45,7 @@ interface ResultState {
 
 const GAME_TYPE: GameType = "calculating";
 const QUESTION_TIME_LIMIT = 10;
-const GOLD_PER_ITEM = 300;
+const GOLD_PER_ITEM = 100;
 const MIN_SUCCESS_COUNT = 1;
 
 const tutorialSteps: TutorialStep[] = [
@@ -59,7 +59,7 @@ const tutorialSteps: TutorialStep[] = [
   },
   {
     title: "성공 조건",
-    description: "정답 1개 이상이면 성공! 품목 × 300골드가 적립됩니다.",
+    description: "정답 1개 이상이면 성공! 품목 × 100골드가 적립됩니다.",
   },
 ];
 

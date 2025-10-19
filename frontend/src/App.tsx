@@ -11,7 +11,7 @@ import SurveyResultPage from "./pages/Survey/SurveyResultPage";
 export default function App() {
   return (
     <BrowserRouter>
-      <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative" }}>
+      <div style={{ maxWidth: 1200, width: "100%", margin: "0 auto", position: "relative" }}>
         <BackButtonOverlay />
         <Routes>
           <Route path="/" element={<Home />} />

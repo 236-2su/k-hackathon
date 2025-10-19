@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ArrowLeft, Sparkles, Lightbulb, PiggyBank, CreditCard, Smartphone } from "lucide-react";
 
@@ -40,11 +40,9 @@ interface StoredSurveyContext extends RecommendationResponse {
 }
 
 function formatMonthlyRange(min?: number | null, max?: number | null) {
-  if (min == null && max == null) {
-    return null;
-  }
+  if (min == null && max == null) return null;
   if (min != null && max != null) {
-    return `${min.toLocaleString()}원~${max.toLocaleString()}원 월 적립`;
+    return `${min.toLocaleString()}~${max.toLocaleString()}원 적립`;
   }
   if (min != null) {
     return `${min.toLocaleString()}원 이상 적립`;
@@ -56,14 +54,14 @@ function splitRecommendations(items?: ProductRecommendation[]) {
   if (!items || items.length === 0) {
     return { savings: [] as ProductRecommendation[], cards: [] as ProductRecommendation[] };
   }
-  const savings = items.filter(item => item.type === "SAVINGS" || item.type === "DEPOSIT");
-  const cards = items.filter(item => item.type === "CARD");
+  const savings = items.filter((item) => item.type === "SAVINGS" || item.type === "DEPOSIT");
+  const cards = items.filter((item) => item.type === "CARD");
   return { savings, cards };
 }
 
 function dedupeByProductId(items: ProductRecommendation[]): ProductRecommendation[] {
   const map = new Map<string, ProductRecommendation>();
-  items.forEach(item => {
+  items.forEach((item) => {
     if (!map.has(item.productId)) {
       map.set(item.productId, item);
     }
@@ -74,35 +72,28 @@ function dedupeByProductId(items: ProductRecommendation[]): ProductRecommendatio
 function ProductBadgeList({ item }: { item: ProductRecommendation }) {
   const badges: React.ReactNode[] = [];
   const monthlyRange = formatMonthlyRange(item.minMonthlyAmount, item.maxMonthlyAmount);
-
   if (monthlyRange) {
     badges.push(
       <span key="range" className="rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-600">
         {monthlyRange}
-      </span>
+      </span>,
     );
   }
-
   if (item.highlightCategories.length > 0) {
     badges.push(
       <span key="highlight" className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-600">
-        추천 혜택: {item.highlightCategories.join(", ")}
-      </span>
+        추천 태그: {item.highlightCategories.join(", ")}
+      </span>,
     );
   }
-
   if (item.digitalFriendly) {
     badges.push(
       <span key="digital" className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-3 py-1 text-xs font-semibold text-violet-600">
-        <Smartphone className="h-3 w-3" /> 모바일 우대
-      </span>
+        <Smartphone className="h-3 w-3" /> 모바일 친화적
+      </span>,
     );
   }
-
-  if (badges.length === 0) {
-    return null;
-  }
-
+  if (badges.length === 0) return null;
   return <div className="mt-3 flex flex-wrap items-center gap-2">{badges}</div>;
 }
 
@@ -114,9 +105,7 @@ function ProductCard({ item }: { item: ProductRecommendation }) {
       </div>
       <h3 className="mt-3 text-lg font-semibold text-slate-800">{item.name}</h3>
       <p className="mt-1 text-sm text-slate-600">{item.headline}</p>
-
       <ProductBadgeList item={item} />
-
       <div className="mt-4 rounded-2xl bg-white/70 p-4">
         <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-500">주요 혜택</h4>
         <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-600">
@@ -125,7 +114,6 @@ function ProductCard({ item }: { item: ProductRecommendation }) {
           ))}
         </ul>
       </div>
-
       <div className="mt-4 rounded-2xl bg-white/70 p-4">
         <h4 className="text-xs font-semibold uppercase tracking-wide text-slate-500">유의 사항</h4>
         <p className="mt-2 text-sm text-slate-600">{item.caution}</p>
@@ -134,26 +122,16 @@ function ProductCard({ item }: { item: ProductRecommendation }) {
   );
 }
 
-function ProductSection({
-  title,
-  icon,
-  items,
-}: {
-  title: string;
-  icon: React.ReactNode;
-  items: ProductRecommendation[];
-}) {
-  if (items.length === 0) {
-    return null;
-  }
+function ProductSection({ title, icon, items }: { title: string; icon: React.ReactNode; items: ProductRecommendation[] }) {
+  if (items.length === 0) return null;
   return (
-    <section className="flex flex-col gap-4">
+    <section className="mt-8 md:mt-10 flex flex-col gap-5 md:gap-6">
       <header className="flex items-center gap-3">
         {icon}
         <h2 className="text-lg font-semibold text-slate-800">{title}</h2>
       </header>
       <div className="grid gap-4 md:grid-cols-2">
-        {items.map(item => (
+        {items.map((item) => (
           <ProductCard key={item.productId} item={item} />
         ))}
       </div>
@@ -162,17 +140,56 @@ function ProductSection({
 }
 
 export default function SurveyResultPage() {
+  const pageRef = useRef<HTMLDivElement | null>(null);
   const topRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const locationState = (location.state ?? null) as LegacyRecommendationResponse | RecommendationResponse | null;
 
   useEffect(() => {
-    if (topRef.current) {
-      topRef.current.scrollIntoView({ behavior: "auto" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "auto" });
-    }
+    // This page only: override global centering so top content is visible
+    const root = document.getElementById('root') as HTMLElement | null;
+    const prevPadding = root?.style.scrollPaddingTop ?? '';
+    const prevMarginTop = root?.style.marginTop ?? '';
+    const prevPaddingTop = root?.style.paddingTop ?? '';
+    const prevAlignItems = root?.style.alignItems ?? '';
+    const bodyEl = document.body as HTMLBodyElement;
+    const prevBodyAlign = bodyEl.style.alignItems ?? '';
+
+    try {
+      const header =
+        (document.querySelector('[data-app-header]') as HTMLElement | null) ||
+        (document.querySelector('header[role="banner"]') as HTMLElement | null) ||
+        (document.querySelector('header.sticky') as HTMLElement | null) ||
+        (document.querySelector('header.fixed') as HTMLElement | null) ||
+        (document.getElementById('app-header') as HTMLElement | null) ||
+        (document.querySelector('.app-header') as HTMLElement | null);
+      const headerH = header?.offsetHeight ?? 0;
+      if (root) {
+        if (headerH > 0) root.style.scrollPaddingTop = `${headerH}px`;
+        root.style.marginTop = '0';
+        if (!prevPaddingTop) root.style.paddingTop = '16px';
+        root.style.alignItems = 'flex-start';
+      }
+      bodyEl.style.alignItems = 'flex-start';
+    } catch {}
+
+    try { root?.scrollTo({ top: 0, behavior: 'auto' }); } catch {}
+    requestAnimationFrame(() => {
+      if (topRef.current) {
+        try { topRef.current.scrollIntoView({ behavior: 'auto', block: 'start' }); } catch {}
+      }
+    });
+
+    return () => {
+      if (root) {
+        root.style.scrollPaddingTop = prevPadding;
+        root.style.marginTop = prevMarginTop;
+        root.style.paddingTop = prevPaddingTop;
+        root.style.alignItems = prevAlignItems;
+      }
+      bodyEl.style.alignItems = prevBodyAlign;
+    };
   }, []);
 
   const storedContext: StoredSurveyContext | null = useMemo(() => {
@@ -188,63 +205,41 @@ export default function SurveyResultPage() {
 
   const resolvedSummary = useMemo(() => {
     const fromState = locationState && "summary" in locationState ? locationState.summary ?? "" : "";
-    if (fromState.trim()) {
-      return fromState.trim();
-    }
+    if (fromState.trim()) return fromState.trim();
     const fromStorage = storedContext?.summary ?? "";
-    if (fromStorage.trim()) {
-      return fromStorage.trim();
-    }
-    return "추천 요약을 불러오지 못했습니다. 아래 추천 상품을 확인해 보세요.";
+    if (fromStorage.trim()) return fromStorage.trim();
+    return "추천 결과를 불러오지 못했습니다. 아래 추천 상품을 확인해 주세요.";
   }, [locationState, storedContext]);
 
   const resolvedInsights = useMemo(() => {
     const base = locationState && "insights" in locationState ? locationState.insights ?? [] : [];
     const fallback = base.length > 0 ? base : storedContext?.insights ?? [];
-    return Array.from(new Set(fallback.map(line => line.trim()).filter(Boolean)));
+    return Array.from(new Set(fallback.map((line) => line.trim()).filter(Boolean)));
   }, [locationState, storedContext]);
 
   const { savings, cards } = useMemo(() => {
     let savingsList: ProductRecommendation[] = [];
     let cardsList: ProductRecommendation[] = [];
-
     if (locationState) {
-      if ("savings" in locationState && Array.isArray(locationState.savings)) {
-        savingsList = locationState.savings ?? [];
-      }
-      if ("cards" in locationState && Array.isArray(locationState.cards)) {
-        cardsList = locationState.cards ?? [];
-      }
+      if ("savings" in locationState && Array.isArray(locationState.savings)) savingsList = locationState.savings ?? [];
+      if ("cards" in locationState && Array.isArray(locationState.cards)) cardsList = locationState.cards ?? [];
       if (savingsList.length === 0 && cardsList.length === 0 && "recommendations" in locationState && locationState.recommendations) {
         const splitted = splitRecommendations(locationState.recommendations);
         savingsList = splitted.savings;
         cardsList = splitted.cards;
       }
     }
-
-    if (savingsList.length === 0 && storedContext?.savings) {
-      savingsList = storedContext.savings;
-    }
-    if (cardsList.length === 0 && storedContext?.cards) {
-      cardsList = storedContext.cards;
-    }
-
-    return {
-      savings: dedupeByProductId(savingsList ?? []),
-      cards: dedupeByProductId(cardsList ?? []),
-    };
+    if (savingsList.length === 0 && storedContext?.savings) savingsList = storedContext.savings;
+    if (cardsList.length === 0 && storedContext?.cards) cardsList = storedContext.cards;
+    return { savings: dedupeByProductId(savingsList ?? []), cards: dedupeByProductId(cardsList ?? []) };
   }, [locationState, storedContext]);
 
   const hasAnyRecommendation = savings.length > 0 || cards.length > 0;
-
   if (!hasAnyRecommendation && resolvedInsights.length === 0 && !resolvedSummary) {
     return (
       <div className="rounded-2xl border border-slate-100 bg-white px-6 py-8 text-center shadow-sm">
-        <p className="text-sm text-slate-500">추천 데이터를 찾지 못했습니다. 설문을 다시 진행해 주세요.</p>
-        <button
-          onClick={() => navigate("/survey", { replace: true })}
-          className="mt-4 rounded-xl bg-blue-500 px-5 py-2 text-sm font-semibold text-white shadow-sm"
-        >
+        <p className="text-sm text-slate-500">추천 결과를 찾지 못했습니다. 설문을 다시 진행해 주세요.</p>
+        <button onClick={() => navigate("/survey", { replace: true })} className="mt-4 rounded-xl bg-blue-500 px-5 py-2 text-sm font-semibold text-white shadow-sm">
           설문 다시 하기
         </button>
       </div>
@@ -252,16 +247,16 @@ export default function SurveyResultPage() {
   }
 
   return (
-    <div ref={topRef} className="flex flex-col gap-6">
-      <div className="flex items-center gap-3">
-        <Link to="/" className="text-sm text-slate-500 hover:text-slate-700">
-          홈으로 가기
-        </Link>
-        <span className="text-slate-400">/</span>
-        <h1 className="text-xl font-bold text-slate-800">맞춤 추천 결과</h1>
+    <div ref={pageRef}>
+      <div ref={topRef} className="flex flex-col gap-8 md:gap-10">
+        <div className="flex items-center gap-3">
+          <Link to="/" className="text-sm text-slate-500 hover:text-slate-700">홈</Link>
+          <span className="text-slate-400">/</span>
+          <h1 className="text-xl font-bold text-slate-800">맞춤 추천 결과</h1>
+        </div>
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+      <div className="mt-6 md:mt-8 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
         <div className="flex items-start gap-3">
           <Sparkles className="h-5 w-5 text-yellow-500" />
           <div className="flex-1">
@@ -272,11 +267,11 @@ export default function SurveyResultPage() {
       </div>
 
       {resolvedInsights.length > 0 && (
-        <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+        <div className="mt-6 md:mt-8 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
           <div className="flex items-start gap-3">
             <Lightbulb className="h-5 w-5 text-amber-500" />
             <div className="flex-1">
-              <h2 className="text-lg font-semibold text-slate-800">이렇게 활용해 보세요</h2>
+              <h2 className="text-lg font-semibold text-slate-800">추천 인사이트</h2>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-600">
                 {resolvedInsights.map((line, index) => (
                   <li key={index}>{line}</li>
@@ -287,33 +282,19 @@ export default function SurveyResultPage() {
         </div>
       )}
 
-      <ProductSection
-        title="추천 적금·예금"
-        icon={<PiggyBank className="h-5 w-5 text-emerald-500" />}
-        items={savings}
-      />
+      <ProductSection title="추천 예금·적금" icon={<PiggyBank className="h-5 w-5 text-emerald-500" />} items={savings} />
+      <ProductSection title="추천 체크카드" icon={<CreditCard className="h-5 w-5 text-indigo-500" />} items={cards} />
 
-      <ProductSection
-        title="추천 체크카드"
-        icon={<CreditCard className="h-5 w-5 text-indigo-500" />}
-        items={cards}
-      />
-
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <button
-          onClick={() => navigate("/survey")}
-          className="flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-500 transition hover:border-slate-300"
-        >
+      <div className="mt-8 md:mt-10 flex flex-wrap items-center justify-between gap-3">
+        <button onClick={() => navigate("/survey")} className="flex items-center gap-2 rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-500 transition hover:border-slate-300">
           <ArrowLeft className="h-4 w-4" />
           설문 다시 하기
         </button>
-        <Link
-          to="/chat/finance"
-          className="rounded-xl bg-blue-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-600"
-        >
-          금융 챗봇에게 이어서 물어보기
+        <Link to="/chat/finance" className="rounded-xl bg-blue-500 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-600">
+          금융 챗봇으로 이동
         </Link>
       </div>
     </div>
   );
 }
+

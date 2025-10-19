@@ -398,11 +398,11 @@ export default function SurveyPage() {
         <h1 className="text-xl font-bold text-slate-800">청소년 금융 생활 설문</h1>
       </div>
 
-      <div className="overflow-hidden rounded-2xl bg-slate-100">
+      <div className="mx-auto w-full max-w-3xl overflow-hidden rounded-2xl bg-slate-100">
         <div className="h-2 bg-blue-500 transition-all" style={{ width: `${progress}%` }} />
       </div>
 
-      <div className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+      <div className="mx-auto w-full max-w-3xl rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
         <span className="text-xs font-medium uppercase tracking-wide text-blue-500">
           질문 {currentIndex + 1} / {questions.length}
         </span>
@@ -424,7 +424,7 @@ export default function SurveyPage() {
                 type="button"
                 key={option.id}
                 onClick={() => handleSelect(option.id)}
-                className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm transition ${
+                className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left text-sm transition ${
                   isSelected
                     ? "border-blue-500 bg-blue-50 text-blue-600"
                     : "border-slate-200 bg-white text-slate-700 hover:border-blue-200"
